@@ -21,4 +21,19 @@ We are currenlty using this sheet :https://bit.ly/JanataPass_Discussion   Shorlt
 **Appeal:**
 please take up any role you feel needs done and u r good at. No need to wait for anyone’s confirmation.  As of now Raviteja, Dushyanth, Manoj , Navaneeth and Chandrasekhar have been active -but they do not own anything in this -can be approached for any doubts.
 
-For any questions email to [Covired](covired.janatapass@gmail.com)
+How do I contribute ?
+---------------------
+
+There are two ways to contribute. 
+
+If **you want to extensively work on this application**, email to [covired.janatapass@gmail.com](covired.janatapass@gmail.com). We will contact you and see if we can add you in core developer group.
+
+If **you want to contribute a bugfix or new feature** but don't want to be core developer,
+- Fork this repository 
+- Edit and fix the bug/add feature
+- Create a pull request.
+- A core developer will check the pull request, review and take a decision to merge it or not. He/she may also ask you do some more changes improvements before merging the changes to this repository.
+
+I have some other question
+------------------------------
+For any other questions email to [Covired](covired.janatapass@gmail.com)
