@@ -1,1 +1,337 @@
+body{
+/*background-image: linear-gradient(#7ED0FF, #3299F1);*/
+    background: #7ED0FF; /* fallback color */
+    /* background: linear-gradient( to bottom, #7ED0FF, #3299F1); */
+	background: linear-gradient(to left top, #3299F1, #7ED0FF) fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+	font-family: 'Product Sans';
+}
+body.green{
+	 background: #89D468; /* fallback color */
+    background: linear-gradient( to bottom, #89D468, #89D468);
+}
+
+@font-face {
+  font-family: 'Product Sans';
+  src: url('../fonts/ProductSans.woff2') format('woff2'),
+       /* url('../fonts/.woff') format('woff'), */
+       url('../fonts/ProductSans-Regular.ttf') format('truetype');
+}
+
+
+.janata_pass {
+    padding: 50px 10px 10px 10px;
+}
+.janata_pass h1 {
+    text-align: center;
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+.janata_pass form.landingpaege{
+	margin-top: 100px;
+}
+.janata_pass form.landingpaege label{
+	font-weight:bold;
+}
+.janata_pass form.landingpaege .form-group {
+    margin-bottom: 2rem;
+}
+.janata_pass form.landingpaege .btn-primary, .janata_pass .btn-primary{
+    color: #000;
+    background-color: #ffffff;
+    border-color: #ffffff;
+    padding: 10px 15px;
+    margin: 0 auto;
+    display: block;
+    width: 48%;
+}
+.janata_pass form.landingpaege .btn-primary:hover, .janata_pass .btn-primary:hover {
+    color: #000;
+    background-color: #ffffff;
+    border-color: #ffffff;
+    margin: 0 auto;
+    display: block;
+}
+.janata_pass form.landingpaege .form-control {
+    height: calc(2em + .75rem + 2px);
+    text-align: center;
+}
+.janata_pass img.logo {
+    width: 100px;
+    margin: 0 auto;
+    display: block;
+}
+
+.janata_pass .p_tag_bottom {
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 4rem;
+    margin-bottom: 1rem;
+}
+
+.janata_pass img.warnig {
+    width: 68px;
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 10px;
+}
+.janata_pass .card-body p{
+	text-align:center;
+}
+
+.janata_pass .custom-control-label a{
+	color:#ccc;
+}
+.janata_pass .grid_grey {
+    background-color: #ccc;
+    text-align: center;
+    padding: 6px;
+    border-radius: 5px;
+	margin-bottom: 4px;
+}
+.janata_pass .grid_grey img.app_icon {
+    width: 58px;
+}
+
+
+
+.janata_pass .box {
+    /* position: absolute; */
+    /* top: 24%; */
+    /* left: 0%; */
+    /* transform: translate(-50%, -50%); */
+}
+
+.janata_pass .box select {
+    background-color: #ffffff;
+    color: #cccccc;
+    padding: 10px 6px;
+    width: 100%;
+    border: none;
+    font-size: 12px;
+    /* box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2); */
+    -webkit-appearance: button;
+    appearance: button;
+    outline: none;
+    border: 1.3px solid #000000;
+}
+.janata_pass .box select.green{
+	color: #89D468;
+}
+.janata_pass .box select.Yellow {
+	color: #F2CA28;
+}
+
+.janata_pass .box::before {
+  content: "\f13a";
+  font-family: FontAwesome;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20%;
+  height: 100%;
+  text-align: center;
+  font-size: 28px;
+  line-height: 45px;
+  color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+}
+
+.janata_pass .box:hover::before {
+  color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.janata_pass .box select option {
+  padding: 30px;
+}
+.janata_pass .form-group.grey_box .form-control{
+	height: 40px;
+    background-color: #e6e6e6;
+}
+
+.janata_pass .card-body h3{
+	font-size:18px;
+}
+.janata_pass .card-body h4{
+	font-size:16px;
+}
+
+.janata_pass .card-body .btn-info {
+    color: #000;
+    background-color: #FF9E5E;
+    border-color: #FF9E5E;
+	width:48%;
+}
+.janata_pass .card-body .btn-info:hover {
+    color: #000;
+    background-color: #FF9E5E;
+    border-color: #FF9E5E;
+}
+
+.janata_pass .button_box {
+    position: absolute;
+    right: 25px;
+    top: 20px;
+    background-color: #fff;
+    width: 75px;
+    border-radius: 15px;
+	text-align:center;
+}
+.janata_pass .div_btn img {
+    width: 20px;
+}
+.janata_pass .div_btn {
+    display: inline-block;
+    padding: 4px 5px;
+}
+.janata_pass .btn.btn-default{
+	background-color:#fff;
+	
+}
+.janata_pass .passes_list{
+	
+}
+.janata_pass .passes_list .btn.btn-success {
+    float: left;
+    margin-bottom: 10px;
+}
+.janata_pass .passes_list .btn.btn-success {
+    color: #000;
+    background-color: #89D468;
+    border-color: #89D468;
+}
+.janata_pass .passes_list .btn.btn-success:hover {
+    color: #000;
+    background-color: #89D468;
+    border-color: #89D468;
+}
+.janata_pass .passes_list .btn.btn-yellow {
+    float: left;
+    margin-bottom: 10px;
+}
+.janata_pass .passes_list .btn.btn-yellow {
+    color: #000;
+    background-color: #F2CA28;
+    border-color: #F2CA28;
+}
+.janata_pass .passes_list .btn.btn-yellow:hover {
+    color: #000;
+    background-color: #F2CA28;
+    border-color: #F2CA28;
+}
+.janata_pass .passes_list p {
+    float: left;
+    padding-left: 10%;
+    margin-bottom: 0px;
+}
+.janata_pass .button_box .div_btn.active {
+    background-color: #89D468;
+    color: #fff;
+    border-radius: 20px;
+}
+
+.janata_pass .passes_list .btn-info {
+    color: #000;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+    width: 50%;
+    margin: 0 auto;
+    display: block;
+    padding: 8px 10px;
+    margin-top: 10px;
+}
+
+.janata_pass .passes_list .btn-info:hover {
+    color: #000;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+}
+
+.janata_pass img.scanner {
+    width: 140px;
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 12px;
+}
+.janata_pass .card-body .btn-info2 {
+    color: #000;
+    background-color: #f25950;
+    border-color: #f25950;
+}
+.janata_pass .card-body .btn-info2:hover {
+    color: #000;
+    background-color: #f25950;
+    border-color: #f25950;
+}
+
+
+.avatar-wrapper, .avatar-wrapper_ {
+    position: relative;
+    height: 100px;
+    width: 100px;
+    margin: 0px auto;
+    border-radius: 20%;
+    overflow: hidden;
+    box-shadow: 1px 1px 15px -5px black;
+    transition: all .3s ease;
+    background-color: #e6e6e6;
+}
+.avatar-wrapper:hover, .avatar-wrapper_:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+.avatar-wrapper:hover .profile-pic, .avatar-wrapper_:hover .profile-pic_ {
+  opacity: .5;
+}
+.avatar-wrapper .profile-pic, .avatar-wrapper_ .profile-pic_ {
+  height: 100%;
+  width: 100%;
+  transition: all .3s ease;
+}
+.avatar-wrapper .profile-pic:after, .avatar-wrapper_ .profile-pic_:after {
+  font-family: FontAwesome;
+  /* content: "\f007"; */
+  background-image: url("../img/camera.png");
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  font-size: 190px;
+  background: #ecf0f1;
+  color: #34495e;
+  text-align: center;
+  width:80px;
+}
+.avatar-wrapper .upload-button, .avatar-wrapper_ .upload-button_ {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+.avatar-wrapper .upload-button .fa-arrow-circle-up, .avatar-wrapper_ .upload-button_ .fa-arrow-circle-up_ {
+    position: absolute;
+    font-size: 234px;
+    top: 10px;
+    left: 10px;
+    text-align: center;
+    opacity: 0;
+    transition: all .3s ease;
+    color: #34495e;
+    right: 0;
+}
+.avatar-wrapper .upload-button:hover .fa-arrow-circle-up, .avatar-wrapper_ .upload-button_:hover .fa-arrow-circle-up_ {
+  opacity: .9;
+}
+img.icon_img{
+	width:80px;
+}
 
