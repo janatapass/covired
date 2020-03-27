@@ -29,7 +29,7 @@ There are two ways to contribute.
 If **you want to extensively work on this application**, email to [covired.janatapass@gmail.com](covired.janatapass@gmail.com). We will contact you and see if we can add you in core developer group.
 
 If **you want to contribute a bugfix or new feature** but don't want to be core developer,
-- Fork this repository 
+- Fork this repository (Hint : [Read](https://gist.github.com/Chaser324/ce0505fbed06b947d962) this GIST for Forking workflow)
 - Edit and fix the bug/add feature
 - Create a pull request.
 - A core developer will check the pull request, review and take a decision to merge it or not. He/she may also ask you do some more changes improvements before merging the changes to this repository.
