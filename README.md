@@ -1,4 +1,4 @@
-# covired
+# covired - Janata Pass
 As Curfew progresses, it becomes harder to control for 21 days. So an App was mooted which will keep Common man first in mind (Service workers, Volunteers , Police are also core users, but they have ID cards, and now physical passes -if executed well by govts).
 
 - We respect privacy and keeping tracking etc to a minimum. Aiming solely for lightening the Roads unlike apps 4 patient tracking etc 
