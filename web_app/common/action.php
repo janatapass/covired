@@ -19,7 +19,13 @@ switch($action){
         $otp = $_REQUEST['otp'];
         $DbHandler->verify_otp($mobile,$otp);
    	break;
-
+    case 'save_approver':
+        $DbHandler->save_approver();
+   	break;
+   
+    case 'approver_pass_count':
+        $DbHandler->approver_pass_count();
+   	break;
 }
 //$response = $obj->utf8_converter($response);
 //$returnresponse = json_encode($response,JSON_HEX_QUOT);

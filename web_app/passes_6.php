@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="en">
    <head>
       <title>Janata Pass</title>
@@ -16,8 +16,31 @@
 		 </div>
             <div class="col-lg-6 col-sm-6 col-12 mx-auto">
                <img alt="Janata Pass" class="logo" src="img/logo.png">
-               <h1>Janata Pass</h1>
+               <h1>Janata Pass</h1>-->
+               <div class="row">
+		
+               <?php 
+               //print_r($_REQUEST);
+			   include_once ('web_api/include/DbHandler.php');
+               $DbHandler = new DbHandler();
+               $approver_id = $_REQUEST['approver_id'];
+			   $arr_passes = $DbHandler->get_approver_passes($approver_id);
+			   $arr_passes = $arr_passes['data'];
+			   
+			   $user_id = $_REQUEST['user_id'];
+			   $arr_user = $DbHandler->get_user_details($user_id,false);
+			   $arr_user = $arr_user['data'];
+			   //print_r($arr_user);
+			   $qr_code = $arr_user['qr_code'];
+			   $color_code = $arr_user['color_code'];
+			   //print_r($arr_services);
+			   ?>
                <div class="card mb-3 mt-3">
+                    <!--<div class="button_box">
+            		 <div class="div_btn" onclick="toggleVisibility('Menu2');"><img alt="approver_black" src="img/approver_black.png"></div>
+            		 <div class="div_btn active" onclick="toggleVisibility('Menu1');"><img alt="black" src="img/black.png"></div>
+            		 </div>-->
+            		 <button class="btn btn-info" onclick="ajax_load('approver_user_details.php?user_id=<?=$user_id;?>','div_main_body');"> Your QR Code </button>
                   <div class="card-body passes_list">
                      <div class="row">
 					 <div class="col-lg-12 col-12">
@@ -27,46 +50,30 @@
 					  <h4>Here are you passes</h4>
 					 </div>
 					 </div>
-					 <div class="row">
-					 <div class="col-lg-12">
-					 <button class="btn btn-success">Pass #1</button> <p>LFZPA</p>
+					 <?php if(is_array($arr_passes) && count($arr_passes)!=0){
+					 foreach($arr_passes as $key=>$pass){
+					     $btn_class = ($pass['pass_type']=='G')?'btn-success':'btn-yellow';
+					     $pass_status = $pass['pass_status']=='O'?'Open':'Assigned';
+					 ?>
+					  <div class="row">
+    					 <div class="col-lg-12">
+    					     <button class="btn <?= $btn_class;?> ">Pass #<?= ++$key;?></button> <p class="pl-3 mt-2"><?= $pass['qr_code'];?> <span class="font_14"><?= $pass_status;?></span></p>
+    					 </div>
 					 </div>
-					 </div>
-					 <div class="row">
-					 <div class="col-lg-12">
-					 <button class="btn btn-success">Pass #1</button> <p>LFZPA</p>
-					 </div>
-					 </div>
-					 <div class="row">
-					 <div class="col-lg-12">
-					 <button class="btn btn-success">Pass #1</button> <p>LFZPA</p>
-					 </div>
-					 </div>
-					 <div class="row">
-					 <div class="col-lg-12">
-					 <button class="btn btn-success">Pass #1</button> <p>LFZPA</p>
-					 </div>
-					 </div>
-					 <div class="row">
-					 <div class="col-lg-12">
-					 <button class="btn btn-yellow">Pass #1</button> <p>LFZPA</p>
-					 </div>
-					 </div>
-					 <div class="row">
-					 <div class="col-lg-12">
-					 <button class="btn btn-yellow">Pass #1</button> <p>LFZPA</p>
-					 </div>
-					 </div>
-					 </div>
+					 <?php
+					     
+					 }
+					 }?>
+										 </div>
 					 <div id="Menu2" style="display:none;">
-					 <img alt="black" src="img/black.png" class="scanner" >
-					 <h3 class="text-center">Pandi</h3>
+					 <div class="scanner"><?php $DbHandler->generate_QR_code($qr_code,$color_code); ?> </div>
+					 <h3 class="text-center"><?= $arr_user['name'];?></h3>
 					 <div class="row">
 					 <div class="col-ld-6 col-sm-6 col-6">
 					 <p>Organization</p>
 					 </div>
 					 <div class="col-ld-6 col-sm-6 col-6">
-					 <p>Appolo</p>
+					 <p><?= $arr_user['name'];?></p>
 					 </div>
 					 </div>
 					 <div class="row">
@@ -74,7 +81,7 @@
 					 <p>Address</p>
 					 </div>
 					 <div class="col-ld-6 col-sm-6 col-6">
-					 <p>Chennai</p>
+					 <p><?= $arr_user['address'];?></p>
 					 </div>
 					 </div>
 					 <div class="row">
@@ -82,7 +89,7 @@
 					 <p>City</p>
 					 </div>
 					 <div class="col-ld-6 col-sm-6 col-6">
-					 <p>Tricy</p>
+					 <p><?= $arr_user['address'];?></p>
 					 </div>
 					 </div>
 					 <div class="row">
@@ -93,9 +100,11 @@
 					 </div>
 					 </div>
 					 </div>
+					 <!--<a href='approver_user_details.php'><button class="btn btn-info2"> Your QR Code </button></a>-->
+					 </div>
                   </div>
                </div>
-			   
+			   <!--
                <p class="p_tag_bottom">A CoVIRED initiative</p>
             </div>
          </div>
@@ -103,7 +112,7 @@
       <script src="js/jquery.min.js"></script>
       <script src="js/popper.min.js"></script>
       <script src="js/bootstrap.min.js"></script>
-	      <script>
+	      <script type="text/javascript">
          var divs = ["Menu1", "Menu2"];
          var visibleDivId = null;
          function toggleVisibility(divId) {
@@ -135,6 +144,6 @@
     $(this).addClass("active");
 });
 });
-	  </script>
+  </script>
    </body>
-</html>
+</html>-->

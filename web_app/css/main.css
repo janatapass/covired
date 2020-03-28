@@ -8,6 +8,7 @@ body{
     width: 100%;
     height: 100%;
 	font-family: 'Product Sans';
+	overflow-x:hidden;
 }
 body.green{
 	 background: #89D468; /* fallback color */
@@ -47,7 +48,8 @@ body.green{
     padding: 10px 15px;
     margin: 0 auto;
     display: block;
-    width: 48%;
+    width: 55%;
+	font-weight: bold;
 }
 .janata_pass form.landingpaege .btn-primary:hover, .janata_pass .btn-primary:hover {
     color: #000;
@@ -80,8 +82,9 @@ body.green{
     display: block;
     margin-bottom: 10px;
 }
-.janata_pass .card-body p{
-	text-align:center;
+.janata_pass .card-body p {
+    text-align: center;
+    font-size: 15px;
 }
 
 .janata_pass .custom-control-label a{
@@ -90,7 +93,7 @@ body.green{
 .janata_pass .grid_grey {
     background-color: #ccc;
     text-align: center;
-    padding: 6px;
+    padding: 2px;
     border-radius: 5px;
 	margin-bottom: 4px;
 }
@@ -153,10 +156,10 @@ body.green{
 }
 .janata_pass .form-group.grey_box .form-control{
 	height: 40px;
-    background-color: #e6e6e6;
+    background-color: #e9ecef;
 }
 
-.janata_pass .card-body h3{
+.janata_pass .card-body h3, .form-group.grey_box h3{
 	font-size:18px;
 }
 .janata_pass .card-body h4{
@@ -206,6 +209,7 @@ body.green{
     color: #000;
     background-color: #89D468;
     border-color: #89D468;
+	width: 40%;
 }
 .janata_pass .passes_list .btn.btn-success:hover {
     color: #000;
@@ -220,6 +224,7 @@ body.green{
     color: #000;
     background-color: #F2CA28;
     border-color: #F2CA28;
+	width: 40%;
 }
 .janata_pass .passes_list .btn.btn-yellow:hover {
     color: #000;
@@ -228,7 +233,7 @@ body.green{
 }
 .janata_pass .passes_list p {
     float: left;
-    padding-left: 10%;
+    /* padding-left: 10%; */
     margin-bottom: 0px;
 }
 .janata_pass .button_box .div_btn.active {
@@ -241,7 +246,7 @@ body.green{
     color: #000;
     background-color: #17a2b8;
     border-color: #17a2b8;
-    width: 50%;
+    width: 55%;
     margin: 0 auto;
     display: block;
     padding: 8px 10px;
@@ -255,15 +260,15 @@ body.green{
 }
 
 .janata_pass img.scanner {
-    width: 140px;
+    width: 158px;
     margin: 0 auto;
     display: block;
     margin-bottom: 12px;
 }
 .janata_pass .card-body .btn-info2 {
     color: #000;
-    background-color: #f25950;
-    border-color: #f25950;
+    background-color: #FFC248;
+    border-color: #FFC248;
 }
 .janata_pass .card-body .btn-info2:hover {
     color: #000;
@@ -334,4 +339,94 @@ body.green{
 img.icon_img{
 	width:80px;
 }
+.open_camera{
+	margin: 0 auto;
+    display: block;
+    text-align: center;
+    margin-top: 30px;
+}
+.open_camera input[type="file"] {
+  display: none;
+}
 
+.open_camera label {
+    display: inline-block;
+    background-color: #FF9E5E;
+    padding: 1em 2em;
+    font-size: 14px;
+    color: #000;
+    border-radius: 6px;
+    font-weight: 600;
+    letter-spacing: 1px;
+	margin-bottom: 0px;
+}
+.janata_pass .card{
+	border-radius:10px;
+}
+.janata_pass p.descrip {
+    font-size: 14px;
+    text-align: left !important;
+}
+.janata_pass .form-group.grey_box textarea.form-control {
+    height: auto !important;
+    resize: none;
+}
+.janata_pass .form-group.grey_box label{
+	font-weight:500;
+}
+.janata_pass h3.fnt_weg{
+	font-weight:bold;
+}
+.janata_pass img.grid_scanner{
+	width:160px;
+	margin:0 auto;
+	display:block;
+}
+
+.janata_pass .btn.btn-black {
+    background-color: #000;
+    border: 1px solid #000;
+    color: #fff;
+    width: 48%;
+}
+
+.janata_pass .modal-content .modal-title{
+	width: 100%;
+    text-align: center;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+.janata_pass .modal{
+	top:10%;
+}
+
+i.fa-check-circle.fa-check-grid{
+ 	font-size: 8rem;
+	color: #fff;
+}
+
+.janata_pass .passes_list .Orange_btn {
+	color: #000;
+    background-color: #FFC248;
+    border-color: #FFC248;
+	margin:0 auto;
+	display:block;
+	width:48%;
+}
+.janata_pass .passes_list .Orange_btn:hover {
+	color: #000;
+    background-color: #FFC248;
+    border-color: #FFC248;
+}
+
+span.font_14{
+	font-size:14px;
+	margin-left:4px;
+}
+.janata_pass p.text-justity{
+	text-align:justify !important;
+}
+
+.janata_pass .grid_grey p{
+	font-weight:bold;
+}

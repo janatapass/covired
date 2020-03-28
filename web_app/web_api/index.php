@@ -64,6 +64,12 @@ $app->get('/services', function() use($app){
     $result = $db->get_active_services();
     echoRespnse(200, $result);
 });
+// get all active services in the system
+$app->get('/organisation', function() use($app){
+    $db = new DbHandler();
+    $result = $db->get_active_org();
+    echoRespnse(200, $result);
+}); 
 
 // generate OTP
 $app->post('/generate_otp', function() use($app){
@@ -104,10 +110,94 @@ $app->post('/register', function() use($app){
 
 // generate_QR_code
 $app->get('/generate_QR_code', function() use($app){
-     verifyRequiredParams(array('code', 'color_code'));
+     //verifyRequiredParams(array('code', 'color_code'));
      $db = new DbHandler();
-     $result = $db->new_QR_code();
+     $result = $db->generate_QR_code();
+}); 
+
+// pass entries
+$app->post('/pass_entries', function() use($app){
+     $user_id = $app->request->post('user_id');
+     $reason = $app->request->post('reason');
+     $services = $app->request->post('services');
+     $start_time = $app->request->post('duration_from');
+     $end_time = $app->request->post('duration_to');
+     $location = $app->request->post('location');
+     $db = new DbHandler();
+     $result = $db->pass_entries($user_id,$reason,$services,$start_time,$end_time,$location);
+     echoRespnse(200, $result);
+}); 
+
+//list user pass entries
+$app->get('/user_pass', function() use($app){
+    verifyRequiredParams(array('id'));
+    $user_id = $app->request->get('id');
+    $db = new DbHandler();
+    $result = $db->user_pass($user_id);
+    echoRespnse(200, $result);
 });
 
+//list all passes
+$app->get('/all_pass', function() use($app){
+    $db = new DbHandler();
+    $result = $db->all_pass();
+    echoRespnse(200, $result);
+});
+
+// update pass entries
+$app->post('/edit_pass', function() use($app){
+     $id = $app->request->post('id');
+     $user_id = $app->request->post('user_id');
+     $reason = $app->request->post('reason');
+     $services = $app->request->post('services');
+     $start_time = $app->request->post('duration_from');
+     $end_time = $app->request->post('duration_to');
+     $location = $app->request->post('location');
+     $db = new DbHandler();
+     $result = $db->pass_entries($id,$user_id,$reason,$services,$start_time,$end_time,$location);
+     echoRespnse(200, $result);
+});
+
+//save approver
+$app->post('/save_approver', function() use($app){
+     verifyRequiredParams(array('approver_mobile','org_name','org_type','org_location','org_email','user_type_id'));
+     $db = new DbHandler();
+     $result = $db->save_approver();
+     echoRespnse(200, $result);
+});
+
+// approve pass count
+$app->post('/approver_pass_count', function() use($app){
+    verifyRequiredParams(array('green_pass_count','yellow_pass_count','approver_id'));
+    $db = new DbHandler();
+    $result = $db->approver_pass_count();
+    echoRespnse(200, $result);
+});
+
+// generate passes
+$app->post('/generate_passes', function() use($app){
+    verifyRequiredParams(array('green_pass_count','yellow_pass_count','approver_id'));
+    $db = new DbHandler();
+    $result = $db->generate_passes();
+    echoRespnse(200, $result);
+});
+
+// get approver passes
+$app->post('/get_approver_passes', function() use($app){
+    verifyRequiredParams(array('approver_id'));
+    $approver_id = $_REQUEST['approver_id'];
+    $db = new DbHandler();
+    $result = $db->get_approver_passes($approver_id);
+    echoRespnse(200, $result);
+});
+
+// get user details
+$app->post('/get_user_details', function() use($app){
+    verifyRequiredParams(array('user_id'));
+    $user_id = $_REQUEST['user_id'];
+    $db = new DbHandler();
+    $result = $db->get_user_details($user_id);
+    echoRespnse(200, $result);
+});
 $app->run();
 ?>
