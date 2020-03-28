@@ -3,7 +3,6 @@ import 'package:janata_curfew/core/app_theme.dart';
 import 'package:janata_curfew/core/image_path.dart';
 import 'package:janata_curfew/core/widgets/background_container.dart';
 import 'package:janata_curfew/core/widgets/footer_brand_text.dart';
-import 'package:janata_curfew/features/authentication/presentation/mobile_registration_view.dart';
 import 'package:janata_curfew/features/authentication/presentation/otp_registration_view.dart';
 
 class RegistrationScreen extends StatelessWidget {

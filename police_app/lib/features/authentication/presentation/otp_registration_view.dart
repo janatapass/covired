@@ -15,6 +15,7 @@ class OtpRegistrationView extends StatelessWidget {
             style: AppTheme.authentication_textfield_header),
         SizedBox(height: 16),
         PinCodeTextField(
+          textInputType: TextInputType.number,
           selectedColor: Colors.black,
           inactiveColor: Colors.black.withAlpha(100),
           backgroundColor: Colors.transparent,
