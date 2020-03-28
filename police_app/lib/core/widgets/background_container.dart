@@ -8,7 +8,7 @@ class BackgroundContainer extends StatelessWidget {
     return Container(
         width: double.infinity,
         height: double.infinity,
-        color: Colors.blue.withAlpha(100),
+        color: Colors.white,
         child: child);
   }
 

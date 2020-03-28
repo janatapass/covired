@@ -5,6 +5,11 @@ import 'package:janata_curfew/features/home/presentation/home_screen.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class OtpRegistrationView extends StatelessWidget {
+
+  VoidCallback onPressed;
+
+  OtpRegistrationView({this.onPressed});
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -16,8 +21,8 @@ class OtpRegistrationView extends StatelessWidget {
         SizedBox(height: 16),
         PinCodeTextField(
           textInputType: TextInputType.number,
-          selectedColor: Colors.black,
-          inactiveColor: Colors.black.withAlpha(100),
+          selectedColor: Colors.orange,
+          inactiveColor: Colors.grey.withAlpha(50),
           backgroundColor: Colors.transparent,
           activeColor: Colors.black,
           length: 4,
@@ -33,13 +38,8 @@ class OtpRegistrationView extends StatelessWidget {
         Center(
           child: AuthenticationButton(
               buttonText: 'Submit',
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => HomeScreen()),
-                );
-              }),
+              onPressed: onPressed
+          ),
         ),
       ],
     );

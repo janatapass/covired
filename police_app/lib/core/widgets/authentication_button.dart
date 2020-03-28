@@ -7,13 +7,13 @@ class AuthenticationButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FlatButton(
-      padding: EdgeInsets.fromLTRB(24, 8, 24, 8),
+    return RaisedButton(
+      padding: EdgeInsets.fromLTRB(48, 8, 48, 8),
       shape:
-          RoundedRectangleBorder(borderRadius: new BorderRadius.circular(12.0)),
+          RoundedRectangleBorder(borderRadius: new BorderRadius.circular(4.0)),
       onPressed: onPressed,
       textColor: AppColors.white,
-      color: Colors.green,
+      color: Colors.orange,
       child: Text(buttonText),
     );
   }

@@ -5,6 +5,11 @@ import 'package:janata_curfew/core/widgets/authentication_text_field.dart';
 import 'package:janata_curfew/features/home/presentation/home_screen.dart';
 
 class MobileRegistrationView extends StatelessWidget {
+
+  VoidCallback onPressed;
+
+  MobileRegistrationView({this.onPressed});
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -14,18 +19,12 @@ class MobileRegistrationView extends StatelessWidget {
         Text('Mobile number',
             style: AppTheme.authentication_textfield_header),
         SizedBox(height: 16),
-        AuthenticationTextField(),
+        AuthenticationTextField(textInputType: TextInputType.number),
         SizedBox(height: 24),
         Center(
           child: AuthenticationButton(
               buttonText: 'Request OTP',
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => HomeScreen()),
-                );
-              }),
+              onPressed: onPressed),
         ),
       ],
     );
