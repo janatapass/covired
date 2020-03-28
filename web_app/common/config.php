@@ -1,10 +1,10 @@
 <?php
 date_default_timezone_set('Asia/Kolkata');
-$website_url = 'https://fatneedle.com/janata_pass/Application/';
+$website_url = 'PROJECT LOCATION HERE';
 $host = "localhost";
-$dbuser = "fatnejjj_janata";
-$dbpsw = "JanataPass@123";
-$dbname = "fatnejjj_janatapass";   
+$dbuser = "DB_USER";
+$dbpsw = "DB_PASSWORD";
+$dbname = "DB_NAME";   
 // Payumoney details
 //$_MERCHANT_KEY = '6u9dOJzc';
 //$_MERCHANT_SALT = '5SBiSLvFPH';
