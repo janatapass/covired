@@ -7,6 +7,7 @@ import 'package:janata_curfew/core/widgets/footer_brand_text.dart';
 import 'package:janata_curfew/features/authentication/bloc/authentication_bloc.dart';
 import 'package:janata_curfew/features/authentication/bloc/authentication_event.dart';
 import 'package:janata_curfew/features/authentication/bloc/authentication_state.dart';
+import 'package:janata_curfew/features/authentication/presentation/pages/profile_review_screen.dart';
 import 'package:janata_curfew/features/authentication/presentation/widgets/mobile_registration_view.dart';
 import 'package:janata_curfew/features/authentication/presentation/widgets/otp_registration_view.dart';
 import 'package:janata_curfew/features/home/presentation/home_screen.dart';
@@ -89,7 +90,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                                   context,
                                                   MaterialPageRoute(
                                                       builder: (context) =>
-                                                          HomeScreen()),
+                                                          ProfileReviewScreen()),
                                                 );
                                               })),
                                     FooterBrandText()

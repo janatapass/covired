@@ -37,7 +37,7 @@ class OtpRegistrationView extends StatelessWidget {
         SizedBox(height: 24),
         Center(
           child: AuthenticationButton(
-              buttonText: 'Submit',
+              text: 'Submit',
               onPressed: onPressed
           ),
         ),
