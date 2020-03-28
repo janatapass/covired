@@ -25,6 +25,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   barcode_scan: ^2.0.1
   font_awesome_flutter: ^8.7.0
+  pin_code_fields: ^2.4.0
 
 dev_dependencies:
   flutter_test:
