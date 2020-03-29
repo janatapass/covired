@@ -13,19 +13,33 @@
 			  // exit;
 			   ?>
 			  
-      
-      
+  
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <title>Janata Pass</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="css/bootstrap.min.css">
+      <link rel="stylesheet" href="css/iziToast.min.css">
+      <link rel="stylesheet" href="css/main.css">
+	  
+   </head>
+<body class="janata_pass green">    
+      <div class="container">
+         <div class="row h-100">
+            <div class="col-lg-6 col-sm-6 col-12 mx-auto">
       <div class="card mb-3 mt-3">
             <div class="card-body passes_list">
                 <div class="row">
                     <div class="col-lg-12 col-12">
-                        <div class="row">
+                        <div class="row mb-3">
                             <?php $DbHandler->generate_QR_code($qr_code,$color_code); ?>
                         </div>
                         <div class="row">
-                            <div id="Menu2" style="display:block;">
+                            <div id="Menu2" class="col-12 w-100" style="display:block;">
 					 <h3 class="text-center"><?= $arr_user['name'];?></h3>
-					 <div class="row">
+					 <div class="row mb-2">
 					 <div class="col-ld-6 col-sm-6 col-6">
 					 <p>Organization</p>
 					 </div>
@@ -33,7 +47,7 @@
 					 <p><?= $arr_user['name'];?></p>
 					 </div>
 					 </div>
-					 <div class="row">
+					 <div class="row mb-2">
 					 <div class="col-ld-6 col-sm-6 col-6">
 					 <p>Address</p>
 					 </div>
@@ -41,7 +55,7 @@
 					 <p><?= $arr_user['address'];?></p>
 					 </div>
 					 </div>
-					 <div class="row">
+					 <div class="row mb-2">
 					 <div class="col-ld-6 col-sm-6 col-6">
 					 <p>City</p>
 					 </div>
@@ -59,6 +73,9 @@
                     </div>
                 </div>
             </div>
+        </div>
+        </div>
+        </div>
         </div>
                                
 			   

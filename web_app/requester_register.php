@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="en">
    <head>
       <title>Janata Pass</title>
@@ -10,10 +10,12 @@
    <body class="janata_pass green">
       <div class="container">
          <div class="row">
-          <form name="form_requester" id="form_requester" method="POST" enctype="multipart">
+          
             <div class="col-lg-6 col-sm-6 col-12 mx-auto">
                <img alt="Janata Pass" class="logo" src="img/logo.png">
-               <h1>Janata Pass</h1>
+               <h1>Janata Pass</h1>-->
+               <form name="form_requester" id="form_requester" method="POST" enctype="multipart">
+               <div class="container">
          <h4 class="text-center"><strong>Please register your details</strong></h4>
                <div class="card mb-3 mt-3">
                   <div class="card-body passes_list">
@@ -45,7 +47,7 @@
               <!-- <i class="fa fa-arrow-circle-up" aria-hidden="true"></i> -->
               <!-- <img alt="" class="fa fa-arrow-circle-up icon_img" src="img/camera.png"> -->
             </div>
-            <input class="file-upload" type="checkbox">
+            <input class="file-upload" type="radio" id="user_proof" name="user_proof" value="photo">
           </div>
            </div>
            <div class="col-lg-6 col-sm-6 col-6">
@@ -55,7 +57,7 @@
               <!-- <i class="fa fa-arrow-circle-up" aria-hidden="true"></i> -->
               <!-- <img alt="" class="fa fa-arrow-circle-up icon_img" src="img/camera.png"> -->
             </div>
-            <input class="file-upload_" type="checkbox">
+            <input class="file-upload_" type="radio" id="user_proof" name="user_proof" value="birthmark">
           </div>
            </div>
            </div>
@@ -64,31 +66,57 @@
                   </div>
                </div>
          <button type="button" class="btn btn-primary" onclick="save_requester()" id="">Next</button>
-               <p class="p_tag_bottom">A CoVIRED initiative</p>
+         </form>
+         </div>
+               <!--<p class="p_tag_bottom">A CoVIRED initiative</p>
             </div>
-          </form>
+          
          </div>
       </div>
       <script src="js/jquery.min.js"></script>
       <script src="js/popper.min.js"></script>
       <script src="js/bootstrap.min.js"></script>
-      
+      -->
       <script type="text/javascript">
 function save_requester(){
+    var ele = document.getElementsByName('user_proof'); 
+    for(i = 0; i < ele.length; i++) { 
+        if(ele[i].checked){ 
+           user_proof = ele[i].value;
+        }
+    } 
     var form_name = 'form_requester';
 
     
     var user_type_id = $('#user_type_id').val();
-    
+    var user_mobile = $('#user_mobile').val();
+    var req_org = $('#req_org').val();
+    var req_services = $('#req_services').val();
+    var req_qr_code = $('#req_qr_code').val();
+    var req_pass_type = $('#req_pass_type').val();
+    var req_pass_id = $('#req_pass_id').val();
+
     var params = $('#' + form_name).serialize();
 
     var form = $('#' + form_name)[0];
     var data = new FormData(form);
     console.log(data);
     // If you want to add an extra field for the FormData
-    data.append("action", 'save_requester');
+    data.append("action", 'register');
     data.append('user_type_id',user_type_id);
-
+    if(user_type_id==4){
+        data.append('user_category_id',2); // yellow for volunteer 
+    }else{
+        data.append('user_category_id',1); // green for requester 
+    }
+    
+    data.append('approver_id',req_org);
+    data.append('services',req_services);
+    data.append('user_proof',user_proof);
+    data.append('qr_code',req_qr_code);
+    data.append('pass_type',req_pass_type);
+    data.append('mobile',user_mobile);
+    data.append('pass_id',req_pass_id);
 
     $.ajax({
         type: 'POST',
@@ -100,15 +128,22 @@ function save_requester(){
         contentType: false,
         cache: false,
         datatype: 'json',
-       
-        success: function (data) {
-        
+        success: function (response) {
+             //alert(response);
+             var data = $.parseJSON(response);
              if(data.status ==0){
                   error_alert(data.message);
               }
               if(data.status ==1){
-                $('#approver_id').val(data.approver_id);
-                success_alert(data.message,'requester_register_5.php');
+                $('#user_id').val(data.user_id);
+                if(user_proof=='photo'){
+                   // redirect_url = 'requester_register_2.php';
+                }
+                if(user_proof =='birthmark'){
+                   // redirect_url = 'requester_register_3.php';
+                }
+                redirect_url = 'approver_user_details.php?user_id='+data.user_id;
+                success_alert(data.message,redirect_url);
               }
             //alertify.alert("Success", data.msg, function () {
             /*alertify.notify(data.msg,"Success",1, function () {

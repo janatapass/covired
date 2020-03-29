@@ -1,18 +1,25 @@
-function error_alert(message){
+function error_alert(message,redirect=''){
      iziToast.error({
                     title: 'Warning',
                     message: message,
                      buttons: [
                     ['<button>Ok</button>', function (instance, toast) {
                        instance.hide({
-                        transitionOut: 'fadeOutUp'
+                        transitionOut: 'fadeOutUp',
+                        onClosing: function(instance, toast, closedBy){
+                            if(redirect!=""){
+                               // window.location.href = BASE_URL + redirect;
+                               ajax_load(redirect,'div_main_body');
+                            } 
+                            console.info('closedBy: ' + closedBy); // The return will be: 'closedBy: buttonName'
+                        }
                     }, toast, 'buttonName');
                     }, true]
                 ]
                 });
 }
 
-function success_alert(message,redirect=false){
+function success_alert(message,redirect=''){
     iziToast.success({
         title: 'Success',
         message: message,

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="en">
    <head>
       <title>Janata Pass</title>
@@ -12,7 +12,8 @@
          <div class="row">
             <div class="col-lg-6 col-sm-6 col-12 mx-auto">
                <img alt="Janata Pass" class="logo" src="img/logo.png">
-               <h1>Janata Pass</h1>
+               <h1>Janata Pass</h1>-->
+               <div class="container">
                <h4 class="text-center"><strong>Please register your details</strong></h4>
                <div class="card mb-3 mt-3">
                   <div class="card-body passes_list">
@@ -37,7 +38,8 @@
                   </div>
                </div>
                <a href="requester_register_5"><button type="button" class="btn btn-primary" id="">Submit</button></a>
-               <p class="p_tag_bottom">A CoVIRED initiative</p>
+               </div>
+              <!-- <p class="p_tag_bottom">A CoVIRED initiative</p>
             </div>
          </div>
       </div>
@@ -45,4 +47,4 @@
       <script src="js/popper.min.js"></script>
       <script src="js/bootstrap.min.js"></script>
    </body>
-</html>
+</html>-->

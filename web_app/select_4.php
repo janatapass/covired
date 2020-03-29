@@ -13,7 +13,6 @@
             <div class="col-lg-6 col-sm-6 col-12 mx-auto">
                <img alt="Janata Pass" class="logo" src="img/logo.png">
                <h1>Janata Pass</h1>-->
-               
                <div class="card mb-3 mt-3">
                   <div class="card-body">
                      <div class="row">
@@ -23,7 +22,7 @@
             					 <p>Approver</p>
         					 </div>
 					    </div>
-					 <div class="col-lg-6 col-sm-6 col-6 mb-4" onclick="load_user_type_page('requester','requester_details.php');">
+					 <div class="col-lg-6 col-sm-6 col-6 mb-4" onclick="load_user_type_page('requester','requester_details_change_page.php');">
     					 <div class="grid_grey">
         					 <a><img alt="app_icon" class="app_icon" src="img/requester.png"></a>
         					 <p>Requester</p>
@@ -35,9 +34,9 @@
         					 <p>General Citizen</p>
     					 </div>
 					 </div>
-					 <div class="col-lg-6 col-sm-6 col-6">
+					 <div class="col-lg-6 col-sm-6 col-6" onclick="load_user_type_page('volunteer','requester_details_change_page.php');">
     					 <div class="grid_grey">
-        					 <a href="requester_register.php"><img alt="app_icon" class="app_icon" src="img/volunteers.png"></a>
+        					 <img alt="app_icon" class="app_icon" src="img/volunteers.png">
         					 <p>Volunteers</p>
     					 </div>
 					 </div>
@@ -57,6 +56,7 @@
 </html>-->
 <script type="text/javascript">
 function load_user_type_page(user_type,type_page){
+   // alert(user_type);
     switch(user_type){
         case 'approver': 
             user_type_id = 1;

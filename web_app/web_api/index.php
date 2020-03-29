@@ -199,5 +199,23 @@ $app->post('/get_user_details', function() use($app){
     $result = $db->get_user_details($user_id);
     echoRespnse(200, $result);
 });
+
+//list all approver organisations
+$app->get('/all_approver_organisations', function() use($app){
+    $db = new DbHandler();
+    $result = $db->get_active_approvers();
+    echoRespnse(200, $result);
+});
+
+//validate approver
+$app->post('/validate_approver', function() use($app){
+     verifyRequiredParams(array('approver_id','approver_mobile'));
+    $approver_id = $_REQUEST['approver_id'];
+    $approver_mobile = $_REQUEST['approver_mobile'];
+    $db = new DbHandler();
+    $result = $db->validate_approver($approver_mobile,$approver_id);
+    echoRespnse(200, $result);
+});
+
 $app->run();
 ?>

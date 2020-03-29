@@ -3,7 +3,7 @@ date_default_timezone_set('Asia/Kolkata');
 
 include_once ('../web_api/include/DbHandler.php'); 
 $DbHandler = new DbHandler();
-$action = isset($_POST['action']) ? $_POST['action'] : "";
+$action = isset($_REQUEST['action']) ? $_REQUEST['action'] : "";
 
 switch($action){
     case 'verify_mobile':
@@ -22,9 +22,14 @@ switch($action){
     case 'save_approver':
         $DbHandler->save_approver();
    	break;
-   
     case 'approver_pass_count':
         $DbHandler->approver_pass_count();
+   	break;
+    case 'validate_approver':
+        $DbHandler->validate_approver($_REQUEST['approver_mobile'],$_REQUEST['approver_id']);
+   	break;
+    case 'register':
+        $DbHandler->register($_REQUEST['approver_mobile'],$_REQUEST['approver_id']);
    	break;
 }
 //$response = $obj->utf8_converter($response);

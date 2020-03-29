@@ -12,7 +12,12 @@
                <input type="hidden" id="approver_id" name="approver_id"/>
                <input type="hidden" id="user_approver_id" name="user_approver_id"/>
                <input type="hidden" id="user_id" name="user_id"/>
-               
+               <input type="hidden" id="req_org" name="req_org"/>
+               <input type="hidden" id="req_services" name="req_services"/>
+               <input type="hidden" id="req_qr_code" name="req_qr_code"/>
+               <input type="hidden" id="req_pass_type" name="req_pass_type"/>
+               <input type="hidden" id="req_pass_id" name="req_pass_id"/>
+
                <div id="div_main_body" name="div_main_body">
                    <div class="form-group">
                      <label for="mobile">Mobile Number:</label>

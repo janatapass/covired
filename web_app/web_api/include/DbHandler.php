@@ -124,8 +124,8 @@ public function sendsms($mobile,$message,$otp){
 	curl_setopt($ch, CURLOPT_POST, true);
 	curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	$response = curl_exec($ch);
-	//$response = 'test response';
+	//$response = curl_exec($ch);
+	$response = 'test response';
 	$arr_sms['response'] = $response;
 	$arr_sms['status'] = 1;
 	$arr_response = $this->insert_sms_log($arr_sms);
@@ -189,9 +189,12 @@ function verify_mobile($mobile){
 
 // register user 
 function register(){
-    $arr_fields = array('mobile','user_type_id','name','aadhar_number','address','city','pincode');
+    $arr_fields = array('mobile','user_type_id','name','aadhar_number','user_category_id','qr_code','approver_id','city','address','pincode','user_proof','services');
 	foreach($arr_fields as $field){
 		$arr_data[$field] = $_REQUEST[$field];
+	}
+	if(!isset($arr_data['qr_code'])){
+	    $arr_data['qr_code'] = $arr_data['mobile'].substr(md5(microtime()),rand(0,26),5);
 	}
 	if(is_array($arr_data) && count($arr_data)!=0){
 	    $arr_data['status'] = $arr_data['is_active'] = 1;
@@ -203,6 +206,11 @@ function register(){
     	$sql3 = $this->conn->prepare("INSERT INTO users (".$str_fields.") VALUES ('".$str_values."')");
     	$sql3->execute();
     	$last_inserted_id = $this->conn->lastInsertId();
+    	if($_REQUEST['pass_id']!=""&& $_REQUEST['pass_id']!=0){
+        	$arr_user['assigned_user_id'] = $last_inserted_id;
+        	$arr_user['pass_id'] = $_REQUEST['pass_id'];
+    	}
+    	$this->update_pass_status($arr_user);
         if($last_inserted_id!='' && $last_inserted_id!=0){
             $arr_response['status'] = 1;
     		$arr_response['message'] = "User Registered Successfully!";
@@ -213,6 +221,11 @@ function register(){
         }
         echo json_encode($arr_response);
 	}
+}
+
+function update_pass_status($arr_user){
+    $sql2 = "UPDATE approver_pass_details SET pass_status='A', assigned_user_id=".$arr_user['assigned_user_id']." WHERE id=".$arr_user['pass_id'];
+    $this->conn->prepare($sql2)->execute();
 }
 
 function create_approver_user($arr_data){
@@ -338,10 +351,13 @@ public function generate_passes(){
 }
 
 // get all approver passes
-function get_approver_passes($approver_id){
+function get_approver_passes($approver_id,$status=''){
 	 $response=array();
 	   $r = array();
         $sql = "SELECT * FROM approver_pass_details WHERE approver_id=".$approver_id;
+        if($status!=""){
+            $sql .= ' AND pass_status="'.$status.'"';
+        }
         $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
         $stmt->execute();
         $rows = $stmt->fetchALL();    
@@ -351,7 +367,7 @@ function get_approver_passes($approver_id){
             $response['data'] = $rows;
         }else{
 			$response['status'] = 0;
-	    $response['message'] = "Services not found";
+	    $response['message'] = "Passes not found";
 		}
     return $response;
 } 
@@ -416,6 +432,59 @@ function generate_QR_code($code='',$color_code='black'){
     echo '<tt style="font-size:7px">'.$raw.'</tt>';
     
 }
+
+
+// get active approver organisations in the system
+function get_active_approvers($approver_id=''){
+	 $response=array();
+	   $r = array();
+        $sql = "SELECT org_name,id FROM approver_details WHERE approver_details.status=1";
+        if($approver_id!="" && $approver_id!=0){
+            $sql .= " AND id=".$approver_id;
+        }
+        $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
+        $stmt->execute();
+        $rows = $stmt->fetchALL();    
+        if(count($rows)>0) {
+            $response['status'] = 1;
+            $response['message'] = "success";
+            $response['data'] = $rows;
+        }else{
+			$response['status'] = 0;
+	        $response['message'] = "approvers not found";
+		}
+    return $response;
+}
+
+
+function validate_approver($mobile,$org_id){
+    $response=array();
+    $r = array();
+    $sql = "SELECT org_name,id FROM approver_details WHERE approver_details.status=1 AND id=".$org_id." AND approver_mobile =".$mobile;
+    $arr_passes = $this->get_approver_passes($org_id,'O');
+    //print_r($arr_passes);
+    $arr_pass = (isset($arr_passes['data']))?$arr_passes['data'][0]:0;
+    $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
+    $stmt->execute();
+    $rows = $stmt->fetch();    
+    if(count($rows)!=0 && $arr_pass==0) {
+        $response['status'] = 2;
+        $response['message'] = "No Approved passes available at the moment! Please contact your approver ";
+    }else if(count($rows)!=0 && count($arr_pass)!=0) {
+        $response['status'] = 1;
+        $response['message'] = "success";
+        $response['data'] = $rows;
+        $response['qr_code'] = $arr_pass['qr_code'];
+        $response['pass_type'] = $arr_pass['pass_type'];
+        $response['pass_id'] = $arr_pass['id'];
+    }else{
+		$response['status'] = 0;
+        $response['message'] = "Invalid Approver detail entered! Please enter Correct details! ";
+	}
+	//print_r($response);
+    echo json_encode($response);
+}
+
 // destruct db connection
 public function __destruct() {
     // close the database connection

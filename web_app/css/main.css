@@ -430,3 +430,7 @@ span.font_14{
 .janata_pass .grid_grey p{
 	font-weight:bold;
 }
+.row tt{
+    margin: 0 auto;
+    display: block;
+	  }
