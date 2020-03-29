@@ -23,7 +23,7 @@ class MobileRegistrationView extends StatelessWidget {
         SizedBox(height: 24),
         Center(
           child: AuthenticationButton(
-              buttonText: 'Request OTP',
+              text: 'Request OTP',
               onPressed: onPressed),
         ),
       ],
