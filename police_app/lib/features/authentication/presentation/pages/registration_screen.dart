@@ -10,7 +10,7 @@ import 'package:janata_curfew/features/authentication/bloc/authentication_state.
 import 'package:janata_curfew/features/authentication/presentation/pages/profile_review_screen.dart';
 import 'package:janata_curfew/features/authentication/presentation/widgets/mobile_registration_view.dart';
 import 'package:janata_curfew/features/authentication/presentation/widgets/otp_registration_view.dart';
-import 'package:janata_curfew/features/home/presentation/home_screen.dart';
+import 'package:janata_curfew/features/home/presentation/pages/home_screen.dart';
 import 'package:janata_curfew/injections.dart';
 
 class RegistrationScreen extends StatefulWidget {

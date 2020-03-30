@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:janata_curfew/core/app_theme.dart';
 import 'package:janata_curfew/core/widgets/authentication_button.dart';
-import 'package:janata_curfew/features/home/presentation/home_screen.dart';
+import 'package:janata_curfew/features/home/presentation/pages/home_screen.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class OtpRegistrationView extends StatelessWidget {

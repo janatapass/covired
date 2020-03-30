@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:barcode_scan/barcode_scan.dart';
-import 'package:flutter/services.dart';
 import 'package:janata_curfew/core/app_colors.dart';
 import 'package:janata_curfew/core/app_theme.dart';
+import 'package:janata_curfew/features/home/presentation/pages/scan_qr_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -11,14 +10,14 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
-  String barcode = "";
+//  String barcode = "";
   TabController _tabController;
 
   @override
   void initState() {
     super.initState();
     _tabController = new TabController(vsync: this, length: 2);
-    _tabController.addListener(_handleTabChange);
+//    _tabController.addListener(_handleTabChange);
   }
 
   @override
@@ -41,8 +40,8 @@ class _HomeScreenState extends State<HomeScreen>
               unselectedLabelStyle: AppTheme.home_tab_un_selected,
               indicatorColor: Colors.orange,
               tabs: [
-                Tab(icon: Text('Check Mobile')),
-                Tab(icon: Text('Check QR'))
+                Tab(child: Text('Check Mobile')),
+                Tab(child: Text('Check QR'))
               ],
             ),
           ),
@@ -50,35 +49,21 @@ class _HomeScreenState extends State<HomeScreen>
             controller: _tabController,
             children: [
               Center(child: Text('Mobile')),
-              Center(child: Text(barcode)),
+              ScanQrScreen(),
             ],
           )),
     );
   }
 
-  Future scan() async {
-    try {
-      String barcode = await BarcodeScanner.scan();
-      setState(() => this.barcode = barcode);
-    } on PlatformException catch (e) {
-      if (e.code == BarcodeScanner.CameraAccessDenied) {
-        setState(() {
-          this.barcode = 'The user did not grant the camera permission!';
-        });
-      } else {
-        setState(() => this.barcode = 'Unknown error: $e');
-      }
-    } on FormatException {
-      setState(() => this.barcode =
-          'null (User returned using the "back"-button before scanning anything. Result)');
-    } catch (e) {
-      setState(() => this.barcode = 'Unknown error: $e');
-    }
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
   }
 
-  void _handleTabChange() {
-    if (_tabController.index == 1) {
-      scan();
-    }
-  }
+//  void _handleTabChange() {
+//    if (_tabController.index == 1) {
+//      scan();
+//    }
+//  }
 }
