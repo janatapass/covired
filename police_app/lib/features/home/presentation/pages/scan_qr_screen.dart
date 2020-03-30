@@ -96,7 +96,7 @@ class _ScanQrScreenState extends State<ScanQrScreen> {
                   ),
                 );
               } else if (state is Loading) {
-                return CircularProgressIndicator();
+                return Center(child: CircularProgressIndicator());
               } else if (state is Error) {
                 return Center(child: Text('No data found', style: AppTheme.error_text));
               }
