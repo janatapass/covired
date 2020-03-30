@@ -15,7 +15,7 @@
                <img alt="Janata Pass" class="logo" src="img/logo.png">
                <h1>Janata Pass</h1>-->
                <form name="form_requester" id="form_requester" method="POST" enctype="multipart">
-               <div class="container">
+               
          <h4 class="text-center"><strong>Please register your details</strong></h4>
                <div class="card mb-3 mt-3">
                   <div class="card-body passes_list">
@@ -27,6 +27,17 @@
               <input type="text" class="form-control" placeholder="Enter your name" id="name" name="name">
            </div>
            </div>
+           
+           <div class="col-lg-12 col-12">
+           <div class="form-group grey_box">
+              <input type="text" class="form-control" placeholder="Enter your aadhar number" id="aadhar_number" name="aadhar_number">
+           </div>
+           </div>
+           <div class="col-lg-12 col-12">
+           <div class="form-group grey_box">
+              <input type="text" class="form-control" placeholder="Enter your address" id="address" name="address">
+           </div>
+           </div>
            <div class="col-lg-12 col-12">
            <div class="form-group grey_box">
               <input type="text" class="form-control" placeholder="Enter your city" id="city" name="city">
@@ -34,18 +45,40 @@
            </div>
            <div class="col-lg-12 col-12">
            <div class="form-group grey_box">
-              <input type="text" class="form-control" placeholder="Enter your aadhar number" id="aadhar_number" name="aadhar_number">
+              <input type="text" class="form-control" placeholder="Enter your pincode" id="pincode" name="pincode">
            </div>
            </div>
            <div class="col-lg-12 col-12 mb-3">
            <label>Choose how we can know its you</label>
            </div>
-           <div class="col-lg-6 col-sm-6 col-6">
+		   <div class="btn-group btn-group-toggle col-lg-12 col-12 mb-3" data-toggle="buttons">
+		<div class="col-lg-6 col-sm-6 col-6 pl-1 pr-0">
+		<label class="btn btn-secondary active">
+		<input type="radio" name="options" id="user_proof" name="user_proof" value="photo" autocomplete="off" checked> 
+		<div class="avatar-wrapper">
+		<img class="profile-pic" src="img/camera.png" />
+		<div class="upload-button">
+		</div>
+		</div>
+		Take my picture
+		</label>
+		</div>
+		<div class="col-lg-6 col-sm-6 col-6 pr-1">
+		<label class="btn btn-secondary">
+		<input type="radio" name="options" id="user_proof" name="user_proof" value="birthmark" autocomplete="off"> 
+		<div class="avatar-wrapper">
+		<img class="profile-pic" src="img/mole.png" />
+		<div class="upload-button">
+		</div>
+		</div>
+		Enter mode/birthmark
+		</label>
+		</div>
+		</div>
+           <!--<div class="col-lg-6 col-sm-6 col-6">
            <div class="avatar-wrapper">
             <img class="profile-pic" src="img/camera.png" />
             <div class="upload-button">
-              <!-- <i class="fa fa-arrow-circle-up" aria-hidden="true"></i> -->
-              <!-- <img alt="" class="fa fa-arrow-circle-up icon_img" src="img/camera.png"> -->
             </div>
             <input class="file-upload" type="radio" id="user_proof" name="user_proof" value="photo">
           </div>
@@ -54,12 +87,10 @@
            <div class="avatar-wrapper_">
             <img class="profile-pic_" src="img/mole.png" />
             <div class="upload-button_">
-              <!-- <i class="fa fa-arrow-circle-up" aria-hidden="true"></i> -->
-              <!-- <img alt="" class="fa fa-arrow-circle-up icon_img" src="img/camera.png"> -->
             </div>
             <input class="file-upload_" type="radio" id="user_proof" name="user_proof" value="birthmark">
-          </div>
            </div>
+           </div>-->
            </div>
            </div>
            </div>
@@ -67,7 +98,6 @@
                </div>
          <button type="button" class="btn btn-primary" onclick="save_requester()" id="">Next</button>
          </form>
-         </div>
                <!--<p class="p_tag_bottom">A CoVIRED initiative</p>
             </div>
           
@@ -104,19 +134,27 @@ function save_requester(){
     // If you want to add an extra field for the FormData
     data.append("action", 'register');
     data.append('user_type_id',user_type_id);
-    if(user_type_id==4){
-        data.append('user_category_id',2); // yellow for volunteer 
-    }else{
-        data.append('user_category_id',1); // green for requester 
+    data.append('user_proof',user_proof);
+    data.append('mobile',user_mobile);
+    
+    // Color code for QR Code
+    if(user_type_id==4){// yellow for volunteer
+        data.append('user_category_id',2);  
+    }else if(user_type_id==2){// green for requester 
+        data.append('user_category_id',1); 
+    }else{// pink for citizen 
+        data.append('user_category_id',3); 
     }
     
-    data.append('approver_id',req_org);
-    data.append('services',req_services);
-    data.append('user_proof',user_proof);
-    data.append('qr_code',req_qr_code);
-    data.append('pass_type',req_pass_type);
-    data.append('mobile',user_mobile);
-    data.append('pass_id',req_pass_id);
+    
+   
+    if(user_type_id==4 || user_type_id==2){ // approver details appended only for Requester/Volunteer
+        data.append('approver_id',req_org);
+        data.append('qr_code',req_qr_code);
+        data.append('pass_type',req_pass_type);
+        data.append('pass_id',req_pass_id);
+        data.append('services',req_services);
+    }
 
     $.ajax({
         type: 'POST',
@@ -154,7 +192,7 @@ function save_requester(){
 }
 </script>
 
-    <script>
+   <!-- <script>
     $(document).ready(function() {
   
     var readURL = function(input) {
@@ -204,6 +242,6 @@ function save_requester(){
     });
   
 });
-    </script>
+    </script>-->
    </body>
 </html>

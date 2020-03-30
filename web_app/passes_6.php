@@ -27,6 +27,8 @@
 			   $arr_passes = $DbHandler->get_approver_passes($approver_id);
 			   $arr_passes = $arr_passes['data'];
 			   
+			   //print_r($arr_passes);
+			   
 			   $user_id = $_REQUEST['user_id'];
 			   $arr_user = $DbHandler->get_user_details($user_id,false);
 			   $arr_user = $arr_user['data'];
@@ -40,7 +42,7 @@
             		 <div class="div_btn" onclick="toggleVisibility('Menu2');"><img alt="approver_black" src="img/approver_black.png"></div>
             		 <div class="div_btn active" onclick="toggleVisibility('Menu1');"><img alt="black" src="img/black.png"></div>
             		 </div>-->
-            		 <button class="btn btn-info" onclick="ajax_load('approver_user_details.php?user_id=<?=$user_id;?>','div_main_body');"> Your QR Code </button>
+            		
                   <div class="card-body passes_list">
                      <div class="row">
 					 <div class="col-lg-12 col-12">
@@ -65,7 +67,18 @@
 					 }
 					 }?>
 										 </div>
-					 <div id="Menu2" style="display:none;">
+										 <div class="row">
+					 <div class="col-lg-12">
+					 <p>Send them to your employees only 1 pass per employee</p>
+					 </div>
+					 </div>
+					 <div class="row">
+					    <div class="col-ld-12 col-sm-12 col-12 mt-3 text-center">
+					       <button class="btn btn-info" onclick='ajax_load("generate_5.php?approver_id=<?= $approver_id;?>&user_id=<?= $user_id;?>","div_main_body");'>Add more passes</button>
+					       <button class="btn btn-info" onclick="ajax_load('approver_user_details.php?user_id=<?=$user_id;?>','div_main_body');"> Home </button>
+					    </div>
+					 </div>
+					 <!--<div id="Menu2" style="display:none;">
 					 <div class="scanner"><?php $DbHandler->generate_QR_code($qr_code,$color_code); ?> </div>
 					 <h3 class="text-center"><?= $arr_user['name'];?></h3>
 					 <div class="row">
@@ -97,7 +110,7 @@
 					 <button class="btn btn-info2">Go to home</button>
 					 </div>
 					 </div>
-					 </div>
+					 </div>-->
 					 </div>
 					 </div>
 					 <!--<a href='approver_user_details.php'><button class="btn btn-info2"> Your QR Code </button></a>-->

@@ -92,13 +92,15 @@ function validate_approver(){
     var approver_mobile = $('#approver_mobile').val();
     var org_id = $('#org_id').val();
     var services_id = $('#services_id').val();
+    var user_type_id = $('#user_type_id').val();
      $.ajax({
         url: "common/action.php",
         type: "POST",
         data: {
             'action': "validate_approver",
             'approver_mobile': approver_mobile,
-            'approver_id':org_id
+            'approver_id':org_id,
+            'user_type_id':user_type_id
         },
         success: function (response){
               //alert(response);

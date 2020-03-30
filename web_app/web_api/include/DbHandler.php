@@ -97,7 +97,8 @@ public function insert_sms_log($data){
     $stmt3->execute([$mobile, $otp, $response, $status,$message]);
     if($stmt3){
         $arr_response['status'] = 1;
-		$arr_response['message'] = "Registered OTP sent Successfully - ".$otp;
+        //$arr_response['message'] = "Registered OTP sent Successfully - ".$otp;
+        $arr_response['message'] = "Registered OTP sent Successfully";
     }else{
         $arr_response['status'] = 0;
         $arr_response['message'] = "Data insert error !";
@@ -124,8 +125,8 @@ public function sendsms($mobile,$message,$otp){
 	curl_setopt($ch, CURLOPT_POST, true);
 	curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	//$response = curl_exec($ch);
-	$response = 'test response';
+	$response = curl_exec($ch);
+	//$response = 'test response';
 	$arr_sms['response'] = $response;
 	$arr_sms['status'] = 1;
 	$arr_response = $this->insert_sms_log($arr_sms);
@@ -188,12 +189,12 @@ function verify_mobile($mobile){
 }
 
 // register user 
-function register(){
+function save_user(){
     $arr_fields = array('mobile','user_type_id','name','aadhar_number','user_category_id','qr_code','approver_id','city','address','pincode','user_proof','services');
 	foreach($arr_fields as $field){
-		$arr_data[$field] = $_REQUEST[$field];
+		$arr_data[$field] = isset($_REQUEST[$field])?$_REQUEST[$field]:'';
 	}
-	if(!isset($arr_data['qr_code'])){
+	if($arr_data['qr_code']==''){
 	    $arr_data['qr_code'] = $arr_data['mobile'].substr(md5(microtime()),rand(0,26),5);
 	}
 	if(is_array($arr_data) && count($arr_data)!=0){
@@ -206,11 +207,12 @@ function register(){
     	$sql3 = $this->conn->prepare("INSERT INTO users (".$str_fields.") VALUES ('".$str_values."')");
     	$sql3->execute();
     	$last_inserted_id = $this->conn->lastInsertId();
-    	if($_REQUEST['pass_id']!=""&& $_REQUEST['pass_id']!=0){
+    	if(isset($_REQUEST['pass_id']) && $_REQUEST['pass_id']!=""&& $_REQUEST['pass_id']!=0){
         	$arr_user['assigned_user_id'] = $last_inserted_id;
         	$arr_user['pass_id'] = $_REQUEST['pass_id'];
+        	$this->update_pass_status($arr_user);
     	}
-    	$this->update_pass_status($arr_user);
+    	
         if($last_inserted_id!='' && $last_inserted_id!=0){
             $arr_response['status'] = 1;
     		$arr_response['message'] = "User Registered Successfully!";
@@ -254,7 +256,7 @@ function save_approver(){
     
     $arr_fields = array('approver_mobile','org_name','org_type','org_location','org_email','user_type_id');
 	foreach($arr_fields as $field){
-		$arr_data[$field] = $_REQUEST[$field];
+		$arr_data[$field] =  isset($_REQUEST[$field])?$_REQUEST[$field]:'';
 	}
 	//print_r($arr_data);exit;
 	if(is_array($arr_data) && count($arr_data)!=0){
@@ -281,6 +283,26 @@ function save_approver(){
 	}
 }
 
+
+// get approver details
+public function get_approver_details($approver_id){
+    $sql = "SELECT * FROM approver_details WHERE status='1' AND id='".$approver_id."'";
+    $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
+    $stmt->execute();
+   	$row = $stmt->fetch();
+   	if(is_array($row) && count($row)!=0){
+        //$arr_response = $this->generate_passes();
+       // $arr_response['status'] = 1;
+	//	$arr_response['message'] = "approve pass count updated!";
+		$arr_response['approver_id'] = $approver_id;
+		$arr_response['approver_details'] = $row;
+    }else{
+        $arr_response['status'] = 0;
+        $arr_response['message'] = "Error when trying to update pass count !";
+    }
+    echo json_encode($arr_response);
+
+}
 
 // update approver pass count 
 public function approver_pass_count(){
@@ -351,12 +373,17 @@ public function generate_passes(){
 }
 
 // get all approver passes
-function get_approver_passes($approver_id,$status=''){
+function get_approver_passes($approver_id,$status='',$user_type=''){
 	 $response=array();
 	   $r = array();
         $sql = "SELECT * FROM approver_pass_details WHERE approver_id=".$approver_id;
         if($status!=""){
             $sql .= ' AND pass_status="'.$status.'"';
+        }
+        
+        if($user_type!=""){
+            $category = ($user_type==2)?'G':'Y';
+            $sql .= ' AND pass_type="'.$category.'"';
         }
         $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
         $stmt->execute();
@@ -401,6 +428,15 @@ function get_user_details($user_id,$json=true){
     $stmt->execute();
    	$row = $stmt->fetch();
    	$count = $stmt->rowCount();
+   	//if($row['user_type_id']==1){
+   	    $arr_passes = $this->user_pass_details($user_id); // get approver passes    
+   	    $response['passes'] = (is_array($arr_passes) && count($arr_passes)!=0 && isset($arr_passes['data']))?$arr_passes['data']:'';
+   	//}
+   //	if($row['user_type_id']==3){
+   	//    $arr_leave_entries = $this->user_pass_details($user_id);
+   	//    $response['leave_entries'] = (is_array($arr_leave_entries) && count($arr_leave_entries)!=0 && isset($arr_leave_entries['data']))?$arr_leave_entries['data']:'';
+   //	}
+   	
    	if($count!="" && $count!=0){
         $response['status']=1;
         $response['message'] =' user details!';
@@ -457,11 +493,11 @@ function get_active_approvers($approver_id=''){
 }
 
 
-function validate_approver($mobile,$org_id){
+function validate_approver($mobile,$org_id,$user_type){
     $response=array();
     $r = array();
     $sql = "SELECT org_name,id FROM approver_details WHERE approver_details.status=1 AND id=".$org_id." AND approver_mobile =".$mobile;
-    $arr_passes = $this->get_approver_passes($org_id,'O');
+    $arr_passes = $this->get_approver_passes($org_id,'O',$user_type);
     //print_r($arr_passes);
     $arr_pass = (isset($arr_passes['data']))?$arr_passes['data'][0]:0;
     $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
@@ -485,6 +521,134 @@ function validate_approver($mobile,$org_id){
     echo json_encode($response);
 }
 
+
+/** Pass Entries **/
+function all_pass(){
+     $response=array();
+       $r = array();
+        $sql = "SELECT * FROM pass_entries  WHERE is_active=1";
+        $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
+        $stmt->execute();
+        $rows = $stmt->fetchALL();
+        if(count($rows)>0) {
+            $response['status'] = 1;
+            $response['message'] = "success";
+            $response['data'] = $rows;
+        }else{
+            $response['status'] = 0;
+        $response['message'] = "Passes not found";
+        }
+    return $response;
+}
+
+function user_pass_details($user_id){
+     $response=array();
+    $sql = "SELECT * FROM pass_entries WHERE user_id= $user_id AND  is_active=1  order by id desc";
+    $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
+    $stmt->execute();
+    $rows = $stmt->fetchAll(); 
+
+ if(count($rows)>0)
+    {
+        $response['status'] = 1;
+        $response['message'] = "success";
+        $response['data'] = $rows;
+    }
+       else{
+          $response['status'] = "failed";
+          $response['message'] = "Passes not found";
+       } 
+
+return $response;
+  } 
+
+  function create_user_pass()
+  {
+    $arr_fields = array('user_id', 'travel_reason','start_time','end_time','location','travel_date');
+	foreach($arr_fields as $field){
+		$arr_data[$field] =  isset($_REQUEST[$field])?$_REQUEST[$field]:'';
+	}
+	$arr_data['travel_date'] = date('Y-m-d h:s:i');
+	
+	if($arr_data['start_time']!=""){
+	    $arr_data['start_time'] = date('Y-m-d h:s:i',strtotime($arr_data['start_time']));
+	}
+	
+	if($arr_data['end_time']!=""){
+	    $arr_data['end_time'] = date('Y-m-d h:s:i',strtotime($arr_data['end_time']));
+	}
+	//print_r($arr_data);exit;
+	if(is_array($arr_data) && count($arr_data)!=0){
+	    $arr_data['is_active'] = 1;
+	    $arr_data['cby'] = $arr_data['mby'] = 1;
+	    $arr_data['cdate'] = $arr_data['mdate'] = date('y-m-d h:d:i');
+    	$str_fields = implode(",",array_keys($arr_data));
+    	$str_values = implode("','",array_values($arr_data));  
+    	$sql3 = $this->conn->prepare("INSERT INTO pass_entries (".$str_fields.") VALUES ('".$str_values."')");
+    	$sql3->execute();
+    	$last_inserted_id = $this->conn->lastInsertId();
+    	$response['status'] = 1;
+        $response['message'] = "Leave Pass Created Successfully!";
+        $response['pass_id'] = $last_inserted_id;
+	}else{
+	    $response['status'] = "failed";
+        $response['message'] = "Data insert error !";
+	}
+	echo json_encode($response);
+     /* $response = array();
+      $is_active=1;
+      $cdate = date('Y-m-d H:i:s');
+        $sql = "INSERT INTO pass_entries (user_id,travel_reason,services,start_time,end_time,location,is_active,cdate) VALUES (?,?,?,?,?,?,?,?)";
+            $stmt= $this->conn->prepare($sql);
+            $stmt->execute([$user_id, $reason,$services,$duration_from,$duration_to,$location,$is_active,$cdate]);
+            if($stmt){
+                $response['status'] = "success";
+                $response['message'] = "success";
+               $pass_id =  $this->conn->lastInsertId();
+        }
+      else{
+            $response['status'] = "failed";
+            $response['message'] = "Data insert error !";
+        }
+
+    return $response;*/
+  }
+
+  function edit_pass($id,$user_id,$reason,$services,$duration_from,$duration_to,$location)
+  {
+    $response = array();
+    $mdate = date('Y-m-d H:i:s');
+    $sql = "UPDATE pass_entries SET user_id='$user_id', travel_reason='$reason', services='$services', start_time='$duration_from', end_time='$duration_to', location='$location', mdate='$mdate' WHERE id=$id";
+    $stmt = $this->conn->query($sql);
+    $stmt->execute();
+         if($stmt){
+           $response['status'] = "success";
+           $response['message'] = "success";
+        }else{
+            $response['status'] = "failed";
+            $response['message'] = "Passes exists !";
+        }
+    return $response;
+  }
+  /** Pass Entries **/
+  
+  
+  function update_leave_status($pass_id,$travel_status){
+        $response = array();
+        $mdate = date('Y-m-d H:i:s');
+        $sql = "UPDATE pass_entries SET travel_status='".$travel_status."' WHERE id=".$pass_id;
+        $stmt = $this->conn->query($sql);
+        $stmt->execute();
+             if($stmt){
+               $response['status'] = 1;
+               $response['message'] = "Leave Pass Updated Successfully!";
+            }else{
+                $response['status'] = "failed";
+                $response['message'] = "Passes exists !";
+            }
+    return $response;
+  }
+  
 // destruct db connection
 public function __destruct() {
     // close the database connection

@@ -1,10 +1,5 @@
 body{
-/*background-image: linear-gradient(#7ED0FF, #3299F1);*/
-    background: #7ED0FF; /* fallback color */
-    /* background: linear-gradient( to bottom, #7ED0FF, #3299F1); */
-	background: linear-gradient(to left top, #3299F1, #7ED0FF) fixed;
-    background-repeat: no-repeat;
-    background-size: cover;
+
     width: 100%;
     height: 100%;
 	font-family: 'Product Sans';
@@ -23,8 +18,79 @@ body.green{
 }
 
 
-.janata_pass {
+body.janata_pass .blue_ {
     padding: 50px 10px 10px 10px;
+	/*background-image: linear-gradient(#7ED0FF, #3299F1);*/
+    background: #7ED0FF; /* fallback color */
+    /* background: linear-gradient( to bottom, #7ED0FF, #3299F1); */
+	background: linear-gradient(to left top, #3299F1, #7ED0FF) fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+	position: fixed;
+	width: 100%;
+    height: 100%;
+	overflow-x:hidden;
+	overflow-y:scroll;
+}
+body.janata_pass .green_grid {
+    padding: 50px 10px 10px 10px;
+    /* background-image: linear-gradient(#89D468, #89D468); */
+    background: #89D468;
+    /* background: linear-gradient( to bottom, #89D468, #89D468); */
+    background: linear-gradient(to left top, #89D468, #89D468) fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+	overflow-y:scroll;
+}
+body.janata_pass .pink_grid {
+    padding: 50px 10px 10px 10px;
+    /* background-image: linear-gradient(#EF97E0, #EF97E0); */
+    background: #EF97E0;
+    /* background: linear-gradient( to bottom, #EF97E0, #EF97E0); */
+    background: linear-gradient(to left top, #EF97E0, #EF97E0) fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+	overflow-y:scroll;
+}
+body.janata_pass .yellow_grid {
+    padding: 50px 10px 10px 10px;
+    /* background-image: linear-gradient(#F2CA28, #F2CA28); */
+    background: #F2CA28;
+    /* background: linear-gradient( to bottom, #F2CA28, #); */
+    background: linear-gradient(to left top, #F2CA28, #F2CA28) fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+	overflow-y:scroll;
+}
+body.janata_pass .red_grid {
+    padding: 50px 10px 10px 10px;
+    /* background-image: linear-gradient(#F26D5E, #F26D5E); */
+    background: #F26D5E;
+    /* background: linear-gradient( to bottom, #F26D5E, #); */
+    background: linear-gradient(to left top, #F26D5E, #F26D5E) fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+	overflow-y:scroll;
+}
+
+input[type="radio"]:checked{
+	
 }
 .janata_pass h1 {
     text-align: center;
@@ -276,17 +342,47 @@ body.green{
     border-color: #f25950;
 }
 
-
+input[type=radio] {
+    box-sizing: border-box;
+    padding: 0;
+    position: absolute;
+    clip: rect(0,0,0,0);
+    pointer-events: none;
+}
+.btn-group.btn-group-toggle{
+	
+}
+.btn-group.btn-group-toggle .btn-secondary {
+    color: #fff;
+    background-color: #e6e6e6;
+    border-color: #e6e6e6;
+	box-shadow: 1px 1px 15px -5px black;
+    transition: all .3s ease;
+}
+.btn-group.btn-group-toggle .btn.btn-secondary {
+    padding: 0px;
+    width: 100%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 20%;
+    font-size: 10px;
+	color: #000;
+}
+.btn-group.btn-group-toggle .btn-secondary:not(:disabled):not(.disabled).active, .btn-group.btn-group-toggle .btn-secondary:not(:disabled):not(.disabled):active, .btn-group.btn-group-toggle .show>.btn-secondary.dropdown-toggle {
+    color: #000;
+    background-color: #e6e6e6;
+    border-color: #000000;
+}
 .avatar-wrapper, .avatar-wrapper_ {
     position: relative;
     height: 100px;
     width: 100px;
     margin: 0px auto;
-    border-radius: 20%;
     overflow: hidden;
-    box-shadow: 1px 1px 15px -5px black;
-    transition: all .3s ease;
-    background-color: #e6e6e6;
+    /* background-color: #e6e6e6; */
+}
+.janata_pass .card-body #Menu2 p{
+	text-align:left !important;
 }
 .avatar-wrapper:hover, .avatar-wrapper_:hover {
   transform: scale(1.05);
@@ -434,3 +530,141 @@ span.font_14{
     margin: 0 auto;
     display: block;
 	  }
+	  
+	  
+.content .input-group-addon {
+cursor: pointer;
+}
+.content .form-control {
+border: 1px solid #ccc;
+box-shadow: none;
+}
+.content .form-control:hover, .content .form-control:focus, .content .form-control:active {
+box-shadow: none;
+}
+.content .form-control:focus {
+border: 1px solid #34495e;
+}
+.bootstrap-datetimepicker-widget.dropdown-menu {
+border: 1px solid #34495e;
+border-radius: 0;
+box-shadow: none;
+margin: 10px 0 0 0;
+padding: 0;
+min-width: 300px;
+max-width: 100%;
+width: auto;
+}
+.bootstrap-datetimepicker-widget.dropdown-menu.bottom:before, .bootstrap-datetimepicker-widget.dropdown-menu.bottom:after {
+display: none;
+}
+.bootstrap-datetimepicker-widget.dropdown-menu table td,
+.bootstrap-datetimepicker-widget.dropdown-menu table th {
+border-radius: 0;
+}
+.bootstrap-datetimepicker-widget.dropdown-menu table td.old, .bootstrap-datetimepicker-widget.dropdown-menu table td.new {
+color: #bbb;
+}
+.bootstrap-datetimepicker-widget.dropdown-menu table td.today:before {
+border-bottom-color: #0095ff;
+}
+.bootstrap-datetimepicker-widget.dropdown-menu table td.active,
+.bootstrap-datetimepicker-widget.dropdown-menu table td.active:hover,
+.bootstrap-datetimepicker-widget.dropdown-menu table td span.active {
+background-color: #0095ff;
+text-shadow: none;
+}
+.bootstrap-datetimepicker-widget.dropdown-menu table td.active.today:before,
+.bootstrap-datetimepicker-widget.dropdown-menu table td.active:hover.today:before,
+.bootstrap-datetimepicker-widget.dropdown-menu table td span.active.today:before {
+border-bottom-color: #fff;
+}
+.bootstrap-datetimepicker-widget.dropdown-menu table th {
+height: 40px;
+padding: 0;
+width: 40px;
+}
+.bootstrap-datetimepicker-widget.dropdown-menu table th.picker-switch {
+width: auto;
+}
+.bootstrap-datetimepicker-widget.dropdown-menu table tr:first-of-type th {
+border-bottom: 1px solid #34495e;
+}
+.bootstrap-datetimepicker-widget.dropdown-menu table td.day {
+height: 32px;
+line-height: 32px;
+padding: 0;
+width: auto;
+}
+.bootstrap-datetimepicker-widget.dropdown-menu table td span {
+border-radius: 0;
+height: 77px;
+line-height: 77px;
+margin: 0;
+width: 25%;
+}
+.bootstrap-datetimepicker-widget.dropdown-menu .datepicker-months tbody tr td,
+.bootstrap-datetimepicker-widget.dropdown-menu .datepicker-years tbody tr td,
+.bootstrap-datetimepicker-widget.dropdown-menu .datepicker-decades tbody tr td {
+padding: 0;
+}
+.bootstrap-datetimepicker-widget.dropdown-menu .datepicker-decades tbody tr td {
+height: 27px;
+line-height: 27px;
+}
+.bootstrap-datetimepicker-widget.dropdown-menu .datepicker-decades tbody tr td span {
+display: block;
+float: left;
+width: 50%;
+height: 46px;
+line-height: 46px !important;
+padding: 0;
+}
+.bootstrap-datetimepicker-widget.dropdown-menu .datepicker-decades tbody tr td span:not(.decade) {
+display: none;
+}
+.bootstrap-datetimepicker-widget.dropdown-menu .timepicker-picker table td {
+padding: 0;
+width: 30%;
+height: 20px;
+line-height: 20px;
+}
+.bootstrap-datetimepicker-widget.dropdown-menu .timepicker-picker table td:nth-child(2) {
+width: 10%;
+}
+.bootstrap-datetimepicker-widget.dropdown-menu .timepicker-picker table td a,
+.bootstrap-datetimepicker-widget.dropdown-menu .timepicker-picker table td span,
+.bootstrap-datetimepicker-widget.dropdown-menu .timepicker-picker table td button {
+border: none;
+border-radius: 0;
+height: 56px;
+line-height: 56px;
+padding: 0;
+width: 100%;
+}
+.bootstrap-datetimepicker-widget.dropdown-menu .timepicker-picker table td span {
+color: #333;
+margin-top: -1px;
+}
+.bootstrap-datetimepicker-widget.dropdown-menu .timepicker-picker table td button {
+background-color: #fff;
+color: #333;
+font-weight: bold;
+font-size: 1.2em;
+}
+.bootstrap-datetimepicker-widget.dropdown-menu .timepicker-picker table td button:hover {
+background-color: #eee;
+}
+.bootstrap-datetimepicker-widget.dropdown-menu .picker-switch table td {
+border-top: 1px solid #34495e;
+}
+.bootstrap-datetimepicker-widget.dropdown-menu .picker-switch table td a, .bootstrap-datetimepicker-widget.dropdown-menu .picker-switch table td span {
+display: block;
+height: 40px;
+line-height: 40px;
+padding: 0;
+width: 100%;
+}
+.todayText:before {
+content: "Today's Date";
+}

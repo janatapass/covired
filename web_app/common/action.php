@@ -29,8 +29,11 @@ switch($action){
         $DbHandler->validate_approver($_REQUEST['approver_mobile'],$_REQUEST['approver_id']);
    	break;
     case 'register':
-        $DbHandler->register($_REQUEST['approver_mobile'],$_REQUEST['approver_id']);
+        $DbHandler->save_user($_REQUEST['approver_mobile'],$_REQUEST['approver_id']);
    	break;
+    case 'create_user_pass':
+        $DbHandler->create_user_pass();
+   	break;   	
 }
 //$response = $obj->utf8_converter($response);
 //$returnresponse = json_encode($response,JSON_HEX_QUOT);

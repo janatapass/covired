@@ -101,10 +101,10 @@ $app->post('/verify_mobile', function() use($app){
 });
 
 // User Register
-$app->post('/register', function() use($app){
-     verifyRequiredParams(array('mobile', 'user_type_id'));
+$app->post('/save_user', function() use($app){
+     verifyRequiredParams(array('mobile', 'user_type_id','name','address','city','pincode','aadhar_number'));
      $db = new DbHandler();
-     $result = $db->register();
+     $result = $db->save_user();
      echoRespnse(200, $result);
 });
 
@@ -116,24 +116,19 @@ $app->get('/generate_QR_code', function() use($app){
 }); 
 
 // pass entries
-$app->post('/pass_entries', function() use($app){
-     $user_id = $app->request->post('user_id');
-     $reason = $app->request->post('reason');
-     $services = $app->request->post('services');
-     $start_time = $app->request->post('duration_from');
-     $end_time = $app->request->post('duration_to');
-     $location = $app->request->post('location');
+$app->post('/create_user_pass', function() use($app){
+     verifyRequiredParams(array('user_id', 'travel_reason','start_time','end_time','location','travel_date'));
      $db = new DbHandler();
-     $result = $db->pass_entries($user_id,$reason,$services,$start_time,$end_time,$location);
+     $result = $db->create_user_pass();
      echoRespnse(200, $result);
 }); 
 
 //list user pass entries
-$app->get('/user_pass', function() use($app){
-    verifyRequiredParams(array('id'));
-    $user_id = $app->request->get('id');
+$app->get('/user_pass_details', function() use($app){
+    verifyRequiredParams(array('pass_id'));
+    $user_id = $app->request->get('pass_id');
     $db = new DbHandler();
-    $result = $db->user_pass($user_id);
+    $result = $db->user_pass_details($user_id);
     echoRespnse(200, $result);
 });
 
@@ -209,13 +204,35 @@ $app->get('/all_approver_organisations', function() use($app){
 
 //validate approver
 $app->post('/validate_approver', function() use($app){
-     verifyRequiredParams(array('approver_id','approver_mobile'));
+     verifyRequiredParams(array('approver_id','approver_mobile','user_type_id'));
     $approver_id = $_REQUEST['approver_id'];
     $approver_mobile = $_REQUEST['approver_mobile'];
+    $user_type_id = $_REQUEST['user_type_id'];
     $db = new DbHandler();
-    $result = $db->validate_approver($approver_mobile,$approver_id);
+    $result = $db->validate_approver($approver_mobile,$approver_id,$user_type_id);
     echoRespnse(200, $result);
 });
+
+// get approver details
+
+$app->post('/get_approver_details', function() use($app){
+     verifyRequiredParams(array('approver_id'));
+    $approver_id = $_REQUEST['approver_id'];
+    $db = new DbHandler();
+    $result = $db->get_approver_details($approver_id);
+    echoRespnse(200, $result);
+});
+
+
+$app->post('/update_leave_status', function() use($app){
+     verifyRequiredParams(array('travel_status','pass_id'));
+    $pass_id = $_REQUEST['pass_id'];
+    $travel_status = $_REQUEST['travel_status'];
+    $db = new DbHandler();
+    $result = $db->update_leave_status($pass_id,$travel_status);
+    echoRespnse(200, $result);
+});
+
 
 $app->run();
 ?>
