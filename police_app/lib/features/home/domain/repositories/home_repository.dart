@@ -4,5 +4,6 @@ import 'package:janata_curfew/features/home/data/models/user_data.dart';
 
 
 abstract class HomeRepository {
-  Future<Either<Failure, UserData>> getQrData();
+  Future<Either<Failure, UserData>> getQrData(String value);
+  Future<Either<Failure, UserData>> getMobileUserData(String value);
 }

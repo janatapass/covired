@@ -4,38 +4,38 @@ import 'package:dartz/dartz.dart';
 import 'package:janata_curfew/core/error/failures.dart';
 import 'package:janata_curfew/features/home/data/models/user_data.dart';
 import 'package:janata_curfew/features/home/domain/repositories/home_repository.dart';
-import 'package:janata_curfew/features/home/presentation/bloc/qr_bloc_event.dart';
-import 'package:janata_curfew/features/home/presentation/bloc/qr_bloc_state.dart';
+import 'package:janata_curfew/features/home/presentation/bloc/checkmobile/check_mobile_bloc_state.dart';
+import 'package:janata_curfew/features/home/presentation/bloc/checkmobile/check_mobile_event.dart';
 import 'package:meta/meta.dart';
 
-class QrBloc extends Bloc<QrBlocEvent, QrBlocState> {
+class CheckMobileBloc extends Bloc<CheckMobileBlocEvent, CheckMobileBlocState> {
   final HomeRepository homeRepository;
 
-  QrBloc({
+  CheckMobileBloc({
     @required HomeRepository repository,
   }) : homeRepository = repository;
 
   @override
-  QrBlocState get initialState => Initial();
+  CheckMobileBlocState get initialState => Initial();
 
   @override
-  Stream<QrBlocState> mapEventToState(
-    QrBlocEvent event,
+  Stream<CheckMobileBlocState> mapEventToState(
+    CheckMobileBlocEvent event,
   ) async* {
-    if (event is ScanQrEvent) {
-      yield* scanQr();
-    } else if (event is GetUserQrData) {
+    if (event is GetUserData) {
       yield Loading();
-      if (event.barcode.isNotEmpty) {
-        final failureOrHomePresentData = await homeRepository.getQrData();
+      if (event.mobile.isNotEmpty) {
+        final failureOrHomePresentData = await homeRepository.getMobileUserData("9538131314");
         yield* _eitherLoadedOrErrorState(failureOrHomePresentData);
       } else {
         yield* showError();
       }
+    } else if (event is ShowMobileField) {
+      yield* showInitial();
     }
   }
 
-  Stream<QrBlocState> _eitherLoadedOrErrorState(
+  Stream<CheckMobileBlocState> _eitherLoadedOrErrorState(
     Either<Failure, UserData> failureOrHomePastData,
   ) async* {
     yield failureOrHomePastData.fold(
@@ -44,11 +44,11 @@ class QrBloc extends Bloc<QrBlocEvent, QrBlocState> {
     );
   }
 
-  Stream<QrBlocState> scanQr() async* {
+  Stream<CheckMobileBlocState> showInitial() async* {
     yield Initial();
   }
 
-  Stream<QrBlocState> showError() async* {
+  Stream<CheckMobileBlocState> showError() async* {
     yield Error();
   }
 }

@@ -6,7 +6,9 @@ import 'features/home/data/datasources/home_data_source.dart';
 import 'features/home/data/datasources/home_data_source_impl.dart';
 import 'features/home/data/repositories/home_repository_impl.dart';
 import 'features/home/domain/repositories/home_repository.dart';
-import 'features/home/presentation/bloc/qr_bloc.dart';
+import 'package:janata_curfew/features/home/presentation/bloc/qr/qr_bloc.dart';
+
+import 'features/home/presentation/bloc/checkmobile/check_mobile_bloc.dart';
 
 final sl = GetIt.instance;
 
@@ -21,6 +23,9 @@ Future<void> init() async {
         () => QrBloc(repository: sl()),
   );
 
+  sl.registerFactory(
+        () => CheckMobileBloc(repository: sl()),
+  );
   // Repository
   sl.registerLazySingleton<HomeRepository>(
         () => HomeRepositoryImpl(

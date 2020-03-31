@@ -15,13 +15,21 @@ class HomeRepositoryImpl implements HomeRepository {
     @required this.remoteDataSource,
   });
 
-  Future<Either<Failure, UserData>> getQrData() async {
+  Future<Either<Failure, UserData>> getQrData(String value) async {
     try {
-      final homePastData = await remoteDataSource.getQrData();
+      final homePastData = await remoteDataSource.getQrData(value);
       return Right(homePastData);
     } on ServerException {
       return Left(ServerFailure());
     }
   }
 
+  Future<Either<Failure, UserData>> getMobileUserData(String value) async {
+    try {
+      final homePastData = await remoteDataSource.getMobileData(value);
+      return Right(homePastData);
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
 }

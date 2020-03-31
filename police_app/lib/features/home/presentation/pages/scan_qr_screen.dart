@@ -6,7 +6,8 @@ import 'package:janata_curfew/core/app_colors.dart';
 import 'package:janata_curfew/core/app_theme.dart';
 import 'package:janata_curfew/features/core/widgets/trip_details_tile.dart';
 import 'package:janata_curfew/features/core/widgets/card_list_tile.dart';
-import 'package:janata_curfew/features/home/presentation/bloc/bloc.dart';
+import 'package:janata_curfew/features/home/presentation/bloc/qr/bloc.dart';
+import 'package:janata_curfew/features/home/presentation/widgets/scan_qr_widget.dart';
 import 'package:janata_curfew/injections.dart';
 import 'package:flutter/services.dart';
 
@@ -45,56 +46,7 @@ class _ScanQrScreenState extends State<ScanQrScreen> {
                 scan();
                 return CircularProgressIndicator();
               } else if (state is Loaded) {
-                var data = state.data;
-                return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 12),
-                  child: ListView(
-                    children: <Widget>[
-                      CardListTile(title: 'Name', subTitle: data.name),
-                      CardListTile(
-                          title: 'Mobile Number', subTitle: data.mobileNumber),
-                      CardListTile(title: 'Address', subTitle: data.address),
-                      Card(
-                        elevation: 1,
-                        margin: EdgeInsets.fromLTRB(8, 4, 8, 4),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            Container(child: Text(data.tripDetails.date, style: AppTheme.item_sub_title,), padding: EdgeInsets.fromLTRB(16, 16, 16, 0)),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                Flexible(
-                                    child: TripDetailsTile(
-                                        subTitleStyle:
-                                        AppTheme.item_sub_title_orange,
-                                        title: 'from',
-                                        subTitle: data.tripDetails.fromPlace,
-                                        caption: data.tripDetails.fromTime)),
-                                Flexible(
-                                    child: TripDetailsTile(
-                                        subTitleStyle:
-                                        AppTheme.item_sub_title_orange,
-                                        title: 'to',
-                                        subTitle: data.tripDetails.toPlace,
-                                        caption: data.tripDetails.toTime))
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
-                      CardListTile(
-                          title: 'Reason for Travel',
-                          subTitle: data.reason,
-                          style: AppTheme.item_sub_title_orange),
-                      CardListTile(
-                          title: 'Vehicle Number',
-                          subTitle: data.vehicleNumber),
-                    ],
-                  ),
-                );
+                return ScanQrWidget(userData: state.data);
               } else if (state is Loading) {
                 return Center(child: CircularProgressIndicator());
               } else if (state is Error) {

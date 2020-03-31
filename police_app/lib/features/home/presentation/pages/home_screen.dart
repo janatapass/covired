@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:janata_curfew/core/app_colors.dart';
 import 'package:janata_curfew/core/app_theme.dart';
+import 'package:janata_curfew/features/home/presentation/pages/check_mobile_screen.dart';
 import 'package:janata_curfew/features/home/presentation/pages/scan_qr_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -48,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen>
           body: TabBarView(
             controller: _tabController,
             children: [
-              Center(child: Text('Mobile')),
+              CheckMobileScreen(),
               ScanQrScreen(),
             ],
           )),

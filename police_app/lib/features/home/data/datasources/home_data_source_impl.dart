@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:janata_curfew/core/error/exceptions.dart';
 import 'package:janata_curfew/features/home/data/models/user_data.dart';
 import 'home_data_source.dart';
@@ -10,10 +12,10 @@ class HomeDataSourceImpl extends HomeDataSource {
   HomeDataSourceImpl({@required this.client});
 
 
-  Future<UserData> _getUserData(String url) async {
-    final response = await client.get(
-      url,
-    );
+  Future<UserData> _getUserData({Map<String, String> params}) async {
+    final response = await client.post(
+      "https://fatneedle.com/janata_pass/Application/web_api/user_details",
+      body: params);
     if (response.statusCode == 200) {
       return userFromJson(response.body);
     } else {
@@ -22,8 +24,18 @@ class HomeDataSourceImpl extends HomeDataSource {
   }
 
   @override
-  Future<UserData> getQrData() {
-    return _getUserData("http://www.mocky.io/v2/5e823eb12f000053002fb9b2");
+  Future<UserData> getQrData(String value) {
+    Map<String, String> params = {
+      "qr_code": value,
+    };
+    return _getUserData(params: params);
   }
 
+  @override
+  Future<UserData> getMobileData(String value) {
+    Map<String, String> params = {
+      "mobile": value,
+    };
+    return _getUserData(params: params);
+  }
 }
