@@ -7,21 +7,21 @@ class AppTheme {
 
   static const TextStyle item_title = TextStyle(
     fontFamily: 'OpenSans',
-    fontWeight: FontWeight.w600,
+    fontWeight: FontWeight.w500,
     fontSize: 14,
     color: AppColors.secondary_text,
   );
 
   static const TextStyle item_sub_title = TextStyle(
     fontFamily: 'OpenSans',
-    fontWeight: FontWeight.w600,
+    fontWeight: FontWeight.w500,
     fontSize: 16,
     color: AppColors.primary_text,
   );
 
   static const TextStyle item_sub_title_orange = TextStyle(
     fontFamily: 'OpenSans',
-    fontWeight: FontWeight.w600,
+    fontWeight: FontWeight.w500,
     fontSize: 16,
     color: Colors.orange,
   );
