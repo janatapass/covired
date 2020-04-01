@@ -4,11 +4,11 @@ import 'package:janata_curfew/features/core/widgets/card_list_tile.dart';
 import 'package:janata_curfew/features/core/widgets/trip_details_tile.dart';
 import 'package:janata_curfew/features/home/data/models/user_data.dart';
 
-class ScanQrWidget extends StatelessWidget {
+class HomeUserDetailsView extends StatelessWidget {
 
   final UserData userData;
 
-  ScanQrWidget({this.userData});
+  HomeUserDetailsView({this.userData});
   @override
   Widget build(BuildContext context) {
     var data = userData.data;

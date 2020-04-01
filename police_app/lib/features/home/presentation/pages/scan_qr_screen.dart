@@ -7,7 +7,7 @@ import 'package:janata_curfew/core/app_theme.dart';
 import 'package:janata_curfew/features/core/widgets/trip_details_tile.dart';
 import 'package:janata_curfew/features/core/widgets/card_list_tile.dart';
 import 'package:janata_curfew/features/home/presentation/bloc/qr/bloc.dart';
-import 'package:janata_curfew/features/home/presentation/widgets/scan_qr_widget.dart';
+import 'package:janata_curfew/features/home/presentation/widgets/home_user_details_view.dart';
 import 'package:janata_curfew/injections.dart';
 import 'package:flutter/services.dart';
 
@@ -46,7 +46,7 @@ class _ScanQrScreenState extends State<ScanQrScreen> {
                 scan();
                 return CircularProgressIndicator();
               } else if (state is Loaded) {
-                return ScanQrWidget(userData: state.data);
+                return HomeUserDetailsView(userData: state.data);
               } else if (state is Loading) {
                 return Center(child: CircularProgressIndicator());
               } else if (state is Error) {

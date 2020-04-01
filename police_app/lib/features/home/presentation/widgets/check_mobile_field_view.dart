@@ -3,12 +3,12 @@ import 'package:janata_curfew/core/app_theme.dart';
 import 'package:janata_curfew/core/widgets/authentication_button.dart';
 import 'package:janata_curfew/core/widgets/authentication_text_field.dart';
 
-class CheckMobileWidget extends StatelessWidget {
+class CheckMobileFieldView extends StatelessWidget {
 
   VoidCallback onPressed;
 
 
-  CheckMobileWidget({this.onPressed});
+  CheckMobileFieldView({this.onPressed});
 
   @override
   Widget build(BuildContext context) {
