@@ -1,3 +1,7 @@
+// To parse this JSON data, do
+//
+//     final userData = userDataFromJson(jsonString);
+
 import 'dart:convert';
 
 UserData userFromJson(String str) => UserData.fromJson(json.decode(str));
@@ -57,10 +61,11 @@ class Data {
   String status;
   String isActive;
   String cby;
-  String cdate;
+  DateTime cdate;
   String mby;
-  String mdate;
+  DateTime mdate;
   String colorCode;
+  String organisation;
 
   Data({
     this.id,
@@ -91,6 +96,7 @@ class Data {
     this.mby,
     this.mdate,
     this.colorCode,
+    this.organisation,
   });
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
@@ -118,10 +124,11 @@ class Data {
     status: json["status"],
     isActive: json["is_active"],
     cby: json["cby"],
-    cdate: json["cdate"],
+    cdate: DateTime.parse(json["cdate"]),
     mby: json["mby"],
-    mdate: json["mdate"],
+    mdate: DateTime.parse(json["mdate"]),
     colorCode: json["color_code"],
+    organisation: json["organisation"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -149,9 +156,10 @@ class Data {
     "status": status,
     "is_active": isActive,
     "cby": cby,
-    "cdate": cdate,
+    "cdate": cdate.toIso8601String(),
     "mby": mby,
-    "mdate": mdate,
+    "mdate": mdate.toIso8601String(),
     "color_code": colorCode,
+    "organisation": organisation,
   };
 }

@@ -117,4 +117,10 @@ class AppTheme {
     color: AppColors.primary_text,
   );
 
+  static const TextStyle message_white = TextStyle(
+    fontFamily: 'OpenSans',
+    fontWeight: FontWeight.w600,
+    fontSize: 18,
+    color: Colors.white,
+  );
 }

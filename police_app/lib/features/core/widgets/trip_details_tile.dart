@@ -4,11 +4,10 @@ import 'package:janata_curfew/core/app_theme.dart';
 class TripDetailsTile extends StatelessWidget {
   final title;
   final subTitle;
-  final caption;
   final subTitleStyle;
   final crossAxisAlignment;
 
-  TripDetailsTile({this.title, this.subTitle, this.caption, this.subTitleStyle, this.crossAxisAlignment});
+  TripDetailsTile({this.title, this.subTitle, this.subTitleStyle, this.crossAxisAlignment});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +21,6 @@ class TripDetailsTile extends StatelessWidget {
           children: <Widget>[
             Text(title, style: AppTheme.item_title),
             Text(subTitle, style: subTitleStyle ?? AppTheme.item_sub_title),
-            Text(caption, style: AppTheme.item_sub_title)
           ],
         ),
       ),
