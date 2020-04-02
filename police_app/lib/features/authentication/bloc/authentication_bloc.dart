@@ -24,7 +24,7 @@ class AuthenticationBloc
   }) : repository = repository;
 
   @override
-  AuthenticationState get initialState => Loaded(state: ScreenState.MOBILE);
+  AuthenticationState get initialState => RegistrationState();
 
   @override
   Stream<AuthenticationState> mapEventToState(
@@ -45,7 +45,7 @@ class AuthenticationBloc
       ) async* {
     yield failureOrHomePastData.fold(
           (failure) => Error(),
-          (userData) => Loaded(data: userData, state: ScreenState.OTP, mobile: mobile),
+          (userData) => OtpState(data: userData, mobile: mobile),
     );
   }
 
@@ -57,8 +57,4 @@ class AuthenticationBloc
           (userData) => GoToNextPage(),
     );
   }
-}
-
-enum ScreenState {
-  MOBILE, OTP
 }

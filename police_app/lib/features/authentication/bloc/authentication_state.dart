@@ -13,15 +13,17 @@ abstract class AuthenticationState extends Equatable {
 
 class Error extends AuthenticationState {}
 
-class Loaded extends AuthenticationState {
+class RegistrationState extends AuthenticationState {}
+
+class OtpState extends AuthenticationState {
   final String mobile;
   final RegistrationData data;
-  final ScreenState state;
 
-  Loaded({this.data, this.state, this.mobile});
+  OtpState({this.data, this.mobile});
 
   @override
-  List<Object> get props => [data, state, mobile];
+  List<Object> get props => [data, mobile];
 }
+
 
 class GoToNextPage extends AuthenticationState {}

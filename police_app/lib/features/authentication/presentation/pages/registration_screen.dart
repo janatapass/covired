@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:janata_curfew/core/app_theme.dart';
-import 'package:janata_curfew/core/image_path.dart';
-import 'package:janata_curfew/core/widgets/background_container.dart';
-import 'package:janata_curfew/core/widgets/footer_brand_text.dart';
 import 'package:janata_curfew/features/authentication/bloc/authentication_bloc.dart';
 import 'package:janata_curfew/features/authentication/bloc/authentication_event.dart';
 import 'package:janata_curfew/features/authentication/bloc/authentication_state.dart';
@@ -39,19 +35,26 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           if (state is GoToNextPage) {
             goToNextPage(context);
           }
+          if (state is OtpState) {
+            Scaffold.of(context).showSnackBar(SnackBar(
+              content: Text(state.data.message),
+              duration: Duration(seconds: 3),
+            ));
+          }
         }, child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
                 builder: (BuildContext context, AuthenticationState state) {
-          if (state is Loaded) {
+          if (state is RegistrationState) {
             return RegistrationBackground(
-                child: state.state == ScreenState.MOBILE
-                    ? MobileRegistrationView(onPressed: (mobile) {
-                        _onMobileRegistrationButtonPressed(mobile);
-                      })
-                    : OtpRegistrationView(
-                        mobile: state.mobile,
-                        onPressed: (mobile, otp) {
-                          _onOtpButtonPressed(mobile, otp);
-                        }));
+                child: MobileRegistrationView(onPressed: (mobile) {
+              _onMobileRegistrationButtonPressed(mobile);
+            }));
+          } else if (state is OtpState) {
+            return RegistrationBackground(
+                child: OtpRegistrationView(
+                    mobile: state.mobile,
+                    onPressed: (mobile, otp) {
+                      _onOtpButtonPressed(mobile, otp);
+                    }));
           } else if (state is Error) {
             return Center();
           }
