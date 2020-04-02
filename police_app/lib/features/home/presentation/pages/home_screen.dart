@@ -11,14 +11,12 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
-//  String barcode = "";
   TabController _tabController;
 
   @override
   void initState() {
     super.initState();
     _tabController = new TabController(vsync: this, length: 2);
-//    _tabController.addListener(_handleTabChange);
   }
 
   @override
@@ -61,10 +59,4 @@ class _HomeScreenState extends State<HomeScreen>
     _tabController.dispose();
     super.dispose();
   }
-
-//  void _handleTabChange() {
-//    if (_tabController.index == 1) {
-//      scan();
-//    }
-//  }
 }
