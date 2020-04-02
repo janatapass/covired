@@ -25,7 +25,7 @@ class CheckMobileBloc extends Bloc<CheckMobileBlocEvent, CheckMobileBlocState> {
     if (event is GetUserData) {
       yield Loading();
       if (event.mobile.isNotEmpty) {
-        final failureOrHomePresentData = await homeRepository.getMobileUserData("9538131314");
+        final failureOrHomePresentData = await homeRepository.getMobileUserData(event.mobile);
         yield* _eitherLoadedOrErrorState(failureOrHomePresentData);
       } else {
         yield* showError();

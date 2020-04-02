@@ -35,14 +35,14 @@ class _CheckMobileScreenState extends State<CheckMobileScreen> {
             bloc: bloc,
             builder: (BuildContext context, CheckMobileBlocState state) {
               if (state is Initial) {
-                return CheckMobileFieldView(onPressed: () {
-                  bloc.add(GetUserData(mobile: '9789010929'));
+                return CheckMobileFieldView(onPressed: (mobile) {
+                  bloc.add(GetUserData(mobile: mobile));
                 });
               } else if (state is Loaded) {
                 return Column(
                   children: <Widget>[
-                    CheckMobileFieldView(onPressed: () {
-                      bloc.add(GetUserData(mobile: '9789010929'));
+                    CheckMobileFieldView(onPressed: (mobile) {
+                      bloc.add(GetUserData(mobile: mobile));
                     }),
                     Expanded(child: HomeUserDetailsView(userData: state.data)),
                   ],

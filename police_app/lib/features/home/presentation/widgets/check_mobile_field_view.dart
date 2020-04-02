@@ -3,12 +3,26 @@ import 'package:janata_curfew/core/app_theme.dart';
 import 'package:janata_curfew/core/widgets/authentication_button.dart';
 import 'package:janata_curfew/core/widgets/authentication_text_field.dart';
 
-class CheckMobileFieldView extends StatelessWidget {
+class CheckMobileFieldView extends StatefulWidget {
 
-  VoidCallback onPressed;
+  Function(String mobile) onPressed;
 
 
   CheckMobileFieldView({this.onPressed});
+
+  @override
+  _CheckMobileFieldViewState createState() => _CheckMobileFieldViewState();
+}
+
+class _CheckMobileFieldViewState extends State<CheckMobileFieldView> {
+
+  TextEditingController textEditingController;
+
+  @override
+  void initState() {
+    super.initState();
+    textEditingController = new TextEditingController();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,12 +35,15 @@ class CheckMobileFieldView extends StatelessWidget {
               style: AppTheme.item_sub_title),
           SizedBox(height: 16),
           AuthenticationTextField(
+            textEditingController: textEditingController,
               textInputType: TextInputType.number),
           SizedBox(height: 24),
           Center(
             child: AuthenticationButton(
                 text: 'Submit',
-                onPressed: onPressed,
+                onPressed: () {
+                  widget.onPressed(textEditingController.text);
+                },
           ),
           )],
       ),

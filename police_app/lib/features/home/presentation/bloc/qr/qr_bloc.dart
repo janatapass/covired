@@ -27,7 +27,7 @@ class QrBloc extends Bloc<QrBlocEvent, QrBlocState> {
     } else if (event is GetUserQrData) {
       yield Loading();
       if (event.barcode.isNotEmpty) {
-        final failureOrHomePresentData = await homeRepository.getQrData("95381313140a266");
+        final failureOrHomePresentData = await homeRepository.getQrData(event.barcode);
         yield* _eitherLoadedOrErrorState(failureOrHomePresentData);
       } else {
         yield* showError();
