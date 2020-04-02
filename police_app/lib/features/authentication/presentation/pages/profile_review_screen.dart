@@ -1,18 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:janata_curfew/core/app_theme.dart';
-import 'package:janata_curfew/core/image_path.dart';
 import 'package:janata_curfew/core/widgets/authentication_button.dart';
 import 'package:janata_curfew/core/widgets/background_container.dart';
-import 'package:janata_curfew/core/widgets/footer_brand_text.dart';
 import 'package:janata_curfew/features/authentication/bloc/authentication_bloc.dart';
-import 'package:janata_curfew/features/authentication/bloc/authentication_event.dart';
-import 'package:janata_curfew/features/authentication/bloc/authentication_state.dart';
-import 'package:janata_curfew/features/authentication/presentation/widgets/mobile_registration_view.dart';
-import 'package:janata_curfew/features/authentication/presentation/widgets/otp_registration_view.dart';
 import 'package:janata_curfew/features/authentication/presentation/widgets/profile_review_item.dart';
 import 'package:janata_curfew/features/home/presentation/pages/home_screen.dart';
-import 'package:janata_curfew/injections.dart';
 
 class ProfileReviewScreen extends StatefulWidget {
   @override

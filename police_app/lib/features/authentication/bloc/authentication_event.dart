@@ -7,6 +7,22 @@ abstract class AuthenticationEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class MobileRegistrationEvent extends AuthenticationEvent {}
+class MobileRegistrationEvent extends AuthenticationEvent {
+  final String mobile;
 
-class OtpRegistrationEvent extends AuthenticationEvent {}
+  MobileRegistrationEvent({@required this.mobile});
+
+  @override
+  List<Object> get props => [mobile];
+}
+
+class OtpRegistrationEvent extends AuthenticationEvent {
+  final String mobile;
+  final String otp;
+
+  OtpRegistrationEvent({@required this.mobile, @required this.otp});
+
+  @override
+  List<Object> get props => [mobile, otp];
+
+}

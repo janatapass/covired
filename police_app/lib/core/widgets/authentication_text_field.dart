@@ -6,14 +6,16 @@ import '../app_theme.dart';
 class AuthenticationTextField extends StatelessWidget {
 
   TextInputType textInputType;
+  TextEditingController textEditingController;
 
-  AuthenticationTextField({this.textInputType});
+  AuthenticationTextField({this.textInputType, this.textEditingController});
 
   @override
   Widget build(BuildContext context) {
     return  SizedBox(
       height: 48,
       child: TextField(
+        controller: textEditingController,
         keyboardType: textInputType,
         style: AppTheme.authentication_textfield,
         decoration: InputDecoration(
