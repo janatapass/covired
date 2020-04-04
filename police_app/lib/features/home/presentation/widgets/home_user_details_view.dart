@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:janata_curfew/core/app_theme.dart';
 import 'package:janata_curfew/core/utils/hex_color.dart';
+import 'package:janata_curfew/core/widgets/authentication_button.dart';
 import 'package:janata_curfew/features/core/widgets/card_list_tile.dart';
 import 'package:janata_curfew/features/core/widgets/trip_details_tile.dart';
 import 'package:janata_curfew/features/home/data/models/user_data.dart';
@@ -21,15 +22,9 @@ class HomeUserDetailsView extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 12),
       child: ListView(
         children: <Widget>[
-          Container(height: 50, alignment: Alignment.center, color: HexColor.fromHex(data.colorCode), child: Text('Pass', style: AppTheme.message_white, textAlign: TextAlign.center)),
-          CardListTile(title: 'Name', subTitle: data.name),
-          CardListTile(title: 'Organisation', subTitle: data.organisation),
+          CardListTile(title: 'Name', subTitle: data.name, trailing: Icon(Icons.check_circle, color: HexColor.fromHex(data.colorCode))),
           CardListTile(
               title: 'Mobile Number', subTitle: data.mobile),
-          CardListTile(
-              title: 'Email',
-              subTitle: data.userEmail),
-          CardListTile(title: 'Address', subTitle: data.address),
           Card(
             elevation: 1,
             margin: EdgeInsets.fromLTRB(8, 4, 8, 4),
@@ -60,12 +55,15 @@ class HomeUserDetailsView extends StatelessWidget {
             ),
           ),
           CardListTile(
-              title: 'Reason for Travel',
-              subTitle: '',
-              style: AppTheme.item_sub_title_orange),
-          CardListTile(
-              title: 'Relationship',
-              subTitle: data.relationship),
+              title: 'Reason Provided', subTitle: '-'),
+          CardListTile(title: 'From Locality', subTitle: data.address),
+          CardListTile(title: 'To Locality', subTitle: data.address),
+          CardListTile(title: 'City', subTitle: data.city),
+          CardListTile(title: 'Vehicle Number', subTitle: '-'),
+          CardListTile(title: 'Previous Warnings', subTitle: '-'),
+          AuthenticationButton(text: 'Issue Warning', onPressed: () {
+            
+          })
         ],
       ),
     );

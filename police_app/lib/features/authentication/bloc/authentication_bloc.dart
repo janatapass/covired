@@ -31,11 +31,24 @@ class AuthenticationBloc
     AuthenticationEvent event,
   ) async* {
     if (event is MobileRegistrationEvent) {
-      final failureOrRegistrationData = await repository.registerMobile(event.mobile);
-      yield* _eitherMobileRegistrationLoadedOrErrorState(event.mobile, failureOrRegistrationData);
+      if(event.mobile.isNotEmpty) {
+        yield Loading();
+        final failureOrRegistrationData = await repository.registerMobile(event.mobile);
+        yield* _eitherMobileRegistrationLoadedOrErrorState(event.mobile, failureOrRegistrationData);
+      } else {
+        yield Error("Please enter a valid mobile number");
+      }
     } else if (event is OtpRegistrationEvent) {
-      final failureOrRegistrationData = await repository.confirmOtp(event.mobile, event.otp);
-      yield* _eitherOtpRegistrationLoadedOrErrorState(failureOrRegistrationData);
+      var otp = event.otp;
+      if(otp.isNotEmpty && otp.length == 4) {
+        yield Loading();
+        final failureOrRegistrationData = await repository.confirmOtp(
+            event.mobile, otp);
+        yield* _eitherOtpRegistrationLoadedOrErrorState(event.mobile,
+            failureOrRegistrationData);
+      } else {
+        yield Error("Please enter a valid mobile number");
+      }
     }
   }
 
@@ -44,17 +57,18 @@ class AuthenticationBloc
       Either<Failure, RegistrationData> failureOrHomePastData,
       ) async* {
     yield failureOrHomePastData.fold(
-          (failure) => Error(),
+          (failure) => Error('Please try again later!'),
           (userData) => OtpState(data: userData, mobile: mobile),
     );
   }
 
   Stream<AuthenticationState> _eitherOtpRegistrationLoadedOrErrorState(
+      String mobile,
       Either<Failure, RegistrationData> failureOrHomePastData,
       ) async* {
     yield failureOrHomePastData.fold(
-          (failure) => Error(),
-          (userData) => GoToNextPage(),
+          (failure) => Error('Please try again later!'),
+          (userData) => GoToNextPage(mobile: mobile),
     );
   }
 }

@@ -23,15 +23,13 @@ class CheckMobileBloc extends Bloc<CheckMobileBlocEvent, CheckMobileBlocState> {
     CheckMobileBlocEvent event,
   ) async* {
     if (event is GetUserData) {
-      yield Loading();
       if (event.mobile.isNotEmpty) {
+        yield Loading();
         final failureOrHomePresentData = await homeRepository.getMobileUserData(event.mobile);
         yield* _eitherLoadedOrErrorState(failureOrHomePresentData);
       } else {
-        yield* showError();
+        yield Error('Please enter a valid mobile number');
       }
-    } else if (event is ShowMobileField) {
-      yield* showInitial();
     }
   }
 
@@ -39,16 +37,8 @@ class CheckMobileBloc extends Bloc<CheckMobileBlocEvent, CheckMobileBlocState> {
     Either<Failure, UserData> failureOrHomePastData,
   ) async* {
     yield failureOrHomePastData.fold(
-      (failure) => Error(),
+      (failure) => Error('Please try again!'),
       (userData) => Loaded(data: userData),
     );
-  }
-
-  Stream<CheckMobileBlocState> showInitial() async* {
-    yield Initial();
-  }
-
-  Stream<CheckMobileBlocState> showError() async* {
-    yield Error();
   }
 }

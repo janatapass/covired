@@ -11,7 +11,16 @@ abstract class AuthenticationState extends Equatable {
   List<Object> get props => [];
 }
 
-class Error extends AuthenticationState {}
+class Error extends AuthenticationState {
+  final String message;
+
+  Error(this.message);
+
+  @override
+  List<Object> get props => [message];
+}
+
+class Loading extends AuthenticationState {}
 
 class RegistrationState extends AuthenticationState {}
 
@@ -26,4 +35,12 @@ class OtpState extends AuthenticationState {
 }
 
 
-class GoToNextPage extends AuthenticationState {}
+class GoToNextPage extends AuthenticationState {
+
+  final String mobile;
+
+  GoToNextPage({this.mobile});
+
+  @override
+  List<Object> get props => [mobile];
+}

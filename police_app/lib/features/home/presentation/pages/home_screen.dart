@@ -23,8 +23,8 @@ class _HomeScreenState extends State<HomeScreen>
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-          drawer: Drawer(),
           appBar: AppBar(
+            centerTitle: true,
             iconTheme: new IconThemeData(color: Colors.black),
             elevation: 0,
             backgroundColor: Colors.white,

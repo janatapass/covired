@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:janata_curfew/core/widgets/loading_dialog.dart';
+import 'package:janata_curfew/core/widgets/loading_progress_indicator.dart';
 import 'package:janata_curfew/features/authentication/bloc/authentication_bloc.dart';
 import 'package:janata_curfew/features/authentication/bloc/authentication_event.dart';
 import 'package:janata_curfew/features/authentication/bloc/authentication_state.dart';
@@ -33,11 +36,15 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         child: BlocListener<AuthenticationBloc, AuthenticationState>(
             listener: (context, state) {
           if (state is GoToNextPage) {
-            goToNextPage(context);
-          }
-          if (state is OtpState) {
+            goToNextPage(context, state.mobile);
+          } if (state is OtpState) {
             Scaffold.of(context).showSnackBar(SnackBar(
               content: Text(state.data.message),
+              duration: Duration(seconds: 3),
+            ));
+          } else if (state is Error) {
+            Scaffold.of(context).showSnackBar(SnackBar(
+              content: Text(state.message),
               duration: Duration(seconds: 3),
             ));
           }
@@ -55,8 +62,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     onPressed: (mobile, otp) {
                       _onOtpButtonPressed(mobile, otp);
                     }));
-          } else if (state is Error) {
-            return Center();
+          } else if (state is Loading) {
+            return LoadingProgressIndicator();
           }
           return RegistrationBackground(
               child: MobileRegistrationView(onPressed: (mobile) {
@@ -76,10 +83,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     bloc.add(OtpRegistrationEvent(mobile: mobile, otp: otp));
   }
 
-  goToNextPage(context) async {
+  goToNextPage(context, mobile) async {
     await Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => ProfileReviewScreen()),
+      MaterialPageRoute(builder: (context) => ProfileReviewScreen(mobile: mobile)),
     );
   }
 

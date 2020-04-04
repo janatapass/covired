@@ -14,8 +14,8 @@ class AppTheme {
 
   static const TextStyle item_sub_title = TextStyle(
     fontFamily: 'OpenSans',
-    fontWeight: FontWeight.w500,
-    fontSize: 16,
+    fontWeight: FontWeight.w700,
+    fontSize: 18,
     color: AppColors.primary_text,
   );
 
@@ -36,9 +36,16 @@ class AppTheme {
 
   static const TextStyle app_bar_text = TextStyle(
     fontFamily: 'OpenSans',
-    fontWeight: FontWeight.w700,
+    fontWeight: FontWeight.w600,
     fontSize: 18,
     color: AppColors.primary_text,
+  );
+
+  static const TextStyle app_bar_text_white = TextStyle(
+    fontFamily: 'OpenSans',
+    fontWeight: FontWeight.w600,
+    fontSize: 18,
+    color: Colors.white,
   );
 
   static const TextStyle home_tab_selected = TextStyle(
@@ -46,7 +53,7 @@ class AppTheme {
     fontWeight: FontWeight.w600,
     fontSize: 14,
     letterSpacing: 1,
-    color: AppColors.primary_text,
+    color: AppColors.white,
   );
 
   static const TextStyle home_tab_un_selected = TextStyle(

@@ -9,27 +9,23 @@ UserData userFromJson(String str) => UserData.fromJson(json.decode(str));
 String userToJson(UserData data) => json.encode(data.toJson());
 
 class UserData {
-  String passes;
   int status;
   String message;
   Data data;
 
   UserData({
-    this.passes,
     this.status,
     this.message,
     this.data,
   });
 
   factory UserData.fromJson(Map<String, dynamic> json) => UserData(
-    passes: json["passes"],
     status: json["status"],
     message: json["message"],
     data: Data.fromJson(json["data"]),
   );
 
   Map<String, dynamic> toJson() => {
-    "passes": passes,
     "status": status,
     "message": message,
     "data": data.toJson(),
