@@ -17,7 +17,9 @@ body.green{
        url('../fonts/ProductSans-Regular.ttf') format('truetype');
 }
 
-
+.card-body.passes_list span{
+	line-height:initial;
+}
 body.janata_pass .blue_ {
     padding: 50px 10px 10px 10px;
 	/*background-image: linear-gradient(#7ED0FF, #3299F1);*/
@@ -226,7 +228,7 @@ input[type="radio"]:checked{
 }
 
 .janata_pass .card-body h3, .form-group.grey_box h3{
-	font-size:18px;
+	font-size:20px;
 }
 .janata_pass .card-body h4{
 	font-size:16px;
@@ -383,6 +385,7 @@ input[type=radio] {
 }
 .janata_pass .card-body #Menu2 p{
 	text-align:left !important;
+	width: 100%;
 }
 .avatar-wrapper:hover, .avatar-wrapper_:hover {
   transform: scale(1.05);
@@ -667,4 +670,32 @@ width: 100%;
 }
 .todayText:before {
 content: "Today's Date";
+}
+
+.grid_position_abs{
+	position: absolute;
+    right: 0;
+    top: -15px;
+}
+span.float_right{
+	float:right;
+}
+span.clr_white {
+    color: #fff !important;
+    padding-right: 4px;
+}
+
+.red_grid {
+    padding: 50px 10px 10px 10px;
+    /* background-image: linear-gradient(#F26D5E, #F26D5E); /
+    background: #F26D5E;
+    / background: linear-gradient( to bottom, #F26D5E, #); */
+    background: linear-gradient(to left top, #F26D5E, #F26D5E) fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y:scroll;
 }

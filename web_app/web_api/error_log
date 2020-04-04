@@ -1,0 +1,291 @@
+[13-Mar-2020 09:55:15 Etc/GMT] PHP Fatal error:  Uncaught Error: Class 'DbHandler' not found in /home/fatnejjj/public_html/abrbacademy.com/web_api/index.php:139
+Stack trace:
+#0 [internal function]: {closure}()
+#1 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Route.php(468): call_user_func_array(Object(Closure), Array)
+#2 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Slim.php(1357): Slim\Route->dispatch()
+#3 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Middleware/Flash.php(85): Slim\Slim->call()
+#4 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Middleware/MethodOverride.php(92): Slim\Middleware\Flash->call()
+#5 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Middleware/PrettyExceptions.php(67): Slim\Middleware\MethodOverride->call()
+#6 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Slim.php(1302): Slim\Middleware\PrettyExceptions->call()
+#7 /home/fatnejjj/public_html/abrbacademy.com/web_api/index.php(446): Slim\Slim->run()
+#8 {main}
+  thrown in /home/fatnejjj/public_html/abrbacademy.com/web_api/index.php on line 139
+[13-Mar-2020 09:55:18 Etc/GMT] PHP Fatal error:  Uncaught Error: Class 'DbHandler' not found in /home/fatnejjj/public_html/abrbacademy.com/web_api/index.php:139
+Stack trace:
+#0 [internal function]: {closure}()
+#1 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Route.php(468): call_user_func_array(Object(Closure), Array)
+#2 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Slim.php(1357): Slim\Route->dispatch()
+#3 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Middleware/Flash.php(85): Slim\Slim->call()
+#4 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Middleware/MethodOverride.php(92): Slim\Middleware\Flash->call()
+#5 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Middleware/PrettyExceptions.php(67): Slim\Middleware\MethodOverride->call()
+#6 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Slim.php(1302): Slim\Middleware\PrettyExceptions->call()
+#7 /home/fatnejjj/public_html/abrbacademy.com/web_api/index.php(446): Slim\Slim->run()
+#8 {main}
+  thrown in /home/fatnejjj/public_html/abrbacademy.com/web_api/index.php on line 139
+[13-Mar-2020 09:55:42 Etc/GMT] PHP Fatal error:  Uncaught Error: Class 'DbHandler' not found in /home/fatnejjj/public_html/abrbacademy.com/web_api/index.php:139
+Stack trace:
+#0 [internal function]: {closure}()
+#1 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Route.php(468): call_user_func_array(Object(Closure), Array)
+#2 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Slim.php(1357): Slim\Route->dispatch()
+#3 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Middleware/Flash.php(85): Slim\Slim->call()
+#4 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Middleware/MethodOverride.php(92): Slim\Middleware\Flash->call()
+#5 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Middleware/PrettyExceptions.php(67): Slim\Middleware\MethodOverride->call()
+#6 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Slim.php(1302): Slim\Middleware\PrettyExceptions->call()
+#7 /home/fatnejjj/public_html/abrbacademy.com/web_api/index.php(446): Slim\Slim->run()
+#8 {main}
+  thrown in /home/fatnejjj/public_html/abrbacademy.com/web_api/index.php on line 139
+[13-Mar-2020 09:55:50 Etc/GMT] PHP Fatal error:  Uncaught Error: Class 'DbHandler' not found in /home/fatnejjj/public_html/abrbacademy.com/web_api/index.php:139
+Stack trace:
+#0 [internal function]: {closure}()
+#1 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Route.php(468): call_user_func_array(Object(Closure), Array)
+#2 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Slim.php(1357): Slim\Route->dispatch()
+#3 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Middleware/Flash.php(85): Slim\Slim->call()
+#4 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Middleware/MethodOverride.php(92): Slim\Middleware\Flash->call()
+#5 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Middleware/PrettyExceptions.php(67): Slim\Middleware\MethodOverride->call()
+#6 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Slim.php(1302): Slim\Middleware\PrettyExceptions->call()
+#7 /home/fatnejjj/public_html/abrbacademy.com/web_api/index.php(446): Slim\Slim->run()
+#8 {main}
+  thrown in /home/fatnejjj/public_html/abrbacademy.com/web_api/index.php on line 139
+[13-Mar-2020 09:56:00 Etc/GMT] PHP Parse error:  syntax error, unexpected end of file in /home/fatnejjj/public_html/abrbacademy.com/web_api/include/DbHandler.php on line 514
+[13-Mar-2020 09:59:05 Etc/GMT] PHP Parse error:  syntax error, unexpected ''messa' (T_ENCAPSED_AND_WHITESPACE), expecting ']' in /home/fatnejjj/public_html/abrbacademy.com/web_api/include/DbHandler.php on line 514
+[14-Mar-2020 05:49:37 Etc/GMT] PHP Fatal error:  Uncaught Error: Class 'DbHandler' not found in /home/fatnejjj/public_html/abrbacademy.com/web_api/index.php:179
+Stack trace:
+#0 [internal function]: {closure}()
+#1 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Route.php(468): call_user_func_array(Object(Closure), Array)
+#2 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Slim.php(1357): Slim\Route->dispatch()
+#3 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Middleware/Flash.php(85): Slim\Slim->call()
+#4 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Middleware/MethodOverride.php(92): Slim\Middleware\Flash->call()
+#5 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Middleware/PrettyExceptions.php(67): Slim\Middleware\MethodOverride->call()
+#6 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Slim.php(1302): Slim\Middleware\PrettyExceptions->call()
+#7 /home/fatnejjj/public_html/abrbacademy.com/web_api/index.php(486): Slim\Slim->run()
+#8 {main}
+  thrown in /home/fatnejjj/public_html/abrbacademy.com/web_api/index.php on line 179
+[14-Mar-2020 07:25:12 Etc/GMT] PHP Fatal error:  Uncaught Error: Class 'DbHandler' not found in /home/fatnejjj/public_html/abrbacademy.com/web_api/index.php:179
+Stack trace:
+#0 [internal function]: {closure}()
+#1 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Route.php(468): call_user_func_array(Object(Closure), Array)
+#2 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Slim.php(1357): Slim\Route->dispatch()
+#3 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Middleware/Flash.php(85): Slim\Slim->call()
+#4 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Middleware/MethodOverride.php(92): Slim\Middleware\Flash->call()
+#5 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Middleware/PrettyExceptions.php(67): Slim\Middleware\MethodOverride->call()
+#6 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Slim.php(1302): Slim\Middleware\PrettyExceptions->call()
+#7 /home/fatnejjj/public_html/abrbacademy.com/web_api/index.php(486): Slim\Slim->run()
+#8 {main}
+  thrown in /home/fatnejjj/public_html/abrbacademy.com/web_api/index.php on line 179
+[14-Mar-2020 11:25:37 Etc/GMT] PHP Parse error:  syntax error, unexpected 'SELECT' (T_STRING) in /home/fatnejjj/public_html/abrbacademy.com/web_api/include/DbHandler.php on line 218
+[14-Mar-2020 11:25:40 Etc/GMT] PHP Parse error:  syntax error, unexpected 'SELECT' (T_STRING) in /home/fatnejjj/public_html/abrbacademy.com/web_api/include/DbHandler.php on line 218
+[14-Mar-2020 11:27:43 Etc/GMT] PHP Parse error:  syntax error, unexpected 'SELECT' (T_STRING) in /home/fatnejjj/public_html/abrbacademy.com/web_api/include/DbHandler.php on line 219
+[14-Mar-2020 17:23:09 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to undefined method DbHandler::forgot_password() in /home/fatnejjj/public_html/abrbacademy.com/web_api/index.php:153
+Stack trace:
+#0 [internal function]: {closure}()
+#1 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Route.php(468): call_user_func_array(Object(Closure), Array)
+#2 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Slim.php(1357): Slim\Route->dispatch()
+#3 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Middleware/Flash.php(85): Slim\Slim->call()
+#4 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Middleware/MethodOverride.php(92): Slim\Middleware\Flash->call()
+#5 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Middleware/PrettyExceptions.php(67): Slim\Middleware\MethodOverride->call()
+#6 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Slim.php(1302): Slim\Middleware\PrettyExceptions->call()
+#7 /home/fatnejjj/public_html/abrbacademy.com/web_api/index.php(503): Slim\Slim->run()
+#8 {main}
+  thrown in /home/fatnejjj/public_html/abrbacademy.com/web_api/index.php on line 153
+[16-Mar-2020 10:49:58 Etc/GMT] PHP Parse error:  syntax error, unexpected ''_certificate'' (T_CONSTANT_ENCAPSED_STRING) in /home/fatnejjj/public_html/abrbacademy.com/web_api/include/DbHandler.php on line 675
+[16-Mar-2020 10:50:02 Etc/GMT] PHP Parse error:  syntax error, unexpected ''_certificate'' (T_CONSTANT_ENCAPSED_STRING) in /home/fatnejjj/public_html/abrbacademy.com/web_api/include/DbHandler.php on line 675
+[16-Mar-2020 10:50:11 Etc/GMT] PHP Parse error:  syntax error, unexpected ''_certificate'' (T_CONSTANT_ENCAPSED_STRING) in /home/fatnejjj/public_html/abrbacademy.com/web_api/include/DbHandler.php on line 675
+[16-Mar-2020 10:50:41 Etc/GMT] PHP Parse error:  syntax error, unexpected ''_certificate'' (T_CONSTANT_ENCAPSED_STRING) in /home/fatnejjj/public_html/abrbacademy.com/web_api/include/DbHandler.php on line 675
+[16-Mar-2020 10:50:44 Etc/GMT] PHP Parse error:  syntax error, unexpected ''_certificate'' (T_CONSTANT_ENCAPSED_STRING) in /home/fatnejjj/public_html/abrbacademy.com/web_api/include/DbHandler.php on line 675
+[16-Mar-2020 10:51:05 Etc/GMT] PHP Parse error:  syntax error, unexpected ''_certificate'' (T_CONSTANT_ENCAPSED_STRING) in /home/fatnejjj/public_html/abrbacademy.com/web_api/include/DbHandler.php on line 675
+[16-Mar-2020 18:42:31 Asia/Kolkata] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function DbHandler::register(), 4 passed in /home/fatnejjj/public_html/abrbacademy.com/web_api/index.php on line 124 and exactly 5 expected in /home/fatnejjj/public_html/abrbacademy.com/web_api/include/DbHandler.php:241
+Stack trace:
+#0 /home/fatnejjj/public_html/abrbacademy.com/web_api/index.php(124): DbHandler->register('aravinth', 'aravinthkumar85...', '8838478308', '123')
+#1 [internal function]: {closure}()
+#2 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Route.php(468): call_user_func_array(Object(Closure), Array)
+#3 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Slim.php(1357): Slim\Route->dispatch()
+#4 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Middleware/Flash.php(85): Slim\Slim->call()
+#5 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Middleware/MethodOverride.php(92): Slim\Middleware\Flash->call()
+#6 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Middleware/PrettyExceptions.php in /home/fatnejjj/public_html/abrbacademy.com/web_api/include/DbHandler.php on line 241
+[16-Mar-2020 18:46:22 Asia/Kolkata] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function DbHandler::register(), 4 passed in /home/fatnejjj/public_html/abrbacademy.com/web_api/index.php on line 124 and exactly 5 expected in /home/fatnejjj/public_html/abrbacademy.com/web_api/include/DbHandler.php:241
+Stack trace:
+#0 /home/fatnejjj/public_html/abrbacademy.com/web_api/index.php(124): DbHandler->register('aravinth', 'aravinthkumar85...', '8838478308', '123')
+#1 [internal function]: {closure}()
+#2 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Route.php(468): call_user_func_array(Object(Closure), Array)
+#3 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Slim.php(1357): Slim\Route->dispatch()
+#4 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Middleware/Flash.php(85): Slim\Slim->call()
+#5 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Middleware/MethodOverride.php(92): Slim\Middleware\Flash->call()
+#6 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Middleware/PrettyExceptions.php in /home/fatnejjj/public_html/abrbacademy.com/web_api/include/DbHandler.php on line 241
+[16-Mar-2020 18:47:02 Asia/Kolkata] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function DbHandler::register(), 4 passed in /home/fatnejjj/public_html/abrbacademy.com/web_api/index.php on line 124 and exactly 5 expected in /home/fatnejjj/public_html/abrbacademy.com/web_api/include/DbHandler.php:241
+Stack trace:
+#0 /home/fatnejjj/public_html/abrbacademy.com/web_api/index.php(124): DbHandler->register('aravinth', 'redantmedia.ara...', '8344471001', '123')
+#1 [internal function]: {closure}()
+#2 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Route.php(468): call_user_func_array(Object(Closure), Array)
+#3 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Slim.php(1357): Slim\Route->dispatch()
+#4 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Middleware/Flash.php(85): Slim\Slim->call()
+#5 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Middleware/MethodOverride.php(92): Slim\Middleware\Flash->call()
+#6 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Middleware/PrettyExceptions.php in /home/fatnejjj/public_html/abrbacademy.com/web_api/include/DbHandler.php on line 241
+[16-Mar-2020 18:47:20 Asia/Kolkata] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function DbHandler::register(), 4 passed in /home/fatnejjj/public_html/abrbacademy.com/web_api/index.php on line 124 and exactly 5 expected in /home/fatnejjj/public_html/abrbacademy.com/web_api/include/DbHandler.php:241
+Stack trace:
+#0 /home/fatnejjj/public_html/abrbacademy.com/web_api/index.php(124): DbHandler->register('aravinth', 'redantmedia.ara...', '8344471001', '123')
+#1 [internal function]: {closure}()
+#2 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Route.php(468): call_user_func_array(Object(Closure), Array)
+#3 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Slim.php(1357): Slim\Route->dispatch()
+#4 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Middleware/Flash.php(85): Slim\Slim->call()
+#5 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Middleware/MethodOverride.php(92): Slim\Middleware\Flash->call()
+#6 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Middleware/PrettyExceptions.php in /home/fatnejjj/public_html/abrbacademy.com/web_api/include/DbHandler.php on line 241
+[16-Mar-2020 23:22:03 Asia/Kolkata] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function DbHandler::certificate_generate(), 1 passed in /home/fatnejjj/public_html/abrbacademy.com/web_api/index.php on line 194 and exactly 3 expected in /home/fatnejjj/public_html/abrbacademy.com/web_api/include/DbHandler.php:623
+Stack trace:
+#0 /home/fatnejjj/public_html/abrbacademy.com/web_api/index.php(194): DbHandler->certificate_generate('1')
+#1 [internal function]: {closure}()
+#2 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Route.php(468): call_user_func_array(Object(Closure), Array)
+#3 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Slim.php(1357): Slim\Route->dispatch()
+#4 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Middleware/Flash.php(85): Slim\Slim->call()
+#5 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Middleware/MethodOverride.php(92): Slim\Middleware\Flash->call()
+#6 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Middleware/PrettyExceptions.php(67): Slim\Middleware\Meth in /home/fatnejjj/public_html/abrbacademy.com/web_api/include/DbHandler.php on line 623
+[21-Mar-2020 12:30:31 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to undefined function length() in /home/fatnejjj/public_html/abrbacademy.com/web_api/include/DbHandler.php:298
+Stack trace:
+#0 /home/fatnejjj/public_html/abrbacademy.com/web_api/index.php(124): DbHandler->register('aravinth', 'testsdfas@gmail...', '9876543211', '202cb962ac59075...', NULL)
+#1 [internal function]: {closure}()
+#2 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Route.php(468): call_user_func_array(Object(Closure), Array)
+#3 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Slim.php(1357): Slim\Route->dispatch()
+#4 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Middleware/Flash.php(85): Slim\Slim->call()
+#5 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Middleware/MethodOverride.php(92): Slim\Middleware\Flash->call()
+#6 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Middleware/PrettyExceptions.php(67): Slim\Middleware\MethodOverride->call()
+#7 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Slim.php in /home/fatnejjj/public_html/abrbacademy.com/web_api/include/DbHandler.php on line 298
+[21-Mar-2020 12:33:10 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to undefined function length() in /home/fatnejjj/public_html/abrbacademy.com/web_api/include/DbHandler.php:299
+Stack trace:
+#0 /home/fatnejjj/public_html/abrbacademy.com/web_api/index.php(124): DbHandler->register('aravinth', 'testsdfas@gmail...', '9876543211', '202cb962ac59075...', NULL)
+#1 [internal function]: {closure}()
+#2 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Route.php(468): call_user_func_array(Object(Closure), Array)
+#3 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Slim.php(1357): Slim\Route->dispatch()
+#4 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Middleware/Flash.php(85): Slim\Slim->call()
+#5 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Middleware/MethodOverride.php(92): Slim\Middleware\Flash->call()
+#6 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Middleware/PrettyExceptions.php(67): Slim\Middleware\MethodOverride->call()
+#7 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Slim.php in /home/fatnejjj/public_html/abrbacademy.com/web_api/include/DbHandler.php on line 299
+[21-Mar-2020 12:33:29 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to undefined function length() in /home/fatnejjj/public_html/abrbacademy.com/web_api/include/DbHandler.php:299
+Stack trace:
+#0 /home/fatnejjj/public_html/abrbacademy.com/web_api/index.php(124): DbHandler->register('aravinth', 'testsdfas@gmail...', '9876543211', '202cb962ac59075...', NULL)
+#1 [internal function]: {closure}()
+#2 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Route.php(468): call_user_func_array(Object(Closure), Array)
+#3 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Slim.php(1357): Slim\Route->dispatch()
+#4 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Middleware/Flash.php(85): Slim\Slim->call()
+#5 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Middleware/MethodOverride.php(92): Slim\Middleware\Flash->call()
+#6 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Middleware/PrettyExceptions.php(67): Slim\Middleware\MethodOverride->call()
+#7 /home/fatnejjj/public_html/abrbacademy.com/web_api/libs/Slim/Slim.php in /home/fatnejjj/public_html/abrbacademy.com/web_api/include/DbHandler.php on line 299
+[21-Mar-2020 07:11:53 Etc/GMT] PHP Parse error:  syntax error, unexpected '$_FILES' (T_VARIABLE), expecting ')' in /home/fatnejjj/public_html/abrbacademy.com/web_api/include/DbHandler.php on line 299
+[21-Mar-2020 07:12:00 Etc/GMT] PHP Parse error:  syntax error, unexpected '$_FILES' (T_VARIABLE), expecting ')' in /home/fatnejjj/public_html/abrbacademy.com/web_api/include/DbHandler.php on line 299
+[21-Mar-2020 08:22:59 Etc/GMT] PHP Parse error:  syntax error, unexpected ')', expecting variable (T_VARIABLE) in /home/fatnejjj/public_html/abrbacademy.com/web_api/include/DbHandler.php on line 148
+[21-Mar-2020 08:23:26 Etc/GMT] PHP Parse error:  syntax error, unexpected ')', expecting variable (T_VARIABLE) in /home/fatnejjj/public_html/abrbacademy.com/web_api/include/DbHandler.php on line 148
+[21-Mar-2020 08:25:06 Etc/GMT] PHP Parse error:  syntax error, unexpected ')', expecting variable (T_VARIABLE) in /home/fatnejjj/public_html/abrbacademy.com/web_api/include/DbHandler.php on line 148
+[27-Mar-2020 07:14:51 Etc/GMT] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO) in /home/fatnejjj/public_html/janata_pass/web_api/include/DbHandler.php on line 170
+[27-Mar-2020 07:14:55 Etc/GMT] PHP Parse error:  syntax error, unexpected 'echo' (T_ECHO) in /home/fatnejjj/public_html/janata_pass/web_api/include/DbHandler.php on line 170
+[27-Mar-2020 14:08:35 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to undefined method DbHandler::register() in /home/fatnejjj/public_html/janata_pass/web_api/index.php:104
+Stack trace:
+#0 [internal function]: {closure}()
+#1 /home/fatnejjj/public_html/janata_pass/web_api/libs/Slim/Route.php(468): call_user_func_array(Object(Closure), Array)
+#2 /home/fatnejjj/public_html/janata_pass/web_api/libs/Slim/Slim.php(1357): Slim\Route->dispatch()
+#3 /home/fatnejjj/public_html/janata_pass/web_api/libs/Slim/Middleware/Flash.php(85): Slim\Slim->call()
+#4 /home/fatnejjj/public_html/janata_pass/web_api/libs/Slim/Middleware/MethodOverride.php(92): Slim\Middleware\Flash->call()
+#5 /home/fatnejjj/public_html/janata_pass/web_api/libs/Slim/Middleware/PrettyExceptions.php(67): Slim\Middleware\MethodOverride->call()
+#6 /home/fatnejjj/public_html/janata_pass/web_api/libs/Slim/Slim.php(1302): Slim\Middleware\PrettyExceptions->call()
+#7 /home/fatnejjj/public_html/janata_pass/web_api/index.php(110): Slim\Slim->run()
+#8 {main}
+  thrown in /home/fatnejjj/public_html/janata_pass/web_api/index.php on line 104
+[27-Mar-2020 12:34:24 Etc/GMT] PHP Parse error:  syntax error, unexpected ',' in /home/fatnejjj/public_html/janata_pass/Application/web_api/include/DbHandler.php on line 218
+[27-Mar-2020 12:34:28 Etc/GMT] PHP Parse error:  syntax error, unexpected ',' in /home/fatnejjj/public_html/janata_pass/Application/web_api/include/DbHandler.php on line 218
+[27-Mar-2020 18:21:58 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to undefined method QRcode::svg() in /home/fatnejjj/public_html/janata_pass/Application/web_api/include/DbHandler.php:221
+Stack trace:
+#0 /home/fatnejjj/public_html/janata_pass/Application/web_api/index.php(109): DbHandler->new_QR_code()
+#1 [internal function]: {closure}()
+#2 /home/fatnejjj/public_html/janata_pass/Application/web_api/libs/Slim/Route.php(468): call_user_func_array(Object(Closure), Array)
+#3 /home/fatnejjj/public_html/janata_pass/Application/web_api/libs/Slim/Slim.php(1357): Slim\Route->dispatch()
+#4 /home/fatnejjj/public_html/janata_pass/Application/web_api/libs/Slim/Middleware/Flash.php(85): Slim\Slim->call()
+#5 /home/fatnejjj/public_html/janata_pass/Application/web_api/libs/Slim/Middleware/MethodOverride.php(92): Slim\Middleware\Flash->call()
+#6 /home/fatnejjj/public_html/janata_pass/Application/web_api/libs/Slim/Middleware/PrettyExceptions.php(67): Slim\Middleware\MethodOverride->call()
+#7 /home/fatnejjj/public_html/janata_pass/Application/web_api/libs/Slim/Slim.php(130 in /home/fatnejjj/public_html/janata_pass/Application/web_api/include/DbHandler.php on line 221
+[27-Mar-2020 18:22:01 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to undefined method QRcode::svg() in /home/fatnejjj/public_html/janata_pass/Application/web_api/include/DbHandler.php:221
+Stack trace:
+#0 /home/fatnejjj/public_html/janata_pass/Application/web_api/index.php(109): DbHandler->new_QR_code()
+#1 [internal function]: {closure}()
+#2 /home/fatnejjj/public_html/janata_pass/Application/web_api/libs/Slim/Route.php(468): call_user_func_array(Object(Closure), Array)
+#3 /home/fatnejjj/public_html/janata_pass/Application/web_api/libs/Slim/Slim.php(1357): Slim\Route->dispatch()
+#4 /home/fatnejjj/public_html/janata_pass/Application/web_api/libs/Slim/Middleware/Flash.php(85): Slim\Slim->call()
+#5 /home/fatnejjj/public_html/janata_pass/Application/web_api/libs/Slim/Middleware/MethodOverride.php(92): Slim\Middleware\Flash->call()
+#6 /home/fatnejjj/public_html/janata_pass/Application/web_api/libs/Slim/Middleware/PrettyExceptions.php(67): Slim\Middleware\MethodOverride->call()
+#7 /home/fatnejjj/public_html/janata_pass/Application/web_api/libs/Slim/Slim.php(130 in /home/fatnejjj/public_html/janata_pass/Application/web_api/include/DbHandler.php on line 221
+[27-Mar-2020 18:22:08 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to undefined method QRcode::svg() in /home/fatnejjj/public_html/janata_pass/Application/web_api/include/DbHandler.php:221
+Stack trace:
+#0 /home/fatnejjj/public_html/janata_pass/Application/web_api/index.php(109): DbHandler->new_QR_code()
+#1 [internal function]: {closure}()
+#2 /home/fatnejjj/public_html/janata_pass/Application/web_api/libs/Slim/Route.php(468): call_user_func_array(Object(Closure), Array)
+#3 /home/fatnejjj/public_html/janata_pass/Application/web_api/libs/Slim/Slim.php(1357): Slim\Route->dispatch()
+#4 /home/fatnejjj/public_html/janata_pass/Application/web_api/libs/Slim/Middleware/Flash.php(85): Slim\Slim->call()
+#5 /home/fatnejjj/public_html/janata_pass/Application/web_api/libs/Slim/Middleware/MethodOverride.php(92): Slim\Middleware\Flash->call()
+#6 /home/fatnejjj/public_html/janata_pass/Application/web_api/libs/Slim/Middleware/PrettyExceptions.php(67): Slim\Middleware\MethodOverride->call()
+#7 /home/fatnejjj/public_html/janata_pass/Application/web_api/libs/Slim/Slim.php(130 in /home/fatnejjj/public_html/janata_pass/Application/web_api/include/DbHandler.php on line 221
+[28-Mar-2020 11:49:03 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to undefined method DbHandler::all_pass() in /home/fatnejjj/public_html/janata_pass/Application/web_api/index.php:151
+Stack trace:
+#0 [internal function]: {closure}()
+#1 /home/fatnejjj/public_html/janata_pass/Application/web_api/libs/Slim/Route.php(468): call_user_func_array(Object(Closure), Array)
+#2 /home/fatnejjj/public_html/janata_pass/Application/web_api/libs/Slim/Slim.php(1357): Slim\Route->dispatch()
+#3 /home/fatnejjj/public_html/janata_pass/Application/web_api/libs/Slim/Middleware/Flash.php(85): Slim\Slim->call()
+#4 /home/fatnejjj/public_html/janata_pass/Application/web_api/libs/Slim/Middleware/MethodOverride.php(92): Slim\Middleware\Flash->call()
+#5 /home/fatnejjj/public_html/janata_pass/Application/web_api/libs/Slim/Middleware/PrettyExceptions.php(67): Slim\Middleware\MethodOverride->call()
+#6 /home/fatnejjj/public_html/janata_pass/Application/web_api/libs/Slim/Slim.php(1302): Slim\Middleware\PrettyExceptions->call()
+#7 /home/fatnejjj/public_html/janata_pass/Application/web_api/ in /home/fatnejjj/public_html/janata_pass/Application/web_api/index.php on line 151
+[28-Mar-2020 11:50:00 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to undefined method DbHandler::user_pass() in /home/fatnejjj/public_html/janata_pass/Application/web_api/index.php:142
+Stack trace:
+#0 [internal function]: {closure}()
+#1 /home/fatnejjj/public_html/janata_pass/Application/web_api/libs/Slim/Route.php(468): call_user_func_array(Object(Closure), Array)
+#2 /home/fatnejjj/public_html/janata_pass/Application/web_api/libs/Slim/Slim.php(1357): Slim\Route->dispatch()
+#3 /home/fatnejjj/public_html/janata_pass/Application/web_api/libs/Slim/Middleware/Flash.php(85): Slim\Slim->call()
+#4 /home/fatnejjj/public_html/janata_pass/Application/web_api/libs/Slim/Middleware/MethodOverride.php(92): Slim\Middleware\Flash->call()
+#5 /home/fatnejjj/public_html/janata_pass/Application/web_api/libs/Slim/Middleware/PrettyExceptions.php(67): Slim\Middleware\MethodOverride->call()
+#6 /home/fatnejjj/public_html/janata_pass/Application/web_api/libs/Slim/Slim.php(1302): Slim\Middleware\PrettyExceptions->call()
+#7 /home/fatnejjj/public_html/janata_pass/Application/web_api in /home/fatnejjj/public_html/janata_pass/Application/web_api/index.php on line 142
+[28-Mar-2020 12:02:20 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to undefined method DbHandler::user_pass() in /home/fatnejjj/public_html/janata_pass/Application/web_api/index.php:130
+Stack trace:
+#0 [internal function]: {closure}()
+#1 /home/fatnejjj/public_html/janata_pass/Application/web_api/libs/Slim/Route.php(468): call_user_func_array(Object(Closure), Array)
+#2 /home/fatnejjj/public_html/janata_pass/Application/web_api/libs/Slim/Slim.php(1357): Slim\Route->dispatch()
+#3 /home/fatnejjj/public_html/janata_pass/Application/web_api/libs/Slim/Middleware/Flash.php(85): Slim\Slim->call()
+#4 /home/fatnejjj/public_html/janata_pass/Application/web_api/libs/Slim/Middleware/MethodOverride.php(92): Slim\Middleware\Flash->call()
+#5 /home/fatnejjj/public_html/janata_pass/Application/web_api/libs/Slim/Middleware/PrettyExceptions.php(67): Slim\Middleware\MethodOverride->call()
+#6 /home/fatnejjj/public_html/janata_pass/Application/web_api/libs/Slim/Slim.php(1302): Slim\Middleware\PrettyExceptions->call()
+#7 /home/fatnejjj/public_html/janata_pass/Application/web_api in /home/fatnejjj/public_html/janata_pass/Application/web_api/index.php on line 130
+[28-Mar-2020 12:24:26 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to undefined method DbHandler::user_pass() in /home/fatnejjj/public_html/janata_pass/Application/web_api/index.php:130
+Stack trace:
+#0 [internal function]: {closure}()
+#1 /home/fatnejjj/public_html/janata_pass/Application/web_api/libs/Slim/Route.php(468): call_user_func_array(Object(Closure), Array)
+#2 /home/fatnejjj/public_html/janata_pass/Application/web_api/libs/Slim/Slim.php(1357): Slim\Route->dispatch()
+#3 /home/fatnejjj/public_html/janata_pass/Application/web_api/libs/Slim/Middleware/Flash.php(85): Slim\Slim->call()
+#4 /home/fatnejjj/public_html/janata_pass/Application/web_api/libs/Slim/Middleware/MethodOverride.php(92): Slim\Middleware\Flash->call()
+#5 /home/fatnejjj/public_html/janata_pass/Application/web_api/libs/Slim/Middleware/PrettyExceptions.php(67): Slim\Middleware\MethodOverride->call()
+#6 /home/fatnejjj/public_html/janata_pass/Application/web_api/libs/Slim/Slim.php(1302): Slim\Middleware\PrettyExceptions->call()
+#7 /home/fatnejjj/public_html/janata_pass/Application/web_api in /home/fatnejjj/public_html/janata_pass/Application/web_api/index.php on line 130
+[31-Mar-2020 12:43:01 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Call to undefined method DbHandler::get_citizen_details() in /home/fatnejjj/public_html/janata_pass/Application/web_api/index.php:242
+Stack trace:
+#0 [internal function]: {closure}()
+#1 /home/fatnejjj/public_html/janata_pass/Application/web_api/libs/Slim/Route.php(468): call_user_func_array(Object(Closure), Array)
+#2 /home/fatnejjj/public_html/janata_pass/Application/web_api/libs/Slim/Slim.php(1357): Slim\Route->dispatch()
+#3 /home/fatnejjj/public_html/janata_pass/Application/web_api/libs/Slim/Middleware/Flash.php(85): Slim\Slim->call()
+#4 /home/fatnejjj/public_html/janata_pass/Application/web_api/libs/Slim/Middleware/MethodOverride.php(92): Slim\Middleware\Flash->call()
+#5 /home/fatnejjj/public_html/janata_pass/Application/web_api/libs/Slim/Middleware/PrettyExceptions.php(67): Slim\Middleware\MethodOverride->call()
+#6 /home/fatnejjj/public_html/janata_pass/Application/web_api/libs/Slim/Slim.php(1302): Slim\Middleware\PrettyExceptions->call()
+#7 /home/fatnejjj/public_html/janata_pass/Applicati in /home/fatnejjj/public_html/janata_pass/Application/web_api/index.php on line 242
+[01-Apr-2020 17:44:18 Asia/Kolkata] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function DbHandler::share_trip_details(), 1 passed in /home/fatnejjj/public_html/janata_pass/Application/web_api/index.php on line 251 and exactly 3 expected in /home/fatnejjj/public_html/janata_pass/Application/web_api/include/DbHandler.php:693
+Stack trace:
+#0 /home/fatnejjj/public_html/janata_pass/Application/web_api/index.php(251): DbHandler->share_trip_details('9538131315')
+#1 [internal function]: {closure}()
+#2 /home/fatnejjj/public_html/janata_pass/Application/web_api/libs/Slim/Route.php(468): call_user_func_array(Object(Closure), Array)
+#3 /home/fatnejjj/public_html/janata_pass/Application/web_api/libs/Slim/Slim.php(1357): Slim\Route->dispatch()
+#4 /home/fatnejjj/public_html/janata_pass/Application/web_api/libs/Slim/Middleware/Flash.php(85): Slim\Slim->call()
+#5 /home/fatnejjj/public_html/janata_pass/Application/web_api/libs/Slim/Middleware/MethodOverride.php(92): Slim\Middleware\Flash->call()
+#6 /home/fatnejjj/public_html/janata_pass/Application/web_ap in /home/fatnejjj/public_html/janata_pass/Application/web_api/include/DbHandler.php on line 693
+[01-Apr-2020 12:51:43 Etc/GMT] PHP Parse error:  syntax error, unexpected '$arr_user' (T_VARIABLE), expecting identifier (T_STRING) in /home/fatnejjj/public_html/janata_pass/Application/web_api/include/DbHandler.php on line 696
+[01-Apr-2020 12:51:46 Etc/GMT] PHP Parse error:  syntax error, unexpected '$arr_user' (T_VARIABLE), expecting identifier (T_STRING) in /home/fatnejjj/public_html/janata_pass/Application/web_api/include/DbHandler.php on line 696
+[04-Apr-2020 11:43:25 Asia/Kolkata] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function DbHandler::get_passes_counts(), 2 passed in /home/fatnejjj/public_html/janata_pass/Application/web_api/include/DbHandler.php on line 952 and exactly 3 expected in /home/fatnejjj/public_html/janata_pass/Application/web_api/include/DbHandler.php:916
+Stack trace:
+#0 /home/fatnejjj/public_html/janata_pass/Application/web_api/include/DbHandler.php(952): DbHandler->get_passes_counts('total', 'Electronic City...')
+#1 /home/fatnejjj/public_html/janata_pass/Application/web_api/index.php(283): DbHandler->daily_statistics('Electronic City...', NULL)
+#2 [internal function]: {closure}()
+#3 /home/fatnejjj/public_html/janata_pass/Application/web_api/libs/Slim/Route.php(468): call_user_func_array(Object(Closure), Array)
+#4 /home/fatnejjj/public_html/janata_pass/Application/web_api/libs/Slim/Slim.php(1357): Slim\Route->dispatch()
+#5 /home/fatnejjj/public_html/janata_pass/Application/web_api/libs/Slim/Middleware/Flash.php(85): Slim\Slim->call()
+#6 /home/fatnejjj/public in /home/fatnejjj/public_html/janata_pass/Application/web_api/include/DbHandler.php on line 916

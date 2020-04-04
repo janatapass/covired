@@ -55,20 +55,20 @@ function verifyRequiredParams($required_fields) {
 $app->get('/user_types', function() use($app){
     $db = new DbHandler();
     $result = $db->get_user_types();
-    echoRespnse(200, $result);
+    //echoRespnse(200, $result);
 });
 
 // get all active services in the system
 $app->get('/services', function() use($app){
     $db = new DbHandler();
     $result = $db->get_active_services();
-    echoRespnse(200, $result);
+    //echoRespnse(200, $result);
 });
 // get all active services in the system
 $app->get('/organisation', function() use($app){
     $db = new DbHandler();
     $result = $db->get_active_org();
-    echoRespnse(200, $result);
+   // echoRespnse(200, $result);
 }); 
 
 // generate OTP
@@ -77,7 +77,7 @@ $app->post('/generate_otp', function() use($app){
     $mobile = $app->request->post('mobile');
     $db = new DbHandler();
     $result = $db->generate_otp($mobile);
-    echoRespnse(200, $result);
+    //echoRespnse(200, $result);
 });
 
 // Verify OTP
@@ -87,7 +87,7 @@ $app->post('/verify_otp', function() use($app){
     $otp = $app->request->post('otp');
     $db = new DbHandler();
     $result = $db->verify_otp($mobile,$otp);
-    echoRespnse(200, $result);
+   // echoRespnse(200, $result);
 });
 
 
@@ -97,7 +97,7 @@ $app->post('/verify_mobile', function() use($app){
     $mobile = $app->request->post('mobile');
     $db = new DbHandler();
     $result = $db->verify_mobile($mobile);
-    echoRespnse(200, $result);
+   // echoRespnse(200, $result);
 });
 
 // User Register
@@ -105,7 +105,7 @@ $app->post('/save_user', function() use($app){
      verifyRequiredParams(array('mobile', 'user_type_id','name','address','city','pincode','aadhar_number'));
      $db = new DbHandler();
      $result = $db->save_user();
-     echoRespnse(200, $result);
+    // echoRespnse(200, $result);
 });
 
 // generate_QR_code
@@ -117,10 +117,10 @@ $app->get('/generate_QR_code', function() use($app){
 
 // pass entries
 $app->post('/create_user_pass', function() use($app){
-     verifyRequiredParams(array('user_id', 'travel_reason','start_time','end_time','location','travel_date'));
+     verifyRequiredParams(array('user_id', 'travel_reason','start_time','end_time','travel_date','trip_from','trip_to'));
      $db = new DbHandler();
      $result = $db->create_user_pass();
-     echoRespnse(200, $result);
+    // echoRespnse(200, $result);
 }); 
 
 //list user pass entries
@@ -129,14 +129,14 @@ $app->get('/user_pass_details', function() use($app){
     $user_id = $app->request->get('pass_id');
     $db = new DbHandler();
     $result = $db->user_pass_details($user_id);
-    echoRespnse(200, $result);
+   // echoRespnse(200, $result);
 });
 
 //list all passes
 $app->get('/all_pass', function() use($app){
     $db = new DbHandler();
     $result = $db->all_pass();
-    echoRespnse(200, $result);
+   // echoRespnse(200, $result);
 });
 
 // update pass entries
@@ -150,7 +150,7 @@ $app->post('/edit_pass', function() use($app){
      $location = $app->request->post('location');
      $db = new DbHandler();
      $result = $db->pass_entries($id,$user_id,$reason,$services,$start_time,$end_time,$location);
-     echoRespnse(200, $result);
+    // echoRespnse(200, $result);
 });
 
 //save approver
@@ -158,7 +158,7 @@ $app->post('/save_approver', function() use($app){
      verifyRequiredParams(array('approver_mobile','org_name','org_type','org_location','org_email','user_type_id'));
      $db = new DbHandler();
      $result = $db->save_approver();
-     echoRespnse(200, $result);
+    // echoRespnse(200, $result);
 });
 
 // approve pass count
@@ -174,7 +174,7 @@ $app->post('/generate_passes', function() use($app){
     verifyRequiredParams(array('green_pass_count','yellow_pass_count','approver_id'));
     $db = new DbHandler();
     $result = $db->generate_passes();
-    echoRespnse(200, $result);
+   // echoRespnse(200, $result);
 });
 
 // get approver passes
@@ -183,7 +183,7 @@ $app->post('/get_approver_passes', function() use($app){
     $approver_id = $_REQUEST['approver_id'];
     $db = new DbHandler();
     $result = $db->get_approver_passes($approver_id);
-    echoRespnse(200, $result);
+   // echoRespnse(200, $result);
 });
 
 // get user details
@@ -192,14 +192,14 @@ $app->post('/get_user_details', function() use($app){
     $user_id = $_REQUEST['user_id'];
     $db = new DbHandler();
     $result = $db->get_user_details($user_id);
-    echoRespnse(200, $result);
+   // echoRespnse(200, $result);
 });
 
 //list all approver organisations
 $app->get('/all_approver_organisations', function() use($app){
     $db = new DbHandler();
     $result = $db->get_active_approvers();
-    echoRespnse(200, $result);
+    //echoRespnse(200, $result);
 });
 
 //validate approver
@@ -210,7 +210,7 @@ $app->post('/validate_approver', function() use($app){
     $user_type_id = $_REQUEST['user_type_id'];
     $db = new DbHandler();
     $result = $db->validate_approver($approver_mobile,$approver_id,$user_type_id);
-    echoRespnse(200, $result);
+   // echoRespnse(200, $result);
 });
 
 // get approver details
@@ -225,12 +225,91 @@ $app->post('/get_approver_details', function() use($app){
 
 
 $app->post('/update_leave_status', function() use($app){
-     verifyRequiredParams(array('travel_status','pass_id'));
+     verifyRequiredParams(array('travel_status','pass_id','verifier_id'));
     $pass_id = $_REQUEST['pass_id'];
     $travel_status = $_REQUEST['travel_status'];
+    $verifier_id = $_REQUEST['verifier_id'];
     $db = new DbHandler();
-    $result = $db->update_leave_status($pass_id,$travel_status);
+    $result = $db->update_leave_status($pass_id,$travel_status,$verifier_id);
     echoRespnse(200, $result);
+});
+
+//
+$app->post('/user_details', function() use($app){
+    //verifyRequiredParams(array('travel_status','pass_id'));
+    $mobile = isset($_REQUEST['mobile'])?$_REQUEST['mobile']:'';
+    $qr_code = isset($_REQUEST['qr_code'])?$_REQUEST['qr_code']:'';
+    $db = new DbHandler();
+    $result = $db->get_citizen_details($mobile,$qr_code);
+    //echoRespnse(200, $result);
+});
+
+// Share Trip Details
+$app->post('/share_trip_details', function() use($app){
+    verifyRequiredParams(array('share_mobile','share_name','pass_id','user_id'));
+    $share_mobile = $app->request->post('share_mobile');
+    $share_name = $app->request->post('share_name');
+    $pass_id = $app->request->post('pass_id');
+    $user_id = $app->request->post('user_id');
+    $db = new DbHandler();
+    $result = $db->share_trip_details($share_name,$pass_id,$share_mobile,$user_id);
+    //echoRespnse(200, $result);
+});
+
+// list of all passes of user
+$app->post('/user_pass_history', function() use($app){
+    verifyRequiredParams(array('user_id'));
+    $user_id = $app->request->post('user_id');
+    $db = new DbHandler();
+    $result = $db->user_pass_history($user_id);
+    echoRespnse(200, $result);
+});
+
+// list of all passes of user
+$app->post('/user_warnings', function() use($app){
+    verifyRequiredParams(array('user_id'));
+    $user_id = $app->request->post('user_id');
+    $db = new DbHandler();
+    $result = $db->user_warnings($user_id);
+    echoRespnse(200, $result);
+});
+
+
+// daily statistics
+$app->post('/daily_statistics', function() use($app){
+    $locality = $app->request->post('locality');
+    $date = $app->request->post('date');
+    $db = new DbHandler();
+    $result = $db->daily_statistics($locality,$date);
+    echoRespnse(200, $result);
+});
+
+// get travel reasons - master
+$app->get('/travel_reasons', function() use($app){
+    $db = new DbHandler();
+    $result = $db->travel_reasons();
+    //echoRespnse(200, $result);
+});
+
+// get city names - master
+$app->get('/city_names', function() use($app){
+    $db = new DbHandler();
+    $result = $db->get_city_names();
+   // echoRespnse(200, $result);
+});
+
+// get city names - master
+$app->get('/locality_names', function() use($app){
+    $db = new DbHandler();
+    $result = $db->locality_names();
+    echoRespnse(200, $result);
+});
+
+$app->post('/save_birthmark', function() use($app){
+     verifyRequiredParams(array('user_id'));
+    $db = new DbHandler();
+    $result = $db->save_birthmark();
+   // echoRespnse(200, $result);
 });
 
 

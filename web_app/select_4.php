@@ -28,7 +28,7 @@
         					 <p>Requester</p>
     					 </div>
 					 </div>
-					 <div class="col-lg-6 col-sm-6 col-6" onclick="load_user_type_page('citizen','requester_register.php');">
+					 <div class="col-lg-6 col-sm-6 col-6" onclick="load_user_type_page('citizen','requester_register.php?user_type=3');">
     					 <div class="grid_grey">
         					 <a><img alt="app_icon" class="app_icon" src="img/general_citizen.png"></a>
         					 <p>General Citizen</p>

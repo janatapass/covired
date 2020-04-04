@@ -34,7 +34,7 @@
 								<div class="form-group grey_box">
 								<label for="sel1">Select Organization</label>
 								<select class="form-control" id="org_id" name="org_id" required>
-								    <option value="">Select Organisation</option>
+								    <option value="">Select Organisation *</option>
 								    <?php if(is_array($arr_orgs) && count($arr_orgs)!=0){ 
 								    foreach($arr_orgs as $org){
 								    ?>
@@ -58,13 +58,13 @@
 								</div> -->
                               <div class="col-lg-12 col-12">
                                  <div class="form-group grey_box">
-								 <label for="sel1">Services</label>
+								 <label for="sel1">Services *</label>
                                     <input type="text" class="form-control" placeholder="Enter Services" id="services_id" name=services_id required>
                                  </div>
                               </div>
                               <div class="col-lg-12 col-12">
                                  <div class="form-group grey_box">
-								 <label for="sel1">Approver details</label>
+								 <label for="sel1">Approver details *</label>
                                     <input type="text" pattern="\d*" maxlength="10"  class="form-control" placeholder="Approver mobile number" id="approver_mobile" name="approver_mobile" required>
                                  </div>
                               </div>

@@ -7,6 +7,7 @@
 			<div class="d-table-cell align-middle">
                <img alt="Janata Pass" class="logo" src="img/logo.png">
                <h1>Janata Pass</h1>
+               <div id='location'></div>
                <input type="hidden" id="user_mobile" name="user_mobile"/>
                <input type="hidden" id="user_otp" name="user_otp"/>
                <input type="hidden" id="user_type_id" name="user_type_id"/>
@@ -40,6 +41,14 @@
          </div>
       </div>
       </div>
+      
+       <div class="modal fade" id="leave_modal" name="leave_modal" >
+   <div class="modal-dialog">
+     <div class="modal-content" id="div_leave_modal" name="div_leave_modal">
+     </div>
+   </div>
+ </div>
+ 
       <!-- The Modal -->
 <div class="modal" id="leave_pass">
     <div class="modal-dialog" id="div_pass_modal">
@@ -50,11 +59,11 @@
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <!-- Modal body -->
-		<div class="modal-body">
-		<form name="form_pass" id="form_pass" method="POST">
+		<div class="modal-body" id='div_leave_pass'>
+		<!--<form name="form_pass" id="form_pass" method="POST">
 		    <div class="form-group grey_box">
         		<label for="text">Date </label>
-        		<input type="text" class="form-control" placeholder="Enter Reason for stepping out" id="travel_date"  name="travel_date" value="<?= date('d/m/Y');?>" readonly>
+        		<input type="text" class="form-control" id="travel_date"  name="travel_date" value="<?= date('d/m/Y');?>" readonly>
     		</div>
     		<div class="form-group grey_box">
     		<label for="text">Reason for stepping out</label>
@@ -86,11 +95,35 @@
     		<div class="col-ld-12 col-sm-12 col-12 mt-3 text-center">
     		<button type="button" onclick="create_pass()" class="btn btn-black">Apply</button>
     		</div>
+		</form>-->
+		</div>
+      </div>
+    </div>
+</div>  
+<!--
+<div class="modal" id="share_trip">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- Modal Header --
+        <div class="modal-header">
+          <h4 class="modal-title">Share Trip</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <!-- Modal body --
+		<div class="modal-body">
+		<form>
+		<div class="form-group grey_box">
+		<input type="text" class="form-control" value="Start" id="" name="" required >
+		</div>
+		<div class="form-group grey_box">
+		<input type="text" class="form-control" placeholder="Mobile number" id="" name="" required value="">
+		</div>
+		<button class="btn btn-info"> Share</button>
 		</form>
 		</div>
       </div>
     </div>
-</div>    
+  </div>-->
       <?php include_once('common/footer.php');?>
       
       <script id="rendered-js">
@@ -129,10 +162,13 @@
          //# sourceURL=pen.js
              
       </script>
-	  <script type="text/javascript">
+	  <script>
+
+	  
             $(function () {
                 $('#datetimepicker2').datetimepicker({
                     locale: 'ru'
                 });
             });
         </script>
+      

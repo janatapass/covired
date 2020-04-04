@@ -6,8 +6,6 @@ include_once 'phpqrcode.php';
 class DbHandler {
 
     private $conn;
-    private $tax = 18;
-    private $api;
 
     function __construct() {
         require_once 'DbConnect.php';
@@ -41,6 +39,74 @@ function verifyToken($id, $token) {
     }else {
         return false;
     }
+}
+
+
+// get active travel reasons in the system
+function travel_reasons(){
+	$response=array();
+    $r = array();
+    $sql = "SELECT id,reason FROM travel_reasons WHERE status=1 and is_active=1 order by reason asc";
+    $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
+    $stmt->execute();
+    $rows = $stmt->fetchALL();    
+    return $rows;
+}
+
+// get active cities in the system
+function get_city_names(){
+	$response=array();
+    $r = array();
+    $sql = "SELECT id,city_name FROM cities WHERE status=1 and is_active=1 AND city_id=0 order by city_name asc";
+    $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
+    $stmt->execute();
+    $rows = $stmt->fetchALL();    
+    return $rows;
+}
+
+// get active localities for the city
+function locality_names($city=''){
+    //echo "city name".$city_name."<br>";
+	$response=array();
+    $r = array();
+    $sql = "SELECT id,locality,city_name FROM cities WHERE status=1 and is_active=1 AND city_id!=0 ";
+    if($city!=''){
+         $sql .= " AND city_name ='".$city."'" ;
+    }
+    $sql .= " order by locality asc ";
+    $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
+    $stmt->execute();
+    $rows = $stmt->fetchALL(); 
+    return $rows;
+}
+
+// get active localities for the city
+function get_locality_names($city_name){
+    //echo "city name".$city_name."<br>";
+	$response=array();
+    $r = array();
+    $sql = "SELECT locality FROM cities WHERE status=1 and is_active=1 AND city_id!=0 ";
+    if($city_name!=''){
+         $sql .= " AND city_name ='".$city_name."'" ;
+    }
+    
+    //$sql .= " order by locality asc ";
+    //echo $sql;
+    $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
+    $stmt->execute();
+    $rows = $stmt->fetchALL(); 
+    echo '<select class="form-control" id="locality" name="locality">
+                <option value="">Select Locality</option>';
+    if(is_array($rows)&&count($rows)!=0){
+        foreach($rows as $locality){
+            echo "<option value='".$locality['locality']."'>".$locality['locality']."</option>";
+        }
+       
+    }else{
+        echo '';
+    }
+     echo "</select>";
+   // return $rows;
 }
 
 
@@ -95,10 +161,14 @@ public function insert_sms_log($data){
     $stmt3= $this->conn->prepare($sql3);
    
     $stmt3->execute([$mobile, $otp, $response, $status,$message]);
+    if($otp==''){
+        $message = ' Trip Details Shared Successfully!';
+    }else{
+        $message =  "OTP sent Successfully - ".$otp;;
+    }
     if($stmt3){
         $arr_response['status'] = 1;
-        //$arr_response['message'] = "Registered OTP sent Successfully - ".$otp;
-        $arr_response['message'] = "Registered OTP sent Successfully";
+		$arr_response['message'] =$message;
     }else{
         $arr_response['status'] = 0;
         $arr_response['message'] = "Data insert error !";
@@ -125,8 +195,8 @@ public function sendsms($mobile,$message,$otp){
 	curl_setopt($ch, CURLOPT_POST, true);
 	curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	$response = curl_exec($ch);
-	//$response = 'test response';
+	//$response = curl_exec($ch);
+	$response = 'test response';
 	$arr_sms['response'] = $response;
 	$arr_sms['status'] = 1;
 	$arr_response = $this->insert_sms_log($arr_sms);
@@ -182,15 +252,14 @@ function verify_mobile($mobile){
    	   // $response['success']=0;
         //$response['message'] ='Please enter a valid OTP!';
         $response = $this->generate_otp($mobile);
-         $response['user_id'] = $row['id'];
+         $response['user_id'] = isset($row['id'])?$row['id']:0;
    //	}
    echo json_encode($response);	
-   
 }
 
 // register user 
 function save_user(){
-    $arr_fields = array('mobile','user_type_id','name','aadhar_number','user_category_id','qr_code','approver_id','city','address','pincode','user_proof','services');
+    $arr_fields = array('mobile','user_type_id','name','aadhar_number','user_category_id','qr_code','approver_id','city','locality','address','pincode','user_proof','services','share_with_mobile','share_with_name','relationship','longitude','latitude');
 	foreach($arr_fields as $field){
 		$arr_data[$field] = isset($_REQUEST[$field])?$_REQUEST[$field]:'';
 	}
@@ -300,7 +369,8 @@ public function get_approver_details($approver_id){
         $arr_response['status'] = 0;
         $arr_response['message'] = "Error when trying to update pass count !";
     }
-    echo json_encode($arr_response);
+    //echo json_encode($arr_response);
+    return $arr_response;
 
 }
 
@@ -438,12 +508,23 @@ function get_user_details($user_id,$json=true){
    //	}
    	
    	if($count!="" && $count!=0){
+   	     if($row['approver_id']!="" && $row['approver_id']!=0){
+       	        $arr_approver = $this->get_approver_details($row['approver_id']);    
+       	        if(is_array($arr_approver) && count($arr_approver)!=0){
+       	            $arr_approver = $arr_approver['approver_details'];
+       	            $row['organisation'] = $arr_approver['org_name'];
+       	            $row['green_pass_count'] = $arr_approver['green_pass_count'];
+       	            $row['yellow_pass_count'] = $arr_approver['yellow_pass_count'];
+       	        }
+       	    }else{
+       	        $row['organisation'] = '';
+       	    }
         $response['status']=1;
         $response['message'] =' user details!';
         $response['data'] = $row;
    	}else{
    	     $response['status']=0;
-        $response['message'] =' Entered OTP is invalid!';
+        $response['message'] =' Entered User ID is invalid or not active in the system';
    	}
    	if($json==true){
         echo json_encode($response);
@@ -541,9 +622,14 @@ function all_pass(){
     return $response;
 }
 
-function user_pass_details($user_id){
+function user_pass_details($user_id,$pass_id=0){
      $response=array();
-    $sql = "SELECT * FROM pass_entries WHERE user_id= $user_id AND  is_active=1  order by id desc";
+     if($user_id!="" && $user_id!=0){
+     $sql = "SELECT * FROM pass_entries WHERE user_id= $user_id AND travel_date >= CURDATE() AND  is_active=1 ";
+     }
+     if($pass_id!=0 && $pass_id!=""){
+        $sql .= " AND id= $pass_id ";
+     }
     $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
     $stmt->execute();
     $rows = $stmt->fetchAll(); 
@@ -564,23 +650,35 @@ return $response;
 
   function create_user_pass()
   {
-    $arr_fields = array('user_id', 'travel_reason','start_time','end_time','location','travel_date');
+     // print_r($_REQUEST);
+    $arr_fields = array('user_id', 'travel_reason','start_time','end_time','travel_date','trip_from','trip_to','vehicle_number','duration');
 	foreach($arr_fields as $field){
 		$arr_data[$field] =  isset($_REQUEST[$field])?$_REQUEST[$field]:'';
 	}
 	$arr_data['travel_date'] = date('Y-m-d h:s:i');
 	
+	$when = new DateTime($arr_data['start_time']);
+	$arr_data['start_time'] = $when->format('Y-m-d h:i A');
+    $when->add(new DateInterval('PT' . $arr_data['duration'] . 'M'));
+   // echo 'End time: ' . $when->format('Y-m-d h:i A') . "\n";
+    $arr_data['end_time'] = $when->format('Y-m-d h:i A');
+
+	/*
 	if($arr_data['start_time']!=""){
-	    $arr_data['start_time'] = date('Y-m-d h:s:i',strtotime($arr_data['start_time']));
+	    $arr_data['start_time'] = 'TIME( STR_TO_DATE( "' . $arr_data['start_time'] . '", "%h:%i %p" ) )';
+	  //$arr_data['start_time'] = date('Y-m-d H:s:i A',strtotime());
 	}
 	
 	if($arr_data['end_time']!=""){
-	    $arr_data['end_time'] = date('Y-m-d h:s:i',strtotime($arr_data['end_time']));
-	}
-	//print_r($arr_data);exit;
+	  //  $arr_data['end_time'] = date('Y-m-d h:s:i',strtotime($arr_data['end_time']));
+	  $arr_data['end_time'] = 'TIME( STR_TO_DATE( "' . $arr_data['end_time'] . '", "%h:%i %p" ) )';
+	}*/
+	//print_r($arr_data);
+    //exit;
 	if(is_array($arr_data) && count($arr_data)!=0){
 	    $arr_data['is_active'] = 1;
-	    $arr_data['cby'] = $arr_data['mby'] = 1;
+	    $arr_data['travel_status'] = 'OPEN';
+	    $arr_data['cby'] = $arr_data['mby'] = $arr_data['user_id'];
 	    $arr_data['cdate'] = $arr_data['mdate'] = date('y-m-d h:d:i');
     	$str_fields = implode(",",array_keys($arr_data));
     	$str_values = implode("','",array_values($arr_data));  
@@ -633,10 +731,33 @@ return $response;
   /** Pass Entries **/
   
   
-  function update_leave_status($pass_id,$travel_status){
+  function update_leave_status($pass_id,$travel_status,$verifier_id){
+      $warning_reason = $_REQUEST['warning_reason'];
+      $warning_date = $_REQUEST['warning_date'];
+      $warning_time = $_REQUEST['warning_time'];
+      $latitude = $_REQUEST['latitude'];
+      $longitude = $_REQUEST['longitude'];
         $response = array();
         $mdate = date('Y-m-d H:i:s');
-        $sql = "UPDATE pass_entries SET travel_status='".$travel_status."' WHERE id=".$pass_id;
+        $sql = "UPDATE pass_entries SET travel_status='".$travel_status."',mby=".$verifier_id;
+        if($warning_reason!=""){
+            $sql .=  " , warning_reason='".$warning_reason."'";
+        }
+        if($warning_date!=""){
+            $sql .=  " , warning_date='".$warning_date."'";
+        }
+        if($warning_time!=""){
+            $sql .=  " , warning_time='".$warning_time."'";
+        }
+         if($latitude!=""){
+            $sql .=  " , latitude='".$latitude."'";
+        }
+         if($warning_time!=""){
+            $sql .=  " , longitude='".$longitude."'";
+        }
+        $sql .= " WHERE id=".$pass_id;
+        
+        //echo $sql;
         $stmt = $this->conn->query($sql);
         $stmt->execute();
              if($stmt){
@@ -648,6 +769,226 @@ return $response;
             }
     return $response;
   }
+  
+  public function get_citizen_details($mobile,$qr_code){
+
+      $sql = "SELECT users.*, user_categories.color_code FROM users join user_categories on user_categories.id = users.user_category_id  WHERE ";
+      if($mobile!="" && $qr_code!=""){
+          $sql .= " mobile ='".$mobile."' AND  qr_code = '".$qr_code."'";
+      }else if($mobile!='' && $qr_code==''){
+          $sql .= "  mobile = '".$mobile."'";
+      }else if($qr_code!='' && $mobile==""){
+          $sql .= "  qr_code = '".$qr_code."'";
+      }
+       // echo $sql;
+        $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
+        $stmt->execute();
+       	$row = $stmt->fetch();
+       	$count = $stmt->rowCount();
+       	if($count!=0){
+       	    if($row['approver_id']!="" && $row['approver_id']!=0){
+       	        $arr_approver = $this->get_approver_details($row['approver_id']);    
+       	        if(is_array($arr_approver) && count($arr_approver)!=0){
+       	            $arr_approver = $arr_approver['approver_details'];
+       	            $row['organisation'] = $arr_approver['org_name'];
+       	        }
+       	    }else{
+       	        $row['organisation'] = '';
+       	    }
+       	    
+       	    //approver_details.org_name as organisation_name, approver_details.org_type
+       	    $user_id = $row['id'];
+       	    $arr_passes = $this->user_pass_details($user_id); // get approver passes    
+       	    $response['passes'] = (is_array($arr_passes) && count($arr_passes)!=0 && isset($arr_passes['data']))?$arr_passes['data']:array();
+            $response['status']=1;
+            $response['message'] =' user details!';
+            $response['data'] = $row;
+           
+       	}else{
+       	    $response['status']=0;
+            $response['message'] =' Entered mobile/qr_code is invalid!';
+       	}
+   	
+        echo json_encode($response);
+  }
+  
+  public function share_trip_details($name,$pass_id,$mobile,$user_id){
+      //$mobile = '9538131315';
+      $arr_pass = $this->user_pass_details($user_id,$pass_id);
+      if(is_array($arr_pass) && count($arr_pass)!=0){
+          $arr_pass = $arr_pass['data'];
+          $pass_details = $arr_pass[0];
+      }
+      $message = " Dear ".$name.",\n Sharing my trip details\n";
+      $message .= " Travel Date : ".$pass_details['travel_date']."\n Travelling from : ".$pass_details['trip_from']." to ".$pass_details['trip_to']."\n";
+      $message .= " Start Time : ".$pass_details['start_time']." \n End Time ".$pass_details['end_time']."\n";
+      $message .= " Reason : ".$pass_details['travel_reason']."\n";
+      if($pass_details['vehicle_number']!="") $message .= " Vehicle Number  : ".$pass_details['vehicle_number']."\n";
+      //echo $message;
+      $response = $this->sendsms($mobile,$message,'');
+      echo json_encode($response);
+  }
+  
+  public function user_pass_history($user_id){
+       $response=array();
+       $r = array();
+        $sql = "SELECT user_id,travel_date,trip_from,trip_to,travel_reason,travel_status,start_time,end_time,mby,mdate,longitude,latitude FROM pass_entries  WHERE is_active=1 AND user_id=".$user_id;
+        $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
+        $stmt->execute();
+        $rows = $stmt->fetchALL();
+        if(count($rows)>0) {
+            $response['status'] = 1;
+            $response['message'] = "User Passes History List";
+            $response['data'] = $rows;
+        }else{
+            $response['status'] = 0;
+        $response['message'] = "No passes found for the user";
+        }
+    return $response;
+  }
+  
+  public function user_warnings($user_id){
+       $response=array();
+       $r = array();
+        $sql = "SELECT user_id,travel_date,trip_from,trip_to,travel_reason,travel_status,start_time,end_time,mby,mdate,warning_reason,warning_date,warning_time,longitude,latitude FROM pass_entries  WHERE is_active=1 AND user_id=".$user_id." AND travel_status = 'WARNING'";
+        $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
+        $stmt->execute();
+        $rows = $stmt->fetchALL();
+        if(count($rows)>0) {
+            $response['status'] = 1;
+            $response['message'] = "User Passes History List";
+            $response['data'] = $rows;
+        }else{
+            $response['status'] = 0;
+        $response['message'] = "No passes with warnings found for the user";
+        }
+    return $response;
+  }
+  
+  // total passes in the system
+  public function get_total_passes($locality,$date){
+        $response=array();
+       $r = array();
+        $sql = "SELECT count(*) as total_passes_count  FROM pass_entries  WHERE is_active=1  ";
+        if($date!=""){
+            $sql .=  " AND travel_date = '".$date."' ";
+        }else{
+           $sql .=  " AND travel_date = CURRENT_DATE ";
+        }
+        if($locality!=""){
+            $sql .= " AND (trip_from='".$locality."' || trip_to='".$locality."') ";
+        }
+        //echo $sql;
+        $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
+        $stmt->execute();
+        $rows = $stmt->fetch();
+        if(count($rows)>0) {
+            return $rows['total_passes_count'];
+        }else{
+            return 0;
+        }
+  }
+  
+  // completed passes in the system
+  public function get_completed_passes($locality,$date){
+        $response=array();
+        $r = array();
+        $sql = "SELECT count(*) as pass_count FROM `pass_entries` where  AND is_active=1 ";
+        if($date!=""){
+            $sql .=  " AND ( travel_date = ".$date." AND end_time < CURRENT_TIMESTAMP )";
+        }else{
+           $sql .=  "  ( travel_date = CURRENT_DATE AND end_time < CURRENT_TIMESTAMP ) ";
+        }
+        if($locality!=""){
+            $sql .= " AND (trip_from='".$locality."' || trip_to='".$locality."') ";
+        }
+        $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
+        $stmt->execute();
+        $rows = $stmt->fetch();
+        if(count($rows)>0) {
+            return $rows['pass_count'];
+        }else{
+            return 0;
+        }
+  }
+  
+   // passes at home 
+  public function get_passes_at_home($type,$locality,$date){
+        $response=array();
+        $r = array();
+        
+        $sql = "SELECT count(*) as pass_count FROM `pass_entries` where ( travel_date = CURRENT_DATE AND start_time > CURRENT_TIMESTAMP ) AND is_active=1";
+        
+        if($locality!=""){
+            $sql .= " AND (trip_from='".$locality."' || trip_to='".$locality."') ";
+        }
+        $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
+        $stmt->execute();
+        $rows = $stmt->fetch();
+        if(count($rows)>0) {
+            return $rows['pass_count'];
+        }else{
+            return 0;
+        }
+  }
+  
+  public function get_passes_counts($type,$locality){
+      switch($type) {
+           case 'total':
+              $sql = "SELECT count(*) as pass_count  FROM pass_entries  WHERE is_active=1  ";
+              break;
+           case 'completed':
+              $sql = "SELECT count(*) as pass_count  FROM pass_entries  WHERE is_active=1  ";
+              $sql .= " AND ( travel_date = CURRENT_DATE AND end_time < CURRENT_TIMESTAMP ) ";
+              // $sql .= " AND  travel_date = ".$date." AND travel_status != 'OPEN'  ";
+              break;
+           case 'at_home':
+              $sql = "SELECT count(*) as pass_count  FROM pass_entries  WHERE is_active=1  ";
+              $sql .= " AND ( travel_date = CURRENT_DATE AND start_time > CURRENT_TIMESTAMP ) ";
+              //$sql .= " AND  travel_date = ".$date." AND travel_status = 'OPEN'  ";
+              break;
+      }
+      
+        if($locality!=""){
+            $sql .= " AND (trip_from='".$locality."' || trip_to='".$locality."') ";
+        }
+
+        $stmt = $this->conn->query($sql, PDO::FETCH_ASSOC);
+        $stmt->execute();
+        $rows = $stmt->fetch();
+        if(count($rows)>0) {
+            return $rows['pass_count'];
+        }else{
+            return 0;
+        }
+  }
+  
+  public function daily_statistics($locality='',$date=''){
+    // registered passes, completed passes, passes at home
+    /*$response['total_passes_count'] = $this->get_total_passes($locality,$date); // total passes in the system
+    $response['completed_passes_count'] = $this->get_completed_passes($locality,$date); // completed passes in the system
+    $response['passes_athome_count'] = $this->get_passes_at_home($locality,$date); // total passes at home at the given time*/
+    $response['total_passes_count'] = $this->get_passes_counts('total',$locality); // total passes in the system
+    $response['completed_passes_count'] = $this->get_passes_counts('completed',$locality); // completed passes in the system
+    $response['passes_athome_count'] = $this->get_passes_counts('at_home',$locality); // total passes at home at the given time
+    return $response;
+  }
+
+
+public function save_birthmark(){
+    $user_id  = $_REQUEST['user_id'];
+    $user_birthmark  = $_REQUEST['user_birthmark'];
+    if($user_id!=0 && $user_id!=""){
+        $sql2 = "UPDATE users SET user_birthmark=? WHERE id=?";
+        $this->conn->prepare($sql2)->execute([$user_birthmark, $user_id]);
+        $response['status']=1;
+        $response['message'] =' User Birth Mark details updated successfully!';
+    }else{
+        $response['status']=0;
+        $response['message'] =' Error when trying to update Birth Mark details!';
+    }
+    echo json_encode($response);
+}
   
 // destruct db connection
 public function __destruct() {

@@ -35,8 +35,14 @@ function success_alert(message,redirect=''){
                 console.info('closedBy: ' + closedBy); // The return will be: 'closedBy: buttonName'
             }
         }, toast, 'buttonName');
-        }, true]
-        ]
+        }, false]
+        ],
+        onClosing: function(instance, toast, closedBy){
+            if(redirect!=""){
+               // window.location.href = BASE_URL + redirect;
+               ajax_load(redirect,'div_main_body');
+            } 
+        }
     });
 }
 
@@ -100,6 +106,23 @@ function ajax_fileform_submit(form_name, url, id) {
 
 
 }
+
+
+function show_data_modal(url,div_id){
+   
+   // var ajax_url = BASE_URL + url;
+    $.ajax({
+        url: url,
+        dataType: 'html',
+        success: function(res) {
+            $('div[id="div_'+div_id+'"]').html(res)
+            $('div[id="'+div_id+'"]').modal('show');
+        },
+        error:function(request, status, error) {
+            console.log("ajax call went wrong:" + request.responseText);
+        }
+    });
+}
    
 
 function request_otp(){
@@ -112,7 +135,7 @@ function request_otp(){
             'mobile': mobile
         },
         success: function (response){
-            //alert(response);
+           // alert(response);
              var data = $.parseJSON(response);
              //alert(data.user_id);
              $('#user_id').val(data.user_id);
@@ -168,7 +191,7 @@ function verifyOTP(){
       });
 }  
 
-
+// enable next button in the warning details page
  function enabletNext(){
        var check = $('#customCheck1').prop('checked');
        var check1 = $('#customCheck2').prop('checked');
@@ -181,7 +204,25 @@ function verifyOTP(){
        } else {
            //error_alert('Please select the checkboxes to move to next page');
            //alert('Fill checkbox');
+            $('#conditions_next').prop('disabled',true);
        }
       }
 
+
+function load_locality(div_id){
+    var city_name = $('#city').val();
+    alert(city_name);
+     $.ajax({
+        url: "common/action.php",
+        type: "POST",
+        data: {
+            'action': "get_locality_names",
+            'city_name': city_name
+        },
+        success: function (response){
+            alert(response);
+            $('#'+div_id).html(response);
+        }
+      });
+}
 

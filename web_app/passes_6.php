@@ -17,9 +17,7 @@
             <div class="col-lg-6 col-sm-6 col-12 mx-auto">
                <img alt="Janata Pass" class="logo" src="img/logo.png">
                <h1>Janata Pass</h1>-->
-               <div class="row">
-		
-               <?php 
+                <?php 
                //print_r($_REQUEST);
 			   include_once ('web_api/include/DbHandler.php');
                $DbHandler = new DbHandler();
@@ -37,13 +35,17 @@
 			   $color_code = $arr_user['color_code'];
 			   //print_r($arr_services);
 			   ?>
+               <div class="row">
+		             <div class="button_box" onclick="ajax_load('approver_user_details.php?user_id=<?=$user_id;?>','div_main_body');">
+            		 <div class="div_btn" ><img alt="approver_black" src="img/black.png"></div>
+            		 <!--<div class="div_btn active" onclick="toggleVisibility('Menu1');"><img alt="black" src="img/approver_black.png"></div>-->
+            		 </div>
+              
                <div class="card mb-3 mt-3">
-                    <!--<div class="button_box">
-            		 <div class="div_btn" onclick="toggleVisibility('Menu2');"><img alt="approver_black" src="img/approver_black.png"></div>
-            		 <div class="div_btn active" onclick="toggleVisibility('Menu1');"><img alt="black" src="img/black.png"></div>
-            		 </div>-->
-            		
-                  <div class="card-body passes_list">
+					 <div class="grid_position_abs">
+            		<button class="btn btn-info w-100" onclick='ajax_load("generate_5.php?approver_id=<?= $approver_id;?>&user_id=<?= $user_id;?>","div_main_body");'>Add more passes</button>
+					</div>
+					<div class="card-body passes_list">
                      <div class="row">
 					 <div class="col-lg-12 col-12">
 					 <div id="Menu1">
@@ -74,8 +76,7 @@
 					 </div>
 					 <div class="row">
 					    <div class="col-ld-12 col-sm-12 col-12 mt-3 text-center">
-					       <button class="btn btn-info" onclick='ajax_load("generate_5.php?approver_id=<?= $approver_id;?>&user_id=<?= $user_id;?>","div_main_body");'>Add more passes</button>
-					       <button class="btn btn-info" onclick="ajax_load('approver_user_details.php?user_id=<?=$user_id;?>','div_main_body');"> Home </button>
+						 <button class="btn btn-info" onclick="ajax_load('approver_user_details.php?user_id=<?=$user_id;?>','div_main_body');"> Home </button>
 					    </div>
 					 </div>
 					 <!--<div id="Menu2" style="display:none;">

@@ -1,0 +1,10 @@
+RewriteEngine on
+
+# Prevents redirecting API_index.php to index.php
+RewriteRule ^index.php$ - [L]
+
+RewriteCond %{REQUEST_URI} /api/v1
+RewriteRule . index.php [L]
+
+RewriteRule ^(font-awesome|fonts|ajax|tools|log|documentation)($|/) - [L]
+RewriteRule !\.(js|ico|gif|jpg|png|css|html|swf|mp3|wav)$ index.php [NC,L]

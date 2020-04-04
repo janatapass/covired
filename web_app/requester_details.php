@@ -145,7 +145,7 @@ function save_appr(){
             $('#loading_gif').hide(); 
         },
         success: function (data) {
-            alert(data);
+            //alert(data);
             
              if(data.status ==0){
                   error_alert(data.message);

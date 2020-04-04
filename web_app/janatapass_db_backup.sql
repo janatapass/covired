@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 31, 2020 at 05:53 AM
+-- Generation Time: Apr 04, 2020 at 01:23 PM
 -- Server version: 5.6.41-84.1-log
 -- PHP Version: 7.2.7
 
@@ -56,6 +56,7 @@ CREATE TABLE `approver_details` (
 INSERT INTO `approver_details` (`id`, `user_id`, `user_type_id`, `approver_mobile`, `org_name`, `org_type`, `org_location`, `org_email`, `org_proof`, `green_pass_count`, `yellow_pass_count`, `service_id`, `status`, `is_active`, `cby`, `cdate`, `mby`, `mdate`) VALUES
 (1, 0, 1, '9538131314', 'test', 'type', 'location', 'test@test.com', '', 1, 2, 0, 1, 1, 1, '2020-03-28 10:43:51', 1, '2020-03-28 12:28:14'),
 (14, 0, 1, '9538131313', 'org name', 'org type', 'org loc', 'test@test.com', '', 1, 1, 0, 1, 1, 1, '2020-03-30 10:08:09', 1, '2020-03-28 02:28:07'),
+(44, 0, 1, '7878787878', 'Approve Organisation 1', 'Test company', 'Chennai', 'test@test.com', '', 2, 2, 0, 1, 1, 1, '2020-04-04 12:24:46', 1, '2020-04-04 05:04:54'),
 (40, 0, 1, '9538131300', 'testing company', 'BD Client', 'city changed', 'bdclient@test.com', '', 1, 1, 0, 1, 1, 1, '2020-03-28 16:14:55', 1, '2020-03-28 09:28:44'),
 (41, 0, 1, '9538131319', 'New Company Test', 'New Company Test', 'city changed', 'test@test.com', '', 1, 1, 0, 1, 1, 1, '2020-03-28 16:17:36', 1, '2020-03-28 09:28:47'),
 (42, 0, 1, '9841696555', 'Red ant media', 'IT', 'Kotturpuram', 'manu@redantmedia.co.in', '', 5, 4, 0, 1, 1, 1, '2020-03-28 16:56:00', 1, '2020-03-28 10:28:25'),
@@ -255,7 +256,44 @@ INSERT INTO `approver_pass_details` (`id`, `approver_id`, `assigned_user_id`, `p
 (167, 34, 0, 'Y', '90f5a', 'O', 1, 1, '2020-03-30 03:30:23', 1, '2020-03-30 03:30:23'),
 (168, 34, 0, 'Y', 'c0b72', 'O', 1, 1, '2020-03-30 03:30:23', 1, '2020-03-30 03:30:23'),
 (169, 34, 0, 'G', '83066', 'O', 1, 1, '2020-03-30 03:30:43', 1, '2020-03-30 03:30:43'),
-(170, 34, 0, 'Y', 'a9c69', 'O', 1, 1, '2020-03-30 03:30:43', 1, '2020-03-30 03:30:43');
+(170, 34, 0, 'Y', 'a9c69', 'O', 1, 1, '2020-03-30 03:30:43', 1, '2020-03-30 03:30:43'),
+(171, 34, 0, 'G', '9dab9', 'O', 1, 1, '2020-03-31 07:31:09', 1, '2020-03-31 07:31:09'),
+(172, 34, 0, 'Y', 'b0879', 'O', 1, 1, '2020-03-31 07:31:09', 1, '2020-03-31 07:31:09'),
+(173, 44, 61, 'G', 'ee40a', 'A', 1, 1, '2020-04-04 12:36:02', 1, '2020-04-04 05:04:54'),
+(174, 44, 0, 'G', 'fdda4', 'O', 1, 1, '2020-04-04 05:04:54', 1, '2020-04-04 05:04:54'),
+(175, 44, 62, 'Y', 'fbf7f', 'A', 1, 1, '2020-04-04 12:39:39', 1, '2020-04-04 05:04:54'),
+(176, 44, 0, 'Y', 'a58d6', 'O', 1, 1, '2020-04-04 05:04:54', 1, '2020-04-04 05:04:54');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cities`
+--
+
+CREATE TABLE `cities` (
+  `id` int(10) NOT NULL,
+  `city_id` int(10) NOT NULL,
+  `city_name` varchar(255) NOT NULL,
+  `locality` varchar(255) NOT NULL,
+  `status` tinyint(1) NOT NULL,
+  `is_active` tinyint(1) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `cities`
+--
+
+INSERT INTO `cities` (`id`, `city_id`, `city_name`, `locality`, `status`, `is_active`) VALUES
+(1, 0, 'Chennai', '', 1, 1),
+(2, 0, 'Bengaluru', '', 1, 1),
+(3, 0, 'Hyderabad', '', 1, 1),
+(4, 0, 'Cochin', '', 1, 1),
+(5, 2, 'Bengaluru', 'Electronic City Phase I', 1, 1),
+(6, 2, 'Bengaluru', 'Electronic City Phase II', 1, 1),
+(7, 1, 'Chennai', 'Adyar', 1, 1),
+(8, 1, 'Chennai', 'Guindy', 1, 1),
+(9, 1, 'Chennai', 'Velcahery', 1, 1),
+(10, 1, 'Chennai', 'Sholinganallur', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -266,33 +304,47 @@ INSERT INTO `approver_pass_details` (`id`, `approver_id`, `assigned_user_id`, `p
 CREATE TABLE `pass_entries` (
   `id` int(10) NOT NULL,
   `user_id` int(10) NOT NULL,
-  `travel_date` timestamp NULL DEFAULT NULL,
+  `travel_date` date DEFAULT NULL,
+  `trip_from` varchar(255) NOT NULL,
+  `trip_to` varchar(255) NOT NULL,
+  `vehicle_number` varchar(255) NOT NULL,
   `travel_reason` text NOT NULL,
   `travel_status` enum('OPEN','APPROVED','FAKE','WARNING','OUTSIDE_ZONE','OUTSIDE_ZONE','SENT_BACK') NOT NULL,
+  `warning_reason` varchar(255) NOT NULL,
+  `warning_date` date NOT NULL,
+  `warning_time` time NOT NULL,
   `services` varchar(255) NOT NULL,
-  `start_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `end_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `start_time` varchar(255) NOT NULL,
+  `duration` enum('30 mins','1 hour','2 hours','3 hours') NOT NULL,
+  `end_time` varchar(255) NOT NULL,
   `location` varchar(25) NOT NULL,
+  `latitude` varchar(255) NOT NULL,
+  `longitude` varchar(255) NOT NULL,
   `location_stamp` text NOT NULL,
   `is_active` tinyint(1) NOT NULL,
   `cby` int(10) NOT NULL,
-  `cdate` int(11) NOT NULL,
+  `cdate` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `mby` int(11) NOT NULL,
-  `mdate` int(11) NOT NULL
+  `mdate` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `pass_entries`
 --
 
-INSERT INTO `pass_entries` (`id`, `user_id`, `travel_date`, `travel_reason`, `travel_status`, `services`, `start_time`, `end_time`, `location`, `location_stamp`, `is_active`, `cby`, `cdate`, `mby`, `mdate`) VALUES
-(1, 6, '2020-03-30 09:35:54', 'test travel', 'WARNING', '', '2020-03-30 15:17:46', '2020-03-30 09:30:00', 'test location', '', 1, 1, 20, 1, 20),
-(8, 6, '2020-03-30 09:35:54', 'test', 'WARNING', '', '2020-03-30 15:17:05', '0000-00-00 00:00:00', 'area', '', 1, 1, 20, 1, 20),
-(9, 6, '0000-00-00 00:00:00', 'testing ', 'APPROVED', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'area ', '', 1, 1, 20, 1, 20),
-(10, 6, '0000-00-00 00:00:00', 'dffdgsdffds', 'OPEN', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'ddsaasaasd', '', 1, 1, 20, 1, 20),
-(11, 6, '1970-01-01 05:00:30', 'travel reason', 'OPEN', '', '2020-03-30 08:00:15', '2020-03-30 09:00:15', 'area ', '', 1, 1, 20, 1, 20),
-(12, 6, '2020-03-30 09:42:20', 'travel reason', 'OPEN', '', '2020-03-30 08:00:15', '2020-03-30 09:00:15', 'area ', '', 1, 1, 20, 1, 20),
-(13, 6, '2020-03-30 09:39:21', 'ddddddddddd', 'OPEN', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'aaaaaa', '', 1, 1, 20, 1, 20);
+INSERT INTO `pass_entries` (`id`, `user_id`, `travel_date`, `trip_from`, `trip_to`, `vehicle_number`, `travel_reason`, `travel_status`, `warning_reason`, `warning_date`, `warning_time`, `services`, `start_time`, `duration`, `end_time`, `location`, `latitude`, `longitude`, `location_stamp`, `is_active`, `cby`, `cdate`, `mby`, `mdate`) VALUES
+(1, 6, '2020-03-30', '', '', '', 'test travel', 'FAKE', '', '0000-00-00', '00:00:00', '', '2020-04-03 15:17:46', '30 mins', '2020-03-30 09:30:00', 'test location', '', '', '', 0, 1, '0000-00-00 00:00:00', 1, '0000-00-00 00:00:00'),
+(8, 6, '2020-03-30', '', '', '', 'test', 'WARNING', 'warning by police', '2020-04-02', '04:20:00', '', '2020-04-03 15:17:05', '30 mins', '2020-03-30 16:17:05', 'area', '', '', '', 1, 1, '0000-00-00 00:00:00', 50, '0000-00-00 00:00:00'),
+(9, 6, '0000-00-00', '', '', '', 'testing ', 'APPROVED', '', '0000-00-00', '00:00:00', '', '2020-04-03 00:00:00', '30 mins', '0000-00-00 00:00:00', 'area ', '', '', '', 0, 1, '0000-00-00 00:00:00', 1, '0000-00-00 00:00:00'),
+(10, 6, '2020-04-03', '', '', '', 'dffdgsdffds', 'OPEN', '', '0000-00-00', '00:00:00', '', '2020-04-03 00:00:00', '30 mins', '0000-00-00 00:00:00', 'ddsaasaasd', '', '', '', 0, 1, '0000-00-00 00:00:00', 1, '0000-00-00 00:00:00'),
+(11, 6, '1970-01-01', '', '', '', 'travel reason', 'OPEN', '', '0000-00-00', '00:00:00', '', '2020-04-03 08:00:15', '30 mins', '2020-03-30 09:00:15', 'area ', '', '', '', 0, 1, '0000-00-00 00:00:00', 1, '0000-00-00 00:00:00'),
+(12, 6, '2020-03-30', '', '', '', 'travel reason', 'OPEN', '', '0000-00-00', '00:00:00', '', '2020-04-03 08:00:15', '30 mins', '2020-03-30 09:00:15', 'area ', '', '', '', 0, 1, '0000-00-00 00:00:00', 1, '0000-00-00 00:00:00'),
+(13, 6, '2020-03-30', '', '', '', 'ddddddddddd', 'OPEN', '', '0000-00-00', '00:00:00', '', '2020-04-03 00:00:00', '30 mins', '0000-00-00 00:00:00', 'aaaaaa', '', '', '', 0, 1, '0000-00-00 00:00:00', 1, '0000-00-00 00:00:00'),
+(14, 49, '2020-04-01', '', '', '', 'Buy Medicines', 'OPEN', '', '0000-00-00', '00:00:00', '', '2020-04-03 00:00:00', '30 mins', '0000-00-00 00:00:00', 'Perungudi', '', '', '', 1, 1, '0000-00-00 00:00:00', 1, '0000-00-00 00:00:00'),
+(23, 51, '2020-04-03', 'Electronic City Phase I', 'Electronic City Phase II', 'KA 22 L1705', 'ATM', 'OPEN', '', '0000-00-00', '00:00:00', '', '2020-04-03 04:00:52', '30 mins', '1970-01-01 05:00:30', '', '', '', '', 1, 51, '2020-04-03 04:03:53', 51, '2020-04-03 04:03:53'),
+(30, 6, '2020-04-04', 'Electronic City Phase I', 'Electronic City Phase II', '', 'Buying groceries', 'OPEN', '', '0000-00-00', '00:00:00', '', '2020-04-04 11:30 AM', '', '2020-04-04 12:30 PM', '', '', '', '', 1, 6, '2020-04-04 11:04:23', 6, '2020-04-04 11:04:23'),
+(31, 52, '2020-04-04', '', '', '', 'Buying groceries', 'OPEN', '', '0000-00-00', '00:00:00', '', '2020-04-04 03:50 PM', '', '2020-04-04 04:50 PM', '', '', '', '', 1, 52, '2020-04-04 03:04:25', 52, '2020-04-04 03:04:25'),
+(32, 63, '2020-04-04', 'Adyar', 'Guindy', '', 'Buying groceries', 'OPEN', '', '0000-00-00', '00:00:00', '', '2020-04-04 06:30 PM', '', '2020-04-04 07:00 PM', '', '', '', '', 1, 63, '2020-04-04 06:04:15', 63, '2020-04-04 06:04:15');
 
 -- --------------------------------------------------------
 
@@ -376,7 +428,7 @@ INSERT INTO `sms_log` (`id`, `mobile`, `otp`, `message`, `response`, `status`, `
 (48, '9538131315', '6975', 'Your OTP for Janata Pass Registration  is 6975', 'test', 1, '2020-03-28 12:18:02'),
 (49, '9538131315', '3014', 'Your OTP for Janata Pass Registration  is 3014', 'test', 1, '2020-03-28 12:18:41'),
 (50, '9538131315', '2255', 'Your OTP for Janata Pass Registration  is 2255', 'test', 1, '2020-03-28 12:18:53'),
-(51, '9538131315', '1179', 'Your OTP for Janata Pass Registration  is 1179', 'test', 1, '2020-03-28 12:20:00'),
+(51, '9538131315', '1179', 'Your OTP for Janata Pass Registration  is 1179', 'test', 0, '2020-03-28 12:20:00'),
 (52, '9538131315', '1046', 'Your OTP for Janata Pass Registration  is 1046', 'test', 1, '2020-03-28 12:22:26'),
 (53, '9538131315', '8621', 'Your OTP for Janata Pass Registration  is 8621', 'test', 1, '2020-03-28 12:23:53'),
 (54, '9538131315', '7179', 'Your OTP for Janata Pass Registration  is 7179', 'test', 1, '2020-03-28 12:27:28'),
@@ -389,7 +441,7 @@ INSERT INTO `sms_log` (`id`, `mobile`, `otp`, `message`, `response`, `status`, `
 (61, '919538131315', '1234', 'test', 'test', 1, '2020-03-28 13:10:07'),
 (62, '9538131315', '1718', 'Your OTP for Janata Pass Registration  is 1718', 'test', 1, '2020-03-28 13:10:48'),
 (63, '9538131315', '7164', 'Your OTP for Janata Pass Registration  is 7164', 'test', 1, '2020-03-28 13:31:05'),
-(64, '9538131315', '5997', 'Your OTP for Janata Pass Registration  is 5997', 'test', 1, '2020-03-28 13:38:38'),
+(64, '9538131315', '5997', 'Your OTP for Janata Pass Registration  is 5997', 'test', 0, '2020-03-28 13:38:38'),
 (65, '919538131315', '5518', 'Your+OTP+for+Janata+Pass+Registration++is+5518', '306342737536353337333233', 1, '2020-03-28 13:51:58'),
 (66, '919538131315', '5342', 'Your+OTP+for+Janata+Pass+Registration++is+5342', '306342737a58303236303235', 1, '2020-03-28 13:56:50'),
 (67, '919538131315', '7200', 'Your+OTP+for+Janata+Pass+Registration++is+7200', 'test response', 1, '2020-03-28 14:01:45'),
@@ -568,7 +620,309 @@ INSERT INTO `sms_log` (`id`, `mobile`, `otp`, `message`, `response`, `status`, `
 (240, '9538131315', '4480', 'Your+OTP+for+Janata+Pass+Registration++is+4480', 'test response', 0, '2020-03-30 15:44:33'),
 (241, '9538131315', '5877', 'Your+OTP+for+Janata+Pass+Registration++is+5877', 'test response', 0, '2020-03-30 15:45:36'),
 (242, '9538131315', '5728', 'Your+OTP+for+Janata+Pass+Registration++is+5728', 'test response', 0, '2020-03-30 15:51:05'),
-(243, '9538131315', '8240', 'Your+OTP+for+Janata+Pass+Registration++is+8240', 'test response', 0, '2020-03-30 15:53:14');
+(243, '9538131315', '8240', 'Your+OTP+for+Janata+Pass+Registration++is+8240', 'test response', 0, '2020-03-30 15:53:14'),
+(244, '9538131315', '5255', 'Your+OTP+for+Janata+Pass+Registration++is+5255', 'test response', 0, '2020-03-31 06:11:13'),
+(245, '9538131315', '5138', 'Your+OTP+for+Janata+Pass+Registration++is+5138', 'test response', 1, '2020-03-31 06:58:37'),
+(246, '9538131312', '5039', 'Your+OTP+for+Janata+Pass+Registration++is+5039', 'test response', 1, '2020-03-31 06:59:40'),
+(247, '9538131310', '2010', 'Your+OTP+for+Janata+Pass+Registration++is+2010', 'test response', 1, '2020-03-31 06:59:47'),
+(248, '9791009293', '6002', 'Your+OTP+for+Janata+Pass+Registration++is+6002', 'test response', 0, '2020-03-31 06:59:55'),
+(249, '9944536282', '7302', 'Your+OTP+for+Janata+Pass+Registration++is+7302', 'test response', 0, '2020-03-31 13:04:40'),
+(250, '8899889988', '1469', 'Your+OTP+for+Janata+Pass+Registration++is+1469', 'test response', 1, '2020-03-31 13:05:51'),
+(251, '8899889988', '2140', 'Your+OTP+for+Janata+Pass+Registration++is+2140', 'test response', 0, '2020-03-31 13:05:58'),
+(252, '7788778877', '9798', 'Your+OTP+for+Janata+Pass+Registration++is+9798', 'test response', 0, '2020-03-31 13:15:02'),
+(253, '9538131313', '2028', 'Your+OTP+for+Janata+Pass+Registration++is+2028', 'test response', 0, '2020-03-31 13:38:35'),
+(254, '9538131313', '9315', 'Your+OTP+for+Janata+Pass+Registration++is+9315', 'test response', 0, '2020-03-31 13:44:30'),
+(255, '9538131313', '2245', 'Your+OTP+for+Janata+Pass+Registration++is+2245', 'test response', 0, '2020-03-31 13:47:50'),
+(256, '9538131315', '4544', 'Your+OTP+for+Janata+Pass+Registration++is+4544', 'test response', 0, '2020-03-31 14:08:26'),
+(257, '9538131315', '7314', 'Your+OTP+for+Janata+Pass+Registration++is+7314', 'test response', 0, '2020-03-31 14:27:44'),
+(258, '9538131315', '9802', 'Your+OTP+for+Janata+Pass+Registration++is+9802', 'test response', 0, '2020-03-31 14:36:37'),
+(259, '9538131315', '9930', 'Your+OTP+for+Janata+Pass+Registration++is+9930', 'test response', 0, '2020-03-31 14:37:57'),
+(260, '9538131315', '6386', 'Your+OTP+for+Janata+Pass+Registration++is+6386', 'test response', 0, '2020-03-31 14:40:06'),
+(261, '9538131315', '1342', 'Your+OTP+for+Janata+Pass+Registration++is+1342', 'test response', 0, '2020-03-31 14:43:41'),
+(262, '9538131315', '5289', 'Your+OTP+for+Janata+Pass+Registration++is+5289', 'test response', 0, '2020-03-31 14:45:19'),
+(263, '9538131313', '7529', 'Your+OTP+for+Janata+Pass+Registration++is+7529', 'test response', 0, '2020-03-31 14:50:44'),
+(264, '9538131315', '2492', 'Your+OTP+for+Janata+Pass+Registration++is+2492', 'test response', 1, '2020-03-31 14:53:14'),
+(265, '9538131313', '9485', 'Your+OTP+for+Janata+Pass+Registration++is+9485', 'test response', 0, '2020-03-31 14:53:25'),
+(266, '9538131313', '2218', 'Your+OTP+for+Janata+Pass+Registration++is+2218', 'test response', 0, '2020-03-31 14:55:46'),
+(267, '9538131313', '9525', 'Your+OTP+for+Janata+Pass+Registration++is+9525', 'test response', 0, '2020-03-31 14:57:13'),
+(268, '9538131313', '2595', 'Your+OTP+for+Janata+Pass+Registration++is+2595', 'test response', 0, '2020-03-31 15:17:27'),
+(269, '9538131315', '1683', 'Your+OTP+for+Janata+Pass+Registration++is+1683', 'test response', 0, '2020-03-31 15:18:26'),
+(270, '9841696555', '1092', 'Your+OTP+for+Janata+Pass+Registration++is+1092', 'test response', 0, '2020-03-31 15:24:17'),
+(271, '9538131313', '4119', 'Your+OTP+for+Janata+Pass+Registration++is+4119', 'test response', 0, '2020-03-31 15:28:01'),
+(272, '9538131313', '1853', 'Your+OTP+for+Janata+Pass+Registration++is+1853', 'test response', 0, '2020-03-31 15:30:05'),
+(273, '9538131313', '3585', 'Your+OTP+for+Janata+Pass+Registration++is+3585', 'test response', 0, '2020-03-31 15:31:52'),
+(274, '9789010929', '4110', 'Your+OTP+for+Janata+Pass+Registration++is+4110', 'test response', 1, '2020-03-31 15:33:04'),
+(275, '9538131313', '7398', 'Your+OTP+for+Janata+Pass+Registration++is+7398', 'test response', 0, '2020-03-31 15:33:06'),
+(276, '9538131313', '7064', 'Your+OTP+for+Janata+Pass+Registration++is+7064', 'test response', 0, '2020-03-31 15:36:35'),
+(277, '9789010929', '9670', 'Your+OTP+for+Janata+Pass+Registration++is+9670', 'test response', 1, '2020-03-31 15:44:49'),
+(278, '9789010929', '4562', 'Your+OTP+for+Janata+Pass+Registration++is+4562', 'test response', 0, '2020-03-31 15:44:51'),
+(279, '9789010929', '1611', 'Your+OTP+for+Janata+Pass+Registration++is+1611', 'test response', 1, '2020-03-31 15:45:41'),
+(280, '9538131315', '9857', 'Your+OTP+for+Janata+Pass+Registration++is+9857', 'test response', 0, '2020-03-31 15:47:32'),
+(281, '9538131315', '6873', 'Your+OTP+for+Janata+Pass+Registration++is+6873', 'test response', 0, '2020-03-31 15:50:29'),
+(282, '9538131315', '6389', 'Your+OTP+for+Janata+Pass+Registration++is+6389', 'test response', 1, '2020-03-31 15:56:56'),
+(283, '9538131315', '5389', 'Your+OTP+for+Janata+Pass+Registration++is+5389', 'test response', 0, '2020-03-31 15:57:02'),
+(284, '9538131315', '2406', 'Your+OTP+for+Janata+Pass+Registration++is+2406', 'test response', 0, '2020-03-31 15:57:24'),
+(285, '9538131315', '8786', 'Your+OTP+for+Janata+Pass+Registration++is+8786', 'test response', 0, '2020-03-31 15:59:57'),
+(286, '9538131315', '7279', 'Your+OTP+for+Janata+Pass+Registration++is+7279', 'test response', 0, '2020-03-31 16:01:48'),
+(287, '9538131315', '9597', 'Your+OTP+for+Janata+Pass+Registration++is+9597', 'test response', 0, '2020-03-31 16:05:02'),
+(288, '9538131315', '3922', 'Your+OTP+for+Janata+Pass+Registration++is+3922', 'test response', 0, '2020-03-31 16:07:50'),
+(289, '9538131315', '4357', 'Your+OTP+for+Janata+Pass+Registration++is+4357', 'test response', 0, '2020-03-31 16:09:01'),
+(290, '9988998899', '5675', 'Your+OTP+for+Janata+Pass+Registration++is+5675', 'test response', 0, '2020-03-31 16:10:32'),
+(291, '9538131315', '6525', 'Your+OTP+for+Janata+Pass+Registration++is+6525', 'test response', 0, '2020-03-31 16:11:57'),
+(292, '9789010929', '5890', 'Your+OTP+for+Janata+Pass+Registration++is+5890', 'test response', 0, '2020-03-31 16:15:24'),
+(293, '9790237667', '1783', 'Your+OTP+for+Janata+Pass+Registration++is+1783', 'test response', 0, '2020-03-31 16:15:38'),
+(294, '9538131315', '5997', 'Your+OTP+for+Janata+Pass+Registration++is+5997', 'test response', 0, '2020-03-31 16:17:33'),
+(295, '9538131315', '3442', 'Your+OTP+for+Janata+Pass+Registration++is+3442', 'test response', 0, '2020-03-31 16:20:51'),
+(296, '9538131315', '5856', 'Your+OTP+for+Janata+Pass+Registration++is+5856', 'test response', 1, '2020-03-31 16:21:48'),
+(297, '9538131315', '8847', 'Your+OTP+for+Janata+Pass+Registration++is+8847', 'test response', 0, '2020-03-31 16:21:59'),
+(298, '9538131315', '6408', 'Your+OTP+for+Janata+Pass+Registration++is+6408', 'test response', 0, '2020-03-31 16:24:22'),
+(299, '9538131315', '5647', 'Your+OTP+for+Janata+Pass+Registration++is+5647', 'test response', 0, '2020-03-31 16:38:54'),
+(300, '9999999999', '1672', 'Your+OTP+for+Janata+Pass+Registration++is+1672', 'test response', 1, '2020-03-31 16:41:58'),
+(301, '9999999999', '3942', 'Your+OTP+for+Janata+Pass+Registration++is+3942', 'test response', 1, '2020-03-31 16:42:11'),
+(302, '9999999999', '9233', 'Your+OTP+for+Janata+Pass+Registration++is+9233', 'test response', 0, '2020-03-31 16:42:18'),
+(303, '9310846605', '1985', 'Your+OTP+for+Janata+Pass+Registration++is+1985', 'test response', 0, '2020-03-31 16:42:20'),
+(304, '9789890946', '1420', 'Your+OTP+for+Janata+Pass+Registration++is+1420', 'test response', 0, '2020-03-31 16:54:57'),
+(305, '', '2536', 'Your+OTP+for+Janata+Pass+Registration++is+2536', 'test response', 1, '2020-03-31 16:57:14'),
+(306, '', '5450', 'Your+OTP+for+Janata+Pass+Registration++is+5450', 'test response', 1, '2020-03-31 16:57:14'),
+(307, '', '6153', 'Your+OTP+for+Janata+Pass+Registration++is+6153', 'test response', 0, '2020-03-31 16:57:30'),
+(308, '9505472200', '2964', 'Your+OTP+for+Janata+Pass+Registration++is+2964', 'test response', 0, '2020-03-31 16:58:19'),
+(309, '9505472200', '8009', 'Your+OTP+for+Janata+Pass+Registration++is+8009', 'test response', 1, '2020-03-31 16:58:46'),
+(310, '9505472200', '5481', 'Your+OTP+for+Janata+Pass+Registration++is+5481', 'test response', 0, '2020-03-31 16:59:08'),
+(311, '9505472200', '9626', 'Your+OTP+for+Janata+Pass+Registration++is+9626', 'test response', 0, '2020-03-31 17:00:01'),
+(312, '9789010929', '3777', 'Your+OTP+for+Janata+Pass+Registration++is+3777', 'test response', 0, '2020-03-31 18:04:30'),
+(313, '9790237667', '5598', 'Your+OTP+for+Janata+Pass+Registration++is+5598', 'test response', 0, '2020-04-01 02:08:26'),
+(314, '9538131315', '6614', 'Your+OTP+for+Janata+Pass+Registration++is+6614', 'test response', 1, '2020-04-01 05:20:26'),
+(315, '9538131315', '9824', 'Your+OTP+for+Janata+Pass+Registration++is+9824', 'test response', 0, '2020-04-01 05:20:54'),
+(316, '7440563577', '5190', 'Your+OTP+for+Janata+Pass+Registration++is+5190', 'test response', 1, '2020-04-01 08:09:58'),
+(317, '7440563116', '6862', 'Your+OTP+for+Janata+Pass+Registration++is+6862', 'test response', 0, '2020-04-01 08:10:21'),
+(318, '9538131315', '7239', 'Your+OTP+for+Janata+Pass+Registration++is+7239', 'test response', 0, '2020-04-01 09:39:24'),
+(319, '9538131315', '8731', 'Your+OTP+for+Janata+Pass+Registration++is+8731', 'test response', 0, '2020-04-01 09:40:42'),
+(320, '852131254', '9515', 'Your+OTP+for+Janata+Pass+Registration++is+9515', 'test response', 0, '2020-04-01 10:09:43'),
+(321, '9538131315', '6525', 'Your+OTP+for+Janata+Pass+Registration++is+6525', 'test response', 0, '2020-04-01 10:32:27'),
+(322, '9538131315', '7512', 'Your+OTP+for+Janata+Pass+Registration++is+7512', 'test response', 0, '2020-04-01 10:34:56'),
+(323, '9538131315', '2474', 'Your+OTP+for+Janata+Pass+Registration++is+2474', 'test response', 0, '2020-04-01 10:54:27'),
+(324, '9538131315', '9443', 'Your+OTP+for+Janata+Pass+Registration++is+9443', 'test response', 0, '2020-04-01 11:02:43'),
+(325, '9538131315', '2254', 'Your+OTP+for+Janata+Pass+Registration++is+2254', 'test response', 0, '2020-04-01 11:05:26'),
+(326, '9538131315', '8070', 'Your+OTP+for+Janata+Pass+Registration++is+8070', 'test response', 0, '2020-04-01 11:06:28'),
+(327, '9538131315', '6804', 'Your+OTP+for+Janata+Pass+Registration++is+6804', 'test response', 0, '2020-04-01 11:12:19'),
+(328, '9538131315', '5157', 'Your+OTP+for+Janata+Pass+Registration++is+5157', 'test response', 0, '2020-04-01 11:13:21'),
+(329, '9538131315', '7844', 'Your+OTP+for+Janata+Pass+Registration++is+7844', 'test response', 0, '2020-04-01 12:07:00'),
+(330, '9538131315', '5731', 'Your+OTP+for+Janata+Pass+Registration++is+5731', '306461714e44353733303533', 0, '2020-04-01 12:10:30'),
+(331, '9538131315', '6118', 'Your+OTP+for+Janata+Pass+Registration++is+6118', '306461715034313532373938', 0, '2020-04-01 12:12:56'),
+(332, '9538131315', '', '+Dear+test%0A%2C+Sharing+my+trip+details%0A+Travel+Date+%3A+2020-04-01%0A+Travelling+from+%3A+from+travel+to+to+travel%0A+Start+Time+%3A+2020-04-01+06%3A00%3A00+-+End+Time+2020-04-01+07%3A00%3A00%0A+Reason+%3A+aaaa%0A+Vehicle+Number++%3A+test%0A', '306461724164343733323830', 1, '2020-04-01 12:57:04'),
+(333, '9538131315', '', '+Dear+test%0A%2C+Sharing+my+trip+details%0A+Travel+Date+%3A+2020-04-01%0A+Travelling+from+%3A+from+travel+to+to+travel%0A+Start+Time+%3A+2020-04-01+06%3A00%3A00+-+End+Time+2020-04-01+07%3A00%3A00%0A+Reason+%3A+aaaa%0A+Vehicle+Number++%3A+test%0A', '306461724230363734343430', 1, '2020-04-01 12:58:00'),
+(334, '9538131315', '5449', 'Your+OTP+for+Janata+Pass+Registration++is+5449', '306461724441313137323135', 0, '2020-04-01 13:00:27'),
+(335, '9538131315', '', '+Dear+test%2C%0A+Sharing+my+trip+details%0A+Travel+Date+%3A+2020-04-01%0A+Travelling+from+%3A+Sholinganallur+to+Adyar%0A+Start+Time+%3A+2020-04-01+06%3A00%3A00+%0A+End+Time+2020-04-01+07%3A00%3A00%0A+Reason+%3A+Buy+Medicines%0A+Vehicle+Number++%3A+TN-01-1234%0A', '306461724574373637393137', 1, '2020-04-01 13:01:20'),
+(336, '9538131315', '8572', 'Your+OTP+for+Janata+Pass+Registration++is+8572', '306461724863343435333537', 0, '2020-04-01 13:04:03'),
+(337, '9538131315', '8145', 'Your+OTP+for+Janata+Pass+Registration++is+8145', 'test response', 0, '2020-04-01 13:05:11'),
+(338, '9538131315', '5686', 'Your+OTP+for+Janata+Pass+Registration++is+5686', 'test response', 0, '2020-04-01 13:06:10'),
+(339, '9538131315', '3960', 'Your+OTP+for+Janata+Pass+Registration++is+3960', 'test response', 0, '2020-04-01 13:08:14'),
+(340, '9538131315', '6367', 'Your+OTP+for+Janata+Pass+Registration++is+6367', 'test response', 0, '2020-04-01 13:09:07'),
+(341, '9538131315', '1179', 'Your+OTP+for+Janata+Pass+Registration++is+1179', 'test response', 1, '2020-04-01 13:10:31'),
+(342, '9538131315', '5735', 'Your+OTP+for+Janata+Pass+Registration++is+5735', 'test response', 0, '2020-04-01 13:18:05'),
+(343, '9876543210', '4793', 'Your+OTP+for+Janata+Pass+Registration++is+4793', 'test response', 0, '2020-04-01 14:53:56'),
+(344, '9876543210', '9324', 'Your+OTP+for+Janata+Pass+Registration++is+9324', 'test response', 0, '2020-04-01 14:59:46'),
+(345, '9538131315', '2387', 'Your+OTP+for+Janata+Pass+Registration++is+2387', 'test response', 0, '2020-04-01 15:00:57'),
+(346, '9538131315', '6931', 'Your+OTP+for+Janata+Pass+Registration++is+6931', 'test response', 0, '2020-04-01 15:02:37'),
+(347, '9538131315', '3932', 'Your+OTP+for+Janata+Pass+Registration++is+3932', 'test response', 0, '2020-04-01 15:06:43'),
+(348, '9876543210', '7411', 'Your+OTP+for+Janata+Pass+Registration++is+7411', 'test response', 0, '2020-04-01 15:09:38'),
+(349, '9538131315', '9510', 'Your+OTP+for+Janata+Pass+Registration++is+9510', 'test response', 0, '2020-04-01 15:11:04'),
+(350, '9538131315', '8979', 'Your+OTP+for+Janata+Pass+Registration++is+8979', 'test response', 0, '2020-04-01 15:18:09'),
+(351, '9538131315', '8212', 'Your+OTP+for+Janata+Pass+Registration++is+8212', 'test response', 1, '2020-04-01 15:25:23'),
+(352, '9538131315', '6472', 'Your+OTP+for+Janata+Pass+Registration++is+6472', 'test response', 1, '2020-04-01 15:25:28'),
+(353, '9538131315', '2809', 'Your+OTP+for+Janata+Pass+Registration++is+2809', 'test response', 0, '2020-04-01 15:26:02'),
+(354, '9538131315', '7538', 'Your+OTP+for+Janata+Pass+Registration++is+7538', 'test response', 0, '2020-04-01 15:28:47'),
+(355, '9538131315', '', '+Dear+Meena%2C%0A+Sharing+my+trip+details%0A+Travel+Date+%3A+2020-04-01%0A+Travelling+from+%3A+Sholinganallur+to+Adyar%0A+Start+Time+%3A+2020-04-01+06%3A00%3A00+%0A+End+Time+2020-04-01+07%3A00%3A00%0A+Reason+%3A+Buy+Medicines%0A+Vehicle+Number++%3A+TN-01-1234%0A', 'test response', 1, '2020-04-01 15:29:27'),
+(356, '9538131315', '7094', 'Your+OTP+for+Janata+Pass+Registration++is+7094', 'test response', 0, '2020-04-01 15:32:43'),
+(357, '9538131315', '', '+Dear+Meena%2C%0A+Sharing+my+trip+details%0A+Travel+Date+%3A+2020-04-01%0A+Travelling+from+%3A+Sholinganallur+to+Adyar%0A+Start+Time+%3A+2020-04-01+06%3A00%3A00+%0A+End+Time+2020-04-01+07%3A00%3A00%0A+Reason+%3A+Buy+Medicines%0A+Vehicle+Number++%3A+TN-01-1234%0A', 'test response', 1, '2020-04-01 15:33:00'),
+(358, '9538131315', '4147', 'Your+OTP+for+Janata+Pass+Registration++is+4147', 'test response', 0, '2020-04-01 15:36:27'),
+(359, '9538131315', '', '+Dear+Meena%2C%0A+Sharing+my+trip+details%0A+Travel+Date+%3A+2020-04-01%0A+Travelling+from+%3A+Sholinganallur+to+Adyar%0A+Start+Time+%3A+2020-04-01+06%3A00%3A00+%0A+End+Time+2020-04-01+07%3A00%3A00%0A+Reason+%3A+Buy+Medicines%0A+Vehicle+Number++%3A+TN-01-1234%0A', 'test response', 1, '2020-04-01 15:36:41'),
+(360, '9538131315', '2788', 'Your+OTP+for+Janata+Pass+Registration++is+2788', 'test response', 0, '2020-04-01 15:38:30'),
+(361, '9538131315', '', '+Dear+Meena%2C%0A+Sharing+my+trip+details%0A+Travel+Date+%3A+2020-04-01%0A+Travelling+from+%3A+Sholinganallur+to+Adyar%0A+Start+Time+%3A+2020-04-01+06%3A00%3A00+%0A+End+Time+2020-04-01+07%3A00%3A00%0A+Reason+%3A+Buy+Medicines%0A+Vehicle+Number++%3A+TN-01-1234%0A', 'test response', 1, '2020-04-01 15:38:46'),
+(362, '9538131315', '7407', 'Your+OTP+for+Janata+Pass+Registration++is+7407', 'test response', 0, '2020-04-01 15:46:24'),
+(363, '9538131315', '9030', 'Your+OTP+for+Janata+Pass+Registration++is+9030', 'test response', 0, '2020-04-01 15:51:18'),
+(364, '9538131315', '2001', 'Your+OTP+for+Janata+Pass+Registration++is+2001', 'test response', 0, '2020-04-01 15:51:43'),
+(365, '9538131315', '4751', 'Your+OTP+for+Janata+Pass+Registration++is+4751', '30646175436b343730333730', 0, '2020-04-01 15:59:11'),
+(366, '9538131315', '', '+Dear+Meena%2C%0A+Sharing+my+trip+details%0A+Travel+Date+%3A+2020-04-01%0A+Travelling+from+%3A+asd+to+asdasd%0A+Start+Time+%3A+2020-04-01+09%3A00%3A30+%0A+End+Time+2020-04-01+10%3A00%3A30%0A+Reason+%3A+sadsadfasd%0A', '306461754342393638323433', 1, '2020-04-01 15:59:28'),
+(367, '8344471001', '9350', 'Your+OTP+for+Janata+Pass+Registration++is+9350', '306461767935303333393638', 0, '2020-04-01 16:55:57'),
+(368, '8838478308', '5390', 'Your+OTP+for+Janata+Pass+Registration++is+5390', '306461767a75313239393536', 1, '2020-04-01 16:56:21'),
+(369, '8344471001', '5556', 'Your+OTP+for+Janata+Pass+Registration++is+5556', '306462626856393432313738', 0, '2020-04-01 20:38:49'),
+(370, '9789010929', '7900', 'Your+OTP+for+Janata+Pass+Registration++is+7900', '3064626e716c343638313937', 1, '2020-04-02 08:47:12'),
+(371, '9789010929', '5960', 'Your+OTP+for+Janata+Pass+Registration++is+5960', '3064626e7242323737333035', 1, '2020-04-02 08:48:28'),
+(372, '9789010929', '3094', 'Your+OTP+for+Janata+Pass+Registration++is+3094', '3064626e7362363431323035', 0, '2020-04-02 08:49:02'),
+(373, '9789010929', '6631', 'Your+OTP+for+Janata+Pass+Registration++is+6631', '306462737375343430353636', 0, '2020-04-02 13:49:21'),
+(374, '9789010929', '2593', 'Your+OTP+for+Janata+Pass+Registration++is+2593', '306462737547313539313932', 0, '2020-04-02 13:51:33'),
+(375, '9789010929', '7696', 'Your+OTP+for+Janata+Pass+Registration++is+7696', '306462737858343534313134', 0, '2020-04-02 13:54:50'),
+(376, '9789010929', '4777', 'Your+OTP+for+Janata+Pass+Registration++is+4777', '306462734148363230303630', 1, '2020-04-02 13:57:34'),
+(377, '9789010929', '6407', 'Your+OTP+for+Janata+Pass+Registration++is+6407', '306462746235373337373434', 0, '2020-04-02 14:32:57'),
+(378, '9789010929', '6535', 'Your+OTP+for+Janata+Pass+Registration++is+6535', '306462746636393231303230', 0, '2020-04-02 14:36:58'),
+(379, '9789010929', '9451', 'Your+OTP+for+Janata+Pass+Registration++is+9451', '306462746731373037393230', 0, '2020-04-02 14:37:53'),
+(380, '9789010929', '8963', 'Your+OTP+for+Janata+Pass+Registration++is+8963', '306462747168333231393136', 1, '2020-04-02 14:47:08'),
+(381, '9789010929', '6205', 'Your+OTP+for+Janata+Pass+Registration++is+6205', '30646274446c313933343034', 1, '2020-04-02 15:00:12'),
+(382, '9789010929', '6294', 'Your+OTP+for+Janata+Pass+Registration++is+6294', '306462744762323235333836', 0, '2020-04-02 15:03:02'),
+(383, '9789010929', '8892', 'Your+OTP+for+Janata+Pass+Registration++is+8892', '306462744845363533323233', 0, '2020-04-02 15:04:31'),
+(384, '9789010929', '9658', 'Your+OTP+for+Janata+Pass+Registration++is+9658', '306462744f33323632303030', 1, '2020-04-02 15:11:56'),
+(385, '9789010929', '2838', 'Your+OTP+for+Janata+Pass+Registration++is+2838', '306462745768393232393630', 1, '2020-04-02 15:19:08'),
+(386, '9789010929', '9614', 'Your+OTP+for+Janata+Pass+Registration++is+9614', '306462743445393930333935', 0, '2020-04-02 15:26:31'),
+(387, '9789010929', '8338', 'Your+OTP+for+Janata+Pass+Registration++is+8338', '306462753041363730323338', 0, '2020-04-02 15:30:28'),
+(388, '9789010929', '6300', 'Your+OTP+for+Janata+Pass+Registration++is+6300', '306462756762333139393633', 1, '2020-04-02 15:37:02'),
+(389, '9789010929', '9487', 'Your+OTP+for+Janata+Pass+Registration++is+9487', '306462756857373739393635', 0, '2020-04-02 15:38:49'),
+(390, '9789010929', '7583', 'Your+OTP+for+Janata+Pass+Registration++is+7583', '306462757264323336303738', 0, '2020-04-02 15:48:04'),
+(391, '9940047569', '9600', 'Your+OTP+for+Janata+Pass+Registration++is+9600', '306462755331363731353334', 0, '2020-04-02 16:15:53'),
+(392, '9789010929', '8334', 'Your+OTP+for+Janata+Pass+Registration++is+8334', '30646275586e323536383131', 0, '2020-04-02 16:20:14'),
+(393, '9841696555', '2450', 'Your+OTP+for+Janata+Pass+Registration++is+2450', '30646275316e363233313930', 0, '2020-04-02 16:23:14'),
+(394, '9841696555', '6134', 'Your+OTP+for+Janata+Pass+Registration++is+6134', '306462753651373637363334', 1, '2020-04-02 16:28:43'),
+(395, '9841696555', '2212', 'Your+OTP+for+Janata+Pass+Registration++is+2212', '306462753652333634363331', 1, '2020-04-02 16:28:44'),
+(396, '9789010929', '3480', 'Your+OTP+for+Janata+Pass+Registration++is+3480', '306462753763373734393131', 0, '2020-04-02 16:29:04'),
+(397, '9789010929', '9709', 'Your+OTP+for+Janata+Pass+Registration++is+9709', '30646276674b353436363133', 0, '2020-04-02 16:37:37'),
+(398, '9999999999', '3399', 'Your+OTP+for+Janata+Pass+Registration++is+3399', '306462766f53373939363234', 0, '2020-04-02 16:45:45'),
+(399, '9962194656', '1051', 'Your+OTP+for+Janata+Pass+Registration++is+1051', '306462767032373539373330', 0, '2020-04-02 16:46:54'),
+(400, '9962194656', '7514', 'Your+OTP+for+Janata+Pass+Registration++is+7514', '306462767471383335333531', 0, '2020-04-02 16:50:17'),
+(401, '9999999999', '8908', 'Your+OTP+for+Janata+Pass+Registration++is+8908', '306462767577323735323331', 0, '2020-04-02 16:51:23'),
+(402, '9789010929', '9638', 'Your+OTP+for+Janata+Pass+Registration++is+9638', '306462764870363734333037', 0, '2020-04-02 17:04:16'),
+(403, '9538131315', '4203', 'Your+OTP+for+Janata+Pass+Registration++is+4203', '306462774967313635313537', 0, '2020-04-02 18:05:07'),
+(404, '9538131315', '6235', 'Your+OTP+for+Janata+Pass+Registration++is+6235', '306462774a54333338343339', 0, '2020-04-02 18:06:46'),
+(405, '9538131315', '6394', 'Your+OTP+for+Janata+Pass+Registration++is+6394', 'test response', 0, '2020-04-02 18:07:59'),
+(406, '9538131315', '9426', 'Your+OTP+for+Janata+Pass+Registration++is+9426', 'test response', 0, '2020-04-02 18:09:06'),
+(407, '9538131315', '5902', 'Your+OTP+for+Janata+Pass+Registration++is+5902', 'test response', 0, '2020-04-02 18:12:57'),
+(408, '9538131315', '7325', 'Your+OTP+for+Janata+Pass+Registration++is+7325', 'test response', 0, '2020-04-02 18:13:31'),
+(409, '9538131315', '6573', 'Your+OTP+for+Janata+Pass+Registration++is+6573', 'test response', 0, '2020-04-02 18:14:32'),
+(410, '9538131315', '7097', 'Your+OTP+for+Janata+Pass+Registration++is+7097', 'test response', 0, '2020-04-02 18:15:53'),
+(411, '9538131315', '6763', 'Your+OTP+for+Janata+Pass+Registration++is+6763', 'test response', 0, '2020-04-02 18:17:40'),
+(412, '9538131315', '3695', 'Your+OTP+for+Janata+Pass+Registration++is+3695', 'test response', 0, '2020-04-02 18:18:04'),
+(413, '9538131315', '3968', 'Your+OTP+for+Janata+Pass+Registration++is+3968', 'test response', 0, '2020-04-02 18:20:33'),
+(414, '9538131315', '1012', 'Your+OTP+for+Janata+Pass+Registration++is+1012', 'test response', 0, '2020-04-02 18:24:01'),
+(415, '9538131315', '6339', 'Your+OTP+for+Janata+Pass+Registration++is+6339', 'test response', 0, '2020-04-02 18:28:07'),
+(416, '9538131315', '3178', 'Your+OTP+for+Janata+Pass+Registration++is+3178', 'test response', 0, '2020-04-02 18:28:52'),
+(417, '9538131315', '2128', 'Your+OTP+for+Janata+Pass+Registration++is+2128', 'test response', 0, '2020-04-02 18:30:07'),
+(418, '9538131315', '9591', 'Your+OTP+for+Janata+Pass+Registration++is+9591', 'test response', 0, '2020-04-02 18:31:17'),
+(419, '9789010929', '9634', 'Your+OTP+for+Janata+Pass+Registration++is+9634', 'test response', 1, '2020-04-02 18:31:24'),
+(420, '9538131315', '3559', 'Your+OTP+for+Janata+Pass+Registration++is+3559', 'test response', 0, '2020-04-02 18:32:42'),
+(421, '9538131315', '9409', 'Your+OTP+for+Janata+Pass+Registration++is+9409', 'test response', 0, '2020-04-02 18:33:30'),
+(422, '9538131315', '8655', 'Your+OTP+for+Janata+Pass+Registration++is+8655', 'test response', 0, '2020-04-02 18:37:49'),
+(423, '124123412341234', '9555', 'Your+OTP+for+Janata+Pass+Registration++is+9555', 'test response', 1, '2020-04-02 18:39:28'),
+(424, '124324123412', '1200', 'Your+OTP+for+Janata+Pass+Registration++is+1200', 'test response', 1, '2020-04-02 18:39:48');
+INSERT INTO `sms_log` (`id`, `mobile`, `otp`, `message`, `response`, `status`, `cdate`) VALUES
+(425, '9789010929', '1552', 'Your+OTP+for+Janata+Pass+Registration++is+1552', 'test response', 0, '2020-04-02 19:13:58'),
+(426, '99999999999', '5323', 'Your+OTP+for+Janata+Pass+Registration++is+5323', 'test response', 0, '2020-04-02 19:21:49'),
+(427, '22222222222', '7233', 'Your+OTP+for+Janata+Pass+Registration++is+7233', 'test response', 0, '2020-04-02 19:24:58'),
+(428, '9876543210', '1281', 'Your+OTP+for+Janata+Pass+Registration++is+1281', 'test response', 1, '2020-04-02 19:27:27'),
+(429, '9789010929', '7444', 'Your+OTP+for+Janata+Pass+Registration++is+7444', 'test response', 0, '2020-04-02 19:28:48'),
+(430, '9876543210', '4544', 'Your+OTP+for+Janata+Pass+Registration++is+4544', 'test response', 1, '2020-04-02 19:29:18'),
+(431, '9876543210', '1851', 'Your+OTP+for+Janata+Pass+Registration++is+1851', 'test response', 1, '2020-04-02 19:33:04'),
+(432, '9841696555', '8023', 'Your+OTP+for+Janata+Pass+Registration++is+8023', 'test response', 1, '2020-04-02 19:34:26'),
+(433, '9841696555', '6101', 'Your+OTP+for+Janata+Pass+Registration++is+6101', 'test response', 1, '2020-04-02 19:37:07'),
+(434, '9841696555', '9482', 'Your+OTP+for+Janata+Pass+Registration++is+9482', 'test response', 1, '2020-04-02 19:40:18'),
+(435, '9841696555', '8914', 'Your+OTP+for+Janata+Pass+Registration++is+8914', 'test response', 1, '2020-04-02 19:41:34'),
+(436, '9789010929', '2137', 'Your+OTP+for+Janata+Pass+Registration++is+2137', 'test response', 1, '2020-04-02 19:41:47'),
+(437, '9841696555', '3384', 'Your+OTP+for+Janata+Pass+Registration++is+3384', 'test response', 1, '2020-04-02 19:42:06'),
+(438, '9841696555', '7493', 'Your+OTP+for+Janata+Pass+Registration++is+7493', 'test response', 0, '2020-04-02 19:45:45'),
+(439, '9841696555', '6748', 'Your+OTP+for+Janata+Pass+Registration++is+6748', 'test response', 1, '2020-04-02 19:47:47'),
+(440, '9841696555', '8658', 'Your+OTP+for+Janata+Pass+Registration++is+8658', 'test response', 0, '2020-04-02 19:48:29'),
+(441, '9841696555', '7626', 'Your+OTP+for+Janata+Pass+Registration++is+7626', 'test response', 0, '2020-04-02 19:53:34'),
+(442, '9538131315', '6863', 'Your+OTP+for+Janata+Pass+Registration++is+6863', 'test response', 0, '2020-04-03 04:09:58'),
+(443, '9538131315', '1556', 'Your+OTP+for+Janata+Pass+Registration++is+1556', 'test response', 0, '2020-04-03 04:11:10'),
+(444, '9538131315', '9184', 'Your+OTP+for+Janata+Pass+Registration++is+9184', 'test response', 0, '2020-04-03 04:12:51'),
+(445, '9538131315', '2494', 'Your+OTP+for+Janata+Pass+Registration++is+2494', 'test response', 0, '2020-04-03 04:20:56'),
+(446, '9538131315', '8032', 'Your+OTP+for+Janata+Pass+Registration++is+8032', 'test response', 0, '2020-04-03 04:22:57'),
+(447, '9538131315', '6276', 'Your+OTP+for+Janata+Pass+Registration++is+6276', 'test response', 0, '2020-04-03 05:25:26'),
+(448, '9538131315', '8703', 'Your+OTP+for+Janata+Pass+Registration++is+8703', 'test response', 0, '2020-04-03 05:33:12'),
+(449, '1111111111', '9688', 'Your+OTP+for+Janata+Pass+Registration++is+9688', 'test response', 0, '2020-04-03 05:33:18'),
+(450, '4321432143', '3453', 'Your+OTP+for+Janata+Pass+Registration++is+3453', 'test response', 0, '2020-04-03 05:33:57'),
+(451, '4321432143', '6145', 'Your+OTP+for+Janata+Pass+Registration++is+6145', 'test response', 0, '2020-04-03 05:34:34'),
+(452, '9538131315', '7183', 'Your+OTP+for+Janata+Pass+Registration++is+7183', 'test response', 0, '2020-04-03 05:37:38'),
+(453, '9538131315', '6005', 'Your+OTP+for+Janata+Pass+Registration++is+6005', 'test response', 0, '2020-04-03 05:39:19'),
+(454, '9538131315', '6098', 'Your+OTP+for+Janata+Pass+Registration++is+6098', 'test response', 0, '2020-04-03 05:40:15'),
+(455, '9538131315', '7438', 'Your+OTP+for+Janata+Pass+Registration++is+7438', 'test response', 0, '2020-04-03 05:40:57'),
+(456, '4321432143', '9511', 'Your+OTP+for+Janata+Pass+Registration++is+9511', 'test response', 0, '2020-04-03 05:52:12'),
+(457, '4321432143', '2228', 'Your+OTP+for+Janata+Pass+Registration++is+2228', 'test response', 0, '2020-04-03 06:13:59'),
+(458, '4321432143', '6559', 'Your+OTP+for+Janata+Pass+Registration++is+6559', 'test response', 0, '2020-04-03 06:25:30'),
+(459, '4321432143', '6725', 'Your+OTP+for+Janata+Pass+Registration++is+6725', 'test response', 0, '2020-04-03 06:37:00'),
+(460, '4321432143', '7551', 'Your+OTP+for+Janata+Pass+Registration++is+7551', 'test response', 0, '2020-04-03 06:39:08'),
+(461, '9538131315', '8361', 'Your+OTP+for+Janata+Pass+Registration++is+8361', 'test response', 0, '2020-04-03 06:40:59'),
+(462, '9538131315', '4035', 'Your+OTP+for+Janata+Pass+Registration++is+4035', 'test response', 0, '2020-04-03 11:11:54'),
+(463, '9538131315', '4046', 'Your+OTP+for+Janata+Pass+Registration++is+4046', 'test response', 0, '2020-04-03 11:15:24'),
+(464, '9962194656', '6624', 'Your+OTP+for+Janata+Pass+Registration++is+6624', 'test response', 0, '2020-04-03 11:22:09'),
+(465, '9538131315', '2337', 'Your+OTP+for+Janata+Pass+Registration++is+2337', 'test response', 0, '2020-04-03 11:22:29'),
+(466, '9538131315', '8354', 'Your+OTP+for+Janata+Pass+Registration++is+8354', 'test response', 0, '2020-04-03 11:30:23'),
+(467, '9538131315', '2544', 'Your+OTP+for+Janata+Pass+Registration++is+2544', 'test response', 0, '2020-04-03 11:33:04'),
+(468, '9538131315', '4984', 'Your+OTP+for+Janata+Pass+Registration++is+4984', 'test response', 0, '2020-04-03 11:35:30'),
+(469, '9538131315', '7534', 'Your+OTP+for+Janata+Pass+Registration++is+7534', 'test response', 0, '2020-04-03 11:36:04'),
+(470, '9538131315', '9404', 'Your+OTP+for+Janata+Pass+Registration++is+9404', 'test response', 1, '2020-04-03 11:45:09'),
+(471, '9538131315', '9562', 'Your+OTP+for+Janata+Pass+Registration++is+9562', 'test response', 0, '2020-04-03 11:45:31'),
+(472, '9538131315', '1641', 'Your+OTP+for+Janata+Pass+Registration++is+1641', 'test response', 0, '2020-04-03 11:48:42'),
+(473, '9538131315', '2895', 'Your+OTP+for+Janata+Pass+Registration++is+2895', 'test response', 0, '2020-04-03 11:49:35'),
+(474, '9538131315', '7005', 'Your+OTP+for+Janata+Pass+Registration++is+7005', 'test response', 0, '2020-04-03 11:55:18'),
+(475, '9538131315', '4919', 'Your+OTP+for+Janata+Pass+Registration++is+4919', 'test response', 0, '2020-04-03 11:55:54'),
+(476, '9538131315', '4708', 'Your+OTP+for+Janata+Pass+Registration++is+4708', 'test response', 0, '2020-04-03 13:06:00'),
+(477, '9538131315', '2322', 'Your+OTP+for+Janata+Pass+Registration++is+2322', 'test response', 0, '2020-04-03 16:12:24'),
+(478, '9538131315', '4351', 'Your+OTP+for+Janata+Pass+Registration++is+4351', 'test response', 0, '2020-04-04 05:37:00'),
+(479, '9538131315', '5164', 'Your+OTP+for+Janata+Pass+Registration++is+5164', 'test response', 0, '2020-04-04 05:54:07'),
+(480, '4321432141', '6938', 'Your+OTP+for+Janata+Pass+Registration++is+6938', 'test response', 0, '2020-04-04 09:48:54'),
+(481, '9538131315', '', '+Dear+Bo%2C%0A+Sharing+my+trip+details%0A+Travel+Date+%3A+2020-04-04%0A+Travelling+from+%3A++to+%0A+Start+Time+%3A+2020-04-04+03%3A50+PM+%0A+End+Time+2020-04-04+04%3A50+PM%0A+Reason+%3A+Buying+groceries%0A', 'test response', 1, '2020-04-04 09:57:51'),
+(482, '4321432141', '9914', 'Your+OTP+for+Janata+Pass+Registration++is+9914', 'test response', 0, '2020-04-04 09:58:06'),
+(483, '9538131315', '', '+Dear+Bo%2C%0A+Sharing+my+trip+details%0A+Travel+Date+%3A+2020-04-04%0A+Travelling+from+%3A++to+%0A+Start+Time+%3A+2020-04-04+03%3A50+PM+%0A+End+Time+2020-04-04+04%3A50+PM%0A+Reason+%3A+Buying+groceries%0A', 'test response', 1, '2020-04-04 09:58:18'),
+(484, '1234123412', '3277', 'Your+OTP+for+Janata+Pass+Registration++is+3277', 'test response', 0, '2020-04-04 10:31:31'),
+(485, '1234123412', '3073', 'Your+OTP+for+Janata+Pass+Registration++is+3073', 'test response', 0, '2020-04-04 10:34:13'),
+(486, '1478523690', '4750', 'Your+OTP+for+Janata+Pass+Registration++is+4750', 'test response', 0, '2020-04-04 10:36:45'),
+(487, '9268121861', '5456', 'Your+OTP+for+Janata+Pass+Registration++is+5456', 'test response', 1, '2020-04-04 10:47:33'),
+(488, '1478523692', '2043', 'Your+OTP+for+Janata+Pass+Registration++is+2043', 'test response', 0, '2020-04-04 10:50:49'),
+(489, '7418223695', '5240', 'Your+OTP+for+Janata+Pass+Registration++is+5240', 'test response', 0, '2020-04-04 10:52:27'),
+(490, '7418963251', '1506', 'Your+OTP+for+Janata+Pass+Registration++is+1506', 'test response', 0, '2020-04-04 10:54:00'),
+(491, '654789521', '5488', 'Your+OTP+for+Janata+Pass+Registration++is+5488', 'test response', 0, '2020-04-04 10:55:28'),
+(492, '9268121861', '3411', 'Your+OTP+for+Janata+Pass+Registration++is+3411', 'test response', 1, '2020-04-04 11:02:18'),
+(493, '9789010929', '2272', 'Your+OTP+for+Janata+Pass+Registration++is+2272', 'test response', 0, '2020-04-04 11:19:59'),
+(494, '9841696555', '5055', 'Your+OTP+for+Janata+Pass+Registration++is+5055', 'test response', 0, '2020-04-04 11:21:25'),
+(495, '9876543210', '8310', 'Your+OTP+for+Janata+Pass+Registration++is+8310', 'test response', 0, '2020-04-04 11:21:49'),
+(496, '9876543210', '9053', 'Your+OTP+for+Janata+Pass+Registration++is+9053', 'test response', 0, '2020-04-04 11:25:43'),
+(497, '9876543210', '3795', 'Your+OTP+for+Janata+Pass+Registration++is+3795', 'test response', 0, '2020-04-04 11:26:58'),
+(498, '9538131315', '5824', 'Your+OTP+for+Janata+Pass+Registration++is+5824', 'test response', 0, '2020-04-04 12:10:30'),
+(499, '1478523691', '9224', 'Your+OTP+for+Janata+Pass+Registration++is+9224', 'test response', 0, '2020-04-04 12:12:06'),
+(500, '2342342341', '1142', 'Your+OTP+for+Janata+Pass+Registration++is+1142', 'test response', 1, '2020-04-04 12:17:20'),
+(501, '2342342341', '6600', 'Your+OTP+for+Janata+Pass+Registration++is+6600', 'test response', 0, '2020-04-04 12:17:30'),
+(502, '9999999999', '6145', 'Your+OTP+for+Janata+Pass+Registration++is+6145', 'test response', 0, '2020-04-04 12:18:50'),
+(503, '7878787878', '1524', 'Your+OTP+for+Janata+Pass+Registration++is+1524', 'test response', 0, '2020-04-04 12:19:28'),
+(504, '7878787878', '4980', 'Your+OTP+for+Janata+Pass+Registration++is+4980', 'test response', 0, '2020-04-04 12:30:27'),
+(505, '8989898989', '4883', 'Your+OTP+for+Janata+Pass+Registration++is+4883', 'test response', 0, '2020-04-04 12:31:24'),
+(506, '8989898989', '6483', 'Your+OTP+for+Janata+Pass+Registration++is+6483', 'test response', 0, '2020-04-04 12:37:34'),
+(507, '7878787878', '5398', 'Your+OTP+for+Janata+Pass+Registration++is+5398', 'test response', 0, '2020-04-04 12:38:07'),
+(508, '8585858585', '8249', 'Your+OTP+for+Janata+Pass+Registration++is+8249', 'test response', 0, '2020-04-04 12:38:44'),
+(509, '9876543210', '4298', 'Your+OTP+for+Janata+Pass+Registration++is+4298', 'test response', 0, '2020-04-04 12:39:13'),
+(510, '8585858585', '2921', 'Your+OTP+for+Janata+Pass+Registration++is+2921', 'test response', 0, '2020-04-04 12:40:36'),
+(511, '9789010929', '3789', 'Your+OTP+for+Janata+Pass+Registration++is+3789', 'test response', 1, '2020-04-04 12:41:23'),
+(512, '8585858585', '7022', 'Your+OTP+for+Janata+Pass+Registration++is+7022', 'test response', 0, '2020-04-04 12:42:21'),
+(513, '9876543210', '1601', 'Your+OTP+for+Janata+Pass+Registration++is+1601', 'test response', 0, '2020-04-04 12:42:40'),
+(514, '7777777777', '9586', 'Your+OTP+for+Janata+Pass+Registration++is+9586', 'test response', 0, '2020-04-04 12:42:54'),
+(515, '7777777777', '8220', 'Your+OTP+for+Janata+Pass+Registration++is+8220', 'test response', 0, '2020-04-04 12:44:30'),
+(516, '9538131315', '', '+Dear+Bo%2C%0A+Sharing+my+trip+details%0A+Travel+Date+%3A+2020-04-04%0A+Travelling+from+%3A+Adyar+to+Guindy%0A+Start+Time+%3A+2020-04-04+06%3A30+PM+%0A+End+Time+2020-04-04+07%3A00+PM%0A+Reason+%3A+Buying+groceries%0A', 'test response', 1, '2020-04-04 12:45:16'),
+(517, '9876543210', '9416', 'Your+OTP+for+Janata+Pass+Registration++is+9416', 'test response', 0, '2020-04-04 12:47:05'),
+(518, '9876543210', '6591', 'Your+OTP+for+Janata+Pass+Registration++is+6591', 'test response', 0, '2020-04-04 12:48:26'),
+(519, '9876543210', '5224', 'Your+OTP+for+Janata+Pass+Registration++is+5224', 'test response', 0, '2020-04-04 13:13:45'),
+(520, '9876543210', '4771', 'Your+OTP+for+Janata+Pass+Registration++is+4771', 'test response', 0, '2020-04-04 13:14:38'),
+(521, '7674810480', '1017', 'Your+OTP+for+Janata+Pass+Registration++is+1017', 'test response', 1, '2020-04-04 13:21:49'),
+(522, '7674810480', '5557', 'Your+OTP+for+Janata+Pass+Registration++is+5557', 'test response', 1, '2020-04-04 13:23:10');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `travel_reasons`
+--
+
+CREATE TABLE `travel_reasons` (
+  `id` int(10) NOT NULL,
+  `reason` varchar(255) NOT NULL,
+  `status` tinyint(1) NOT NULL,
+  `is_active` tinyint(1) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `travel_reasons`
+--
+
+INSERT INTO `travel_reasons` (`id`, `reason`, `status`, `is_active`) VALUES
+(1, 'Medical Emergency', 1, 1),
+(2, 'Buying groceries', 1, 1),
+(3, 'ATM', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -585,17 +939,22 @@ CREATE TABLE `users` (
   `user_category_id` int(10) NOT NULL,
   `approver_id` int(12) NOT NULL,
   `services` varchar(255) NOT NULL,
-  `user_check` tinyint(1) NOT NULL COMMENT '1-Image,2-Birth',
   `user_proof` enum('photo','birthmark') NOT NULL,
   `user_image` int(11) NOT NULL,
   `user_birthmark` text NOT NULL,
   `user_email` varchar(25) NOT NULL,
+  `share_with_name` varchar(255) NOT NULL,
+  `share_with_mobile` varchar(25) NOT NULL,
+  `relationship` enum('FATHER','MOTHER','SISTER','BROTHER','SON','DAUGHTER','FRIEND') NOT NULL,
   `address` text NOT NULL,
   `city` varchar(25) NOT NULL,
+  `locality` varchar(255) NOT NULL,
   `state` varchar(25) NOT NULL,
   `pincode` int(10) NOT NULL,
   `qr_code` text NOT NULL,
   `location_recording` tinyint(1) NOT NULL,
+  `latitude` varchar(255) NOT NULL,
+  `longitude` varchar(255) NOT NULL,
   `device_id` text NOT NULL,
   `status` tinyint(1) NOT NULL,
   `is_active` tinyint(1) NOT NULL,
@@ -609,43 +968,63 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `mobile`, `aadhar_number`, `user_type_id`, `user_category_id`, `approver_id`, `services`, `user_check`, `user_proof`, `user_image`, `user_birthmark`, `user_email`, `address`, `city`, `state`, `pincode`, `qr_code`, `location_recording`, `device_id`, `status`, `is_active`, `cby`, `cdate`, `mby`, `mdate`) VALUES
-(6, 'Priya', '9538131315', '147147147147', 3, 3, 0, '', 0, '', 0, '', '', 'address', 'city', '', 560105, '9538131315', 0, '', 1, 1, 1, '2020-03-30 09:26:47', 1, '2020-03-27 02:27:37'),
-(7, '', '', '', 0, 0, 0, '', 0, '', 0, '', '', '', '', '', 0, '', 0, '', 1, 1, 1, '2020-03-28 04:28:21', 1, '2020-03-28 04:28:21'),
-(8, '', '', '', 0, 0, 0, '', 0, '', 0, '', '', '', '', '', 0, '', 0, '', 1, 1, 1, '2020-03-28 04:28:28', 1, '2020-03-28 04:28:28'),
-(9, '', '', '', 0, 0, 0, '', 0, '', 0, '', '', '', '', '', 0, '', 0, '', 1, 1, 1, '2020-03-28 04:28:31', 1, '2020-03-28 04:28:31'),
-(10, 'sss', '', '3333', 0, 0, 0, '', 0, '', 0, '', '', '', 'dss', '', 0, '', 0, '', 1, 1, 1, '2020-03-28 04:28:34', 1, '2020-03-28 04:28:34'),
-(11, 'seenu', '', '3333335534', 0, 0, 0, '', 0, '', 0, '', '', '', 'trichy', '', 0, '', 0, '', 1, 1, 1, '2020-03-28 04:28:37', 1, '2020-03-28 04:28:37'),
-(12, '', '', '', 2, 0, 0, '', 0, '', 0, '', '', '', '', '', 0, '', 0, '', 1, 1, 1, '2020-03-28 04:28:57', 1, '2020-03-28 04:28:57'),
-(13, '', '', '', 2, 0, 0, '', 0, '', 0, '', '', '', '', '', 0, '', 0, '', 1, 1, 1, '2020-03-28 05:28:00', 1, '2020-03-28 05:28:00'),
-(14, '', '', '', 2, 0, 0, '', 0, '', 0, '', '', '', '', '', 0, '', 0, '', 1, 1, 1, '2020-03-28 05:28:01', 1, '2020-03-28 05:28:01'),
-(15, '', '', '', 2, 0, 0, '', 0, '', 0, '', '', '', '', '', 0, '', 0, '', 1, 1, 1, '2020-03-28 05:28:11', 1, '2020-03-28 05:28:11'),
-(16, '', '', '', 2, 0, 0, '', 0, '', 0, '', '', '', '', '', 0, '', 0, '', 1, 1, 1, '2020-03-28 05:28:22', 1, '2020-03-28 05:28:22'),
-(17, '', '', '', 2, 0, 0, '', 0, '', 0, '', '', '', '', '', 0, '', 0, '', 1, 1, 1, '2020-03-28 05:28:22', 1, '2020-03-28 05:28:22'),
-(18, '', '', '', 2, 0, 0, '', 0, '', 0, '', '', '', '', '', 0, '', 0, '', 1, 1, 1, '2020-03-28 05:28:22', 1, '2020-03-28 05:28:22'),
-(19, '', '', '', 2, 0, 0, '', 0, '', 0, '', '', '', '', '', 0, '', 0, '', 1, 1, 1, '2020-03-28 05:28:30', 1, '2020-03-28 05:28:30'),
-(20, 'org name', '9538131313', '', 1, 1, 34, '', 0, '', 0, '', 'test@test.com', 'org loc', '', '', 0, '9538131313565f8', 0, '', 1, 1, 1, '2020-03-28 15:34:19', 1, '2020-03-28 08:28:45'),
-(21, 'org name', '9538131314', '', 1, 1, 35, '', 0, '', 0, '', 'test@test.com', 'org loc', '', '', 0, '95381313140a266', 0, '', 1, 1, 1, '2020-03-28 09:28:31', 1, '2020-03-28 09:28:31'),
-(22, 'org name', '9538131312', '', 1, 1, 36, '', 0, '', 0, '', 'test@test.com', 'org loc', '', '', 0, '9538131312ed6d3', 0, '', 1, 1, 1, '2020-03-28 09:28:33', 1, '2020-03-28 09:28:33'),
-(23, 'org name', '9538131311', '', 1, 1, 37, '', 0, '', 0, '', 'test@test.com', 'org loc', '', '', 0, '9538131311b6fc2', 0, '', 1, 1, 1, '2020-03-28 09:28:37', 1, '2020-03-28 09:28:37'),
-(24, 'org name', '9538131310', '', 1, 1, 38, '', 0, '', 0, '', 'test@test.com', 'org loc', '', '', 0, '953813131037789', 0, '', 1, 1, 1, '2020-03-28 09:28:38', 1, '2020-03-28 09:28:38'),
-(25, 'org name', '9538131303', '', 1, 1, 39, '', 0, '', 0, '', 'test@test.com', 'org loc', '', '', 0, '9538131303857f2', 0, '', 1, 1, 1, '2020-03-28 09:28:41', 1, '2020-03-28 09:28:41'),
-(26, 'testing company', '9538131300', '', 1, 1, 40, '', 0, '', 0, '', 'bdclient@test.com', 'city changed', '', '', 0, '9538131300b6599', 0, '', 1, 1, 1, '2020-03-28 09:28:44', 1, '2020-03-28 09:28:44'),
-(27, 'New Company Test', '9538131319', '', 1, 1, 41, '', 0, '', 0, '', 'test@test.com', 'city changed', '', '', 0, '9538131319a0f2f', 0, '', 1, 1, 1, '2020-03-28 09:28:47', 1, '2020-03-28 09:28:47'),
-(28, 'Red ant media', '9841696555', '', 1, 1, 42, '', 0, '', 0, '', 'manu@redantmedia.co.in', 'Kotturpuram', '', '', 0, '98416965556d681', 0, '', 1, 1, 1, '2020-03-28 10:28:25', 1, '2020-03-28 10:28:25'),
-(29, 'Test', '8220990313', '', 1, 1, 43, '', 0, '', 0, '', 'test@gmail.com', 'tiruchirappalli', '', '', 0, '822099031338baa', 0, '', 1, 1, 1, '2020-03-29 09:29:16', 1, '2020-03-29 09:29:16'),
-(30, 'Bo', '1231231231', '123412341234', 2, 1, 14, 'test', 0, 'photo', 0, '', '', '', 'Chennai', '', 0, '47b11', 0, '', 1, 1, 1, '2020-03-29 19:14:19', 1, '2020-03-30 12:30:32'),
-(31, 'volunteer', '2342342341', '123456789012', 4, 2, 14, 'test', 0, 'birthmark', 0, '', '', '', 'chennai', '', 0, '36f5f', 0, '', 1, 1, 1, '2020-03-30 12:30:42', 1, '2020-03-30 12:30:42'),
-(34, 'Product ', '4354354351', '123456789123', 2, 1, 14, 'test', 0, 'birthmark', 0, '', '', '', 'city', '', 0, '5bf70', 0, '', 1, 1, 1, '2020-03-30 12:30:55', 1, '2020-03-30 12:30:55'),
-(35, 'seenu', '', '12232321522', 2, 0, 0, '', 0, 'photo', 0, '', '', '', 'trichy', '', 0, '', 0, '', 1, 1, 1, '2020-03-30 10:30:08', 1, '2020-03-30 10:30:08'),
-(36, 'Name', '1111111111', '123412341234', 3, 3, 0, '', 0, 'photo', 0, '', '', 'address', 'city', '', 563102, '111111111119009', 0, '', 1, 1, 1, '2020-03-30 10:30:36', 1, '2020-03-30 10:30:36'),
-(37, 'Pandiyan', '9790237667', '1100445577', 2, 1, 1, 'Test', 0, 'photo', 0, '', '', 'D block, door no 1(5, 6th West Cross Street,', 'CHENNAI', '', 600102, 'e0c67', 0, '', 1, 1, 1, '2020-03-30 11:30:02', 1, '2020-03-30 11:30:02'),
-(38, 'Pandiyan', '9944536282', '6655333454', 2, 1, 1, 'Test', 0, '', 0, '', '', 'D block, door no 1(5, 6th West Cross Street,', 'CHENNAI', '', 600102, 'd38a8', 0, '', 1, 1, 1, '2020-03-30 01:30:47', 1, '2020-03-30 01:30:47'),
-(39, 'pandiyan', '9944536282', '8877665544', 2, 1, 1, 'Test', 0, '', 0, '', '', 'Chennai', 'Chennai', '', 600001, 'd38a8', 0, '', 1, 1, 1, '2020-03-30 01:30:48', 1, '2020-03-30 01:30:48'),
-(40, 'test', '1234567890', '123412341234', 5, 4, 0, '', 0, '', 0, '', '', 'apartment', 'chennai', '', 600001, '1234567890f476d', 0, '', 1, 1, 1, '2020-03-30 07:30:36', 1, '2020-03-30 07:30:36'),
-(41, 'test', '1234567890', '123412341234', 5, 4, 0, '', 0, '', 0, '', '', 'apartment', 'chennai', '', 600001, '123456789055f76', 0, '', 1, 1, 1, '2020-03-30 07:30:37', 1, '2020-03-30 07:30:37'),
-(42, 'test', '1234567890', '123412341234', 5, 4, 0, '', 0, '', 0, '', '', 'apartment', 'chennai', '', 600001, '1234567890a8e62', 0, '', 1, 1, 1, '2020-03-30 07:30:42', 1, '2020-03-30 07:30:42'),
-(43, 'Pandiyan', '8899889988', '6677556677', 3, 3, 0, '', 0, '', 0, '', '', 'D block, door no 1(5, 6th West Cross Street,', 'CHENNAI', '', 600102, '8899889988e8855', 0, '', 1, 1, 1, '2020-03-30 08:30:27', 1, '2020-03-30 08:30:27');
+INSERT INTO `users` (`id`, `name`, `mobile`, `aadhar_number`, `user_type_id`, `user_category_id`, `approver_id`, `services`, `user_proof`, `user_image`, `user_birthmark`, `user_email`, `share_with_name`, `share_with_mobile`, `relationship`, `address`, `city`, `locality`, `state`, `pincode`, `qr_code`, `location_recording`, `latitude`, `longitude`, `device_id`, `status`, `is_active`, `cby`, `cdate`, `mby`, `mdate`) VALUES
+(6, 'Priya', '9538131315', '147147147147', 3, 3, 0, '', '', 0, 'testing birthmark', '', 'Meena', '9538131315', 'FATHER', 'address', 'Bengaluru', '', '', 560105, '9538131315', 0, '', '', '', 1, 1, 1, '2020-04-04 10:24:26', 1, '2020-03-27 02:27:37'),
+(7, '', '', '', 0, 0, 0, '', '', 0, '', '', '', '', 'FATHER', '', '', '', '', 0, '', 0, '', '', '', 1, 1, 1, '2020-03-28 04:28:21', 1, '2020-03-28 04:28:21'),
+(8, '', '', '', 0, 0, 0, '', '', 0, '', '', '', '', 'FATHER', '', '', '', '', 0, '', 0, '', '', '', 1, 1, 1, '2020-03-28 04:28:28', 1, '2020-03-28 04:28:28'),
+(9, '', '', '', 0, 0, 0, '', '', 0, '', '', '', '', 'FATHER', '', '', '', '', 0, '', 0, '', '', '', 1, 1, 1, '2020-03-28 04:28:31', 1, '2020-03-28 04:28:31'),
+(10, 'sss', '', '3333', 0, 0, 0, '', '', 0, '', '', '', '', 'FATHER', '', 'dss', '', '', 0, '', 0, '', '', '', 1, 1, 1, '2020-03-28 04:28:34', 1, '2020-03-28 04:28:34'),
+(11, 'seenu', '', '3333335534', 0, 0, 0, '', '', 0, '', '', '', '', 'FATHER', '', 'trichy', '', '', 0, '', 0, '', '', '', 1, 1, 1, '2020-03-28 04:28:37', 1, '2020-03-28 04:28:37'),
+(12, '', '', '', 2, 0, 0, '', '', 0, '', '', '', '', 'FATHER', '', '', '', '', 0, '', 0, '', '', '', 1, 1, 1, '2020-03-28 04:28:57', 1, '2020-03-28 04:28:57'),
+(13, '', '', '', 2, 0, 0, '', '', 0, '', '', '', '', 'FATHER', '', '', '', '', 0, '', 0, '', '', '', 1, 1, 1, '2020-03-28 05:28:00', 1, '2020-03-28 05:28:00'),
+(14, '', '', '', 2, 0, 0, '', '', 0, '', '', '', '', 'FATHER', '', '', '', '', 0, '', 0, '', '', '', 1, 1, 1, '2020-03-28 05:28:01', 1, '2020-03-28 05:28:01'),
+(15, '', '', '', 2, 0, 0, '', '', 0, '', '', '', '', 'FATHER', '', '', '', '', 0, '', 0, '', '', '', 1, 1, 1, '2020-03-28 05:28:11', 1, '2020-03-28 05:28:11'),
+(16, '', '', '', 2, 0, 0, '', '', 0, '', '', '', '', 'FATHER', '', '', '', '', 0, '', 0, '', '', '', 1, 1, 1, '2020-03-28 05:28:22', 1, '2020-03-28 05:28:22'),
+(17, '', '', '', 2, 0, 0, '', '', 0, '', '', '', '', 'FATHER', '', '', '', '', 0, '', 0, '', '', '', 1, 1, 1, '2020-03-28 05:28:22', 1, '2020-03-28 05:28:22'),
+(18, '', '', '', 2, 0, 0, '', '', 0, '', '', '', '', 'FATHER', '', '', '', '', 0, '', 0, '', '', '', 1, 1, 1, '2020-03-28 05:28:22', 1, '2020-03-28 05:28:22'),
+(19, '', '', '', 2, 0, 0, '', '', 0, '', '', '', '', 'FATHER', '', '', '', '', 0, '', 0, '', '', '', 1, 1, 1, '2020-03-28 05:28:30', 1, '2020-03-28 05:28:30'),
+(20, 'org name', '9538131313', '', 1, 1, 34, '', '', 0, '', 'test@test.com', '', '', 'FATHER', 'org loc', '', '', '', 0, '9538131313565f8', 0, '', '', '', 1, 1, 1, '2020-03-28 15:34:19', 1, '2020-03-28 08:28:45'),
+(21, 'org name', '9538131314', '', 1, 1, 35, '', '', 0, '', 'test@test.com', '', '', 'FATHER', 'org loc', '', '', '', 0, '95381313140a266', 0, '', '', '', 1, 1, 1, '2020-04-01 20:49:52', 1, '2020-03-28 09:28:31'),
+(22, 'org name', '9538131312', '', 1, 1, 36, '', '', 0, '', 'test@test.com', '', '', 'FATHER', 'org loc', '', '', '', 0, '9538131312ed6d3', 0, '', '', '', 1, 1, 1, '2020-03-28 09:28:33', 1, '2020-03-28 09:28:33'),
+(23, 'org name', '9538131311', '', 1, 1, 37, '', '', 0, '', 'test@test.com', '', '', 'FATHER', 'org loc', '', '', '', 0, '9538131311b6fc2', 0, '', '', '', 1, 1, 1, '2020-03-28 09:28:37', 1, '2020-03-28 09:28:37'),
+(24, 'org name', '9538131310', '', 1, 1, 38, '', '', 0, '', 'test@test.com', '', '', 'FATHER', 'org loc', '', '', '', 0, '953813131037789', 0, '', '', '', 1, 1, 1, '2020-03-28 09:28:38', 1, '2020-03-28 09:28:38'),
+(25, 'org name', '9538131303', '', 1, 1, 39, '', '', 0, '', 'test@test.com', '', '', 'FATHER', 'org loc', '', '', '', 0, '9538131303857f2', 0, '', '', '', 1, 1, 1, '2020-03-28 09:28:41', 1, '2020-03-28 09:28:41'),
+(26, 'testing company', '9538131300', '', 1, 1, 40, '', '', 0, '', 'bdclient@test.com', '', '', 'FATHER', 'city changed', '', '', '', 0, '9538131300b6599', 0, '', '', '', 1, 1, 1, '2020-03-28 09:28:44', 1, '2020-03-28 09:28:44'),
+(27, 'New Company Test', '9538131319', '', 1, 1, 41, '', '', 0, '', 'test@test.com', '', '', 'FATHER', 'city changed', '', '', '', 0, '9538131319a0f2f', 0, '', '', '', 1, 1, 1, '2020-03-28 09:28:47', 1, '2020-03-28 09:28:47'),
+(28, 'Red ant media', '9841696555', '', 1, 1, 42, '', '', 0, '', 'manu@redantmedia.co.in', '', '', 'FATHER', 'Kotturpuram', '', '', '', 0, '98416965556d681', 0, '', '', '', 1, 1, 1, '2020-03-28 10:28:25', 1, '2020-03-28 10:28:25'),
+(29, 'Test', '8220990313', '', 1, 1, 43, '', '', 0, '', 'test@gmail.com', '', '', 'FATHER', 'tiruchirappalli', '', '', '', 0, '822099031338baa', 0, '', '', '', 1, 1, 1, '2020-03-29 09:29:16', 1, '2020-03-29 09:29:16'),
+(30, 'Bo', '1231231231', '123412341234', 2, 1, 14, 'test', 'photo', 0, '', '', '', '', 'FATHER', '', 'Chennai', '', '', 0, '47b11', 0, '', '', '', 1, 1, 1, '2020-03-29 19:14:19', 1, '2020-03-30 12:30:32'),
+(31, 'volunteer', '2342342341', '123456789012', 4, 2, 14, 'test', 'birthmark', 0, '', '', '', '', 'FATHER', '', 'chennai', '', '', 0, '36f5f', 0, '', '', '', 1, 1, 1, '2020-03-30 12:30:42', 1, '2020-03-30 12:30:42'),
+(34, 'Product ', '4354354351', '123456789123', 2, 1, 14, 'test', 'birthmark', 0, '', '', '', '', 'FATHER', '', 'city', '', '', 0, '5bf70', 0, '', '', '', 1, 1, 1, '2020-03-30 12:30:55', 1, '2020-03-30 12:30:55'),
+(35, 'seenu', '', '12232321522', 2, 0, 0, '', 'photo', 0, '', '', '', '', 'FATHER', '', 'trichy', '', '', 0, '', 0, '', '', '', 1, 1, 1, '2020-03-30 10:30:08', 1, '2020-03-30 10:30:08'),
+(36, 'Name', '1111111111', '123412341234', 3, 3, 0, '', 'photo', 0, '', '', '', '', 'FATHER', 'address', 'city', '', '', 563102, '111111111119009', 0, '', '', '', 1, 1, 1, '2020-03-30 10:30:36', 1, '2020-03-30 10:30:36'),
+(37, 'Pandiyan', '9790237667', '1100445577', 2, 1, 1, 'Test', 'photo', 0, '', '', '', '', 'FATHER', 'D block, door no 1(5, 6th West Cross Street,', 'CHENNAI', '', '', 600102, 'e0c67', 0, '', '', '', 1, 1, 1, '2020-03-30 11:30:02', 1, '2020-03-30 11:30:02'),
+(38, 'Pandiyan', '9944536282', '6655333454', 2, 1, 1, 'Test', '', 0, '', '', '', '', 'FATHER', 'D block, door no 1(5, 6th West Cross Street,', 'CHENNAI', '', '', 600102, 'd38a8', 0, '', '', '', 1, 1, 1, '2020-03-30 01:30:47', 1, '2020-03-30 01:30:47'),
+(39, 'pandiyan', '9944536282', '8877665544', 2, 1, 1, 'Test', '', 0, '', '', '', '', 'FATHER', 'Chennai', 'Chennai', '', '', 600001, 'd38a8', 0, '', '', '', 1, 1, 1, '2020-03-30 01:30:48', 1, '2020-03-30 01:30:48'),
+(40, 'test', '1234567890', '123412341234', 5, 4, 0, '', '', 0, '', '', '', '', 'FATHER', 'apartment', 'chennai', '', '', 600001, '1234567890f476d', 0, '', '', '', 1, 1, 1, '2020-03-30 07:30:36', 1, '2020-03-30 07:30:36'),
+(41, 'test', '1234567890', '123412341234', 5, 4, 0, '', '', 0, '', '', '', '', 'FATHER', 'apartment', 'chennai', '', '', 600001, '123456789055f76', 0, '', '', '', 1, 1, 1, '2020-03-30 07:30:37', 1, '2020-03-30 07:30:37'),
+(42, 'test', '1234567890', '123412341234', 5, 4, 0, '', '', 0, '', '', '', '', 'FATHER', 'apartment', 'chennai', '', '', 600001, '1234567890a8e62', 0, '', '', '', 1, 1, 1, '2020-03-30 07:30:42', 1, '2020-03-30 07:30:42'),
+(43, 'Pandiyan', '8899889988', '6677556677', 3, 3, 0, '', '', 0, '', '', '', '', 'FATHER', 'D block, door no 1(5, 6th West Cross Street,', 'CHENNAI', '', '', 600102, '8899889988e8855', 0, '', '', '', 1, 1, 1, '2020-03-30 08:30:27', 1, '2020-03-30 08:30:27'),
+(44, 'test', '1234567890', '123412341234', 5, 4, 0, '', '', 0, '', '', '', '', 'FATHER', 'apartment', 'chennai', '', '', 600001, '1234567890d7622', 0, '', '', '', 1, 1, 1, '2020-03-31 11:31:33', 1, '2020-03-31 11:31:33'),
+(45, '', '9999999999', '', 3, 3, 0, '', '', 0, '', '', '', '', '', '', '', '', '', 0, '9999999999b5bb6', 0, '', '', '', 1, 1, 1, '2020-03-31 10:31:26', 1, '2020-03-31 10:31:26'),
+(46, 'Ravi', '9505472200', '123486547896', 3, 3, 0, '', '', 0, '', '', '', '9989716190', '', 'Kukatpally', 'Hyderabad', '', '', 500044, '9505472200df917', 0, '', '', '', 1, 1, 1, '2020-03-31 10:31:31', 1, '2020-03-31 10:31:31'),
+(47, 'test', '1234567890', '123412341234', 5, 4, 0, '', '', 0, '', '', '', '', '', 'apartment', 'chennai', '', '', 600001, '12345678908b586', 0, '', '', '', 1, 1, 1, '2020-04-01 10:01:53', 1, '2020-04-01 10:01:53'),
+(48, '', '7440563116', '', 3, 3, 0, '', '', 0, '', '', '', '', '', '', '', '', '', 0, '7440563116e49e4', 0, '', '', '', 1, 1, 1, '2020-04-01 01:01:41', 1, '2020-04-01 01:01:41'),
+(49, 'Aam Aadmi', '852131254', '7049 0974 1717', 3, 3, 0, '', '', 0, '', '', '', 'Mr. Kumarswamy', '', 'Perungudi', 'Chennai', '', '', 600096, '85213125400e3b', 0, '', '', '', 1, 1, 1, '2020-04-01 03:01:42', 1, '2020-04-01 03:01:42'),
+(50, 'Police', '9876543210', '123412341234', 5, 4, 0, '', '', 0, '', '', '', '', '', 'address', 'city', '', '', 600001, '9876543210', 0, '', '', '', 1, 1, 1, '2020-04-01 14:54:52', 1, '0000-00-00 00:00:00'),
+(51, '', '9962194656', '', 3, 3, 0, '', '', 0, '', '', '', '', '', '', '', '', '', 0, '9962194656e69a1', 0, '', '', '', 1, 1, 1, '2020-04-02 10:02:17', 1, '2020-04-02 10:02:17'),
+(52, 'Bo', '4321432141', '123412341234', 3, 3, 0, '', '', 0, '', '', 'Bo', '9538131315', 'MOTHER', 'test@test.com', 'Bengaluru', '', '', 560100, '43214321414ef23', 0, '12.827886099999999', '77.6550676', '', 1, 1, 1, '2020-04-04 03:04:23', 1, '2020-04-04 03:04:23'),
+(53, 'general citizen', '1234123412', '147852369874', 3, 3, 0, '', '', 0, '', '', 'Bo', '9538131315', 'FATHER', 'address', 'Chennai', '', '', 123456, '123412341263ba5', 0, '12.877823999999999', '77.6634368', '', 1, 1, 1, '2020-04-04 04:04:04', 1, '2020-04-04 04:04:04'),
+(54, 'Bosdfsdaf', '1478523690', '14785236991', 3, 3, 0, '', '', 0, '', '', 'Bo', '9538131315', '', 'address', 'Chennai', '', '', 147852, '1478523690d15ca', 0, '12.877823999999999', '77.6634368', '', 1, 1, 1, '2020-04-04 04:04:07', 1, '2020-04-04 04:04:07'),
+(55, 'sss', '1478523692', '1234567890', 3, 3, 0, '', 'birthmark', 0, '', '', 'Bo', '09538131315', 'FATHER', 'address', 'Bengaluru', '', '', 123123, '1478523692fa0a6', 0, '12.877823999999999', '77.6634368', '', 1, 1, 1, '2020-04-04 04:04:21', 1, '2020-04-04 04:04:21'),
+(56, 'aaaa', '7418223695', '12312312312', 3, 3, 0, '', 'birthmark', 0, 'undefined', '', 'Bo', '9538131315', '', 'sdfg', 'Bengaluru', '', '', 147852, '74182236956adf0', 0, '12.877823999999999', '77.6634368', '', 1, 1, 1, '2020-04-04 10:53:14', 1, '2020-04-04 04:04:23'),
+(57, 'general citizen', '7418963251', '123123123123123123', 3, 3, 0, '', 'birthmark', 0, 'undefined', '', 'Bo', '09538131315', '', 'address', 'Chennai', '', '', 147852, '7418963251bc323', 0, '12.877823999999999', '77.6634368', '', 1, 1, 1, '2020-04-04 10:54:46', 1, '2020-04-04 04:04:24'),
+(58, 'sss', '654789521', '114782236955', 3, 3, 0, '', 'birthmark', 0, 'undefined', '', 'a', '9538131315', 'SON', 'bd client', 'Bengaluru', '', '', 0, '6547895210ffa9', 0, '12.877823999999999', '77.6634368', '', 1, 1, 1, '2020-04-04 10:56:34', 1, '2020-04-04 04:04:26'),
+(59, 'general 1', '1478523691', '14785236985', 3, 3, 0, '', 'birthmark', 0, 'undefined', '', 'general 2', '9538131315', 'FATHER', '', 'Bengaluru', 'Electronic City Phase I', '', 147852, '147852369133642', 0, '12.877823999999999', '77.6634368', '', 1, 1, 1, '2020-04-04 12:13:08', 1, '2020-04-04 05:04:42'),
+(60, 'Approve Organisation 1', '7878787878', '', 1, 1, 44, '', 'photo', 0, '', 'test@test.com', '', '', 'FATHER', 'Chennai', '', '', '', 0, '7878787878913e5', 0, '', '', '', 1, 1, 1, '2020-04-04 05:04:54', 1, '2020-04-04 05:04:54'),
+(61, 'Requester 1 ', '8989898989', '741852963789', 2, 1, 44, 'test services', 'birthmark', 0, 'undefined', '', '', '', '', 'address', 'Bengaluru', 'Electronic City Phase I', '', 147852, 'ee40a', 0, '12.877823999999999', '77.6634368', '', 1, 1, 1, '2020-04-04 12:36:15', 1, '2020-04-04 06:04:06'),
+(62, 'volunteer 1 ', '8585858585', '741852963789', 4, 2, 44, 'test services', 'photo', 0, '', '', '', '', '', '', 'Chennai', 'Sholinganallur', '', 600001, 'fbf7f', 0, '12.877823999999999', '77.6634368', '', 1, 1, 1, '2020-04-04 06:04:09', 1, '2020-04-04 06:04:09'),
+(63, 'General Citizen 1', '7777777777', '789456123147', 3, 3, 0, '', 'birthmark', 0, 'undefined', '', 'Bo', '9999999999', 'FRIEND', 'address', 'Chennai', 'Guindy', '', 600001, '777777777789b0d', 0, '12.877823999999999', '77.6634368', '', 1, 1, 1, '2020-04-04 12:44:05', 1, '2020-04-04 06:04:13');
 
 -- --------------------------------------------------------
 
@@ -724,6 +1103,12 @@ ALTER TABLE `approver_pass_details`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `cities`
+--
+ALTER TABLE `cities`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `pass_entries`
 --
 ALTER TABLE `pass_entries`
@@ -739,6 +1124,12 @@ ALTER TABLE `services`
 -- Indexes for table `sms_log`
 --
 ALTER TABLE `sms_log`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `travel_reasons`
+--
+ALTER TABLE `travel_reasons`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -767,19 +1158,25 @@ ALTER TABLE `user_type`
 -- AUTO_INCREMENT for table `approver_details`
 --
 ALTER TABLE `approver_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `approver_pass_details`
 --
 ALTER TABLE `approver_pass_details`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=171;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=177;
+
+--
+-- AUTO_INCREMENT for table `cities`
+--
+ALTER TABLE `cities`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `pass_entries`
 --
 ALTER TABLE `pass_entries`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `services`
@@ -791,13 +1188,19 @@ ALTER TABLE `services`
 -- AUTO_INCREMENT for table `sms_log`
 --
 ALTER TABLE `sms_log`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=244;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=523;
+
+--
+-- AUTO_INCREMENT for table `travel_reasons`
+--
+ALTER TABLE `travel_reasons`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT for table `user_categories`
