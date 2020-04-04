@@ -28,9 +28,9 @@ class AppTheme {
 
   static const TextStyle error_text = TextStyle(
     fontFamily: 'OpenSans',
-    fontWeight: FontWeight.w700,
-    fontSize: 22,
-    letterSpacing: 1.2,
+    fontWeight: FontWeight.w600,
+    fontSize: 18,
+    letterSpacing: 1,
     color: AppColors.primary_text,
   );
 

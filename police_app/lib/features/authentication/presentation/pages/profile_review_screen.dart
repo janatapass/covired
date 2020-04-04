@@ -30,7 +30,7 @@ class _ProfileReviewScreenState extends State<ProfileReviewScreen> {
                   return LoadingProgressIndicator();
                 case ConnectionState.done:
                   if(snapshot.hasError){
-                    return Center(child: Text('Unable to load details', style: AppTheme.error_text));
+                    return Center(child: Text('Unable to load details for this user. Plese contact the administator.', style: AppTheme.error_text));
                   }
                   var data = snapshot.data;
                   return BackgroundContainer(
