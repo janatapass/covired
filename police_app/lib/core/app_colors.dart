@@ -13,7 +13,7 @@ class AppColors {
   static const Color white_secondary = Color.fromARGB(255, 220, 220, 220);
   static const Color white_un_selected = Color.fromARGB(255, 180, 180, 180);
   static const Color indigo = Color.fromARGB(255, 51, 105, 231);
-  static const Color primary_text = Color.fromARGB(255, 70, 70, 70);
+  static const Color primary_text = Color.fromARGB(255, 0, 0, 0);
   static const Color secondary_text = Color.fromARGB(255, 141, 141, 141);
   static const Color grey = Color.fromARGB(255, 188, 187, 187);
   static const Color teal = Color.fromARGB(255, 52, 148, 159);

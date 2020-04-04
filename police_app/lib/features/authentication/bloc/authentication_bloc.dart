@@ -1,9 +1,13 @@
 import 'dart:async';
 
+import 'package:dartz/dartz.dart';
+import 'package:janata_curfew/features/authentication/data/models/registration_data.dart';
+import 'package:meta/meta.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:janata_curfew/core/error/failures.dart';
 import 'package:janata_curfew/features/authentication/bloc/authentication_event.dart';
 import 'package:janata_curfew/features/authentication/bloc/authentication_state.dart';
+import 'package:janata_curfew/features/authentication/domain/repositories/authentication_repository.dart';
 
 const String SERVER_FAILURE_MESSAGE = 'Server Failure';
 const String CACHE_FAILURE_MESSAGE = 'Cache Failure';
@@ -13,30 +17,58 @@ const String INVALID_INPUT_FAILURE_MESSAGE =
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
 
+  final AuthenticationRepository repository;
+
+  AuthenticationBloc({
+    @required AuthenticationRepository repository,
+  }) : repository = repository;
+
   @override
-  AuthenticationState get initialState => ScreenLoaded(data: ScreenState.MOBILE_REGISTRATION);
+  AuthenticationState get initialState => RegistrationState();
 
   @override
   Stream<AuthenticationState> mapEventToState(
     AuthenticationEvent event,
   ) async* {
     if (event is MobileRegistrationEvent) {
-      yield* pumpScreen(ScreenState.MOBILE_REGISTRATION);
+      if(event.mobile.isNotEmpty) {
+        yield Loading();
+        final failureOrRegistrationData = await repository.registerMobile(event.mobile);
+        yield* _eitherMobileRegistrationLoadedOrErrorState(event.mobile, failureOrRegistrationData);
+      } else {
+        yield Error("Please enter a valid mobile number");
+      }
     } else if (event is OtpRegistrationEvent) {
-      yield* pumpScreen(ScreenState.OTP_REGISTRATION);
+      var otp = event.otp;
+      if(otp.isNotEmpty && otp.length == 4) {
+        yield Loading();
+        final failureOrRegistrationData = await repository.confirmOtp(
+            event.mobile, otp);
+        yield* _eitherOtpRegistrationLoadedOrErrorState(event.mobile,
+            failureOrRegistrationData);
+      } else {
+        yield Error("Please enter a valid mobile number");
+      }
     }
   }
 
-  Stream<AuthenticationState> pumpScreen(ScreenState screenState) async* {
-    yield ScreenLoaded(data: screenState);
+  Stream<AuthenticationState> _eitherMobileRegistrationLoadedOrErrorState(
+      String mobile,
+      Either<Failure, RegistrationData> failureOrHomePastData,
+      ) async* {
+    yield failureOrHomePastData.fold(
+          (failure) => Error('Please try again later!'),
+          (userData) => OtpState(data: userData, mobile: mobile),
+    );
   }
 
-  String _mapFailureToMessage(Failure failure) {
-    switch (failure.runtimeType) {
-      case ServerFailure:
-        return SERVER_FAILURE_MESSAGE;
-      default:
-        return 'Unexpected error';
-    }
+  Stream<AuthenticationState> _eitherOtpRegistrationLoadedOrErrorState(
+      String mobile,
+      Either<Failure, RegistrationData> failureOrHomePastData,
+      ) async* {
+    yield failureOrHomePastData.fold(
+          (failure) => Error('Please try again later!'),
+          (userData) => GoToNextPage(mobile: mobile),
+    );
   }
 }

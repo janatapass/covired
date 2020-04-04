@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:janata_curfew/core/app_theme.dart';
-import 'package:janata_curfew/core/image_path.dart';
-import 'package:janata_curfew/core/widgets/background_container.dart';
-import 'package:janata_curfew/core/widgets/footer_brand_text.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:janata_curfew/core/widgets/loading_dialog.dart';
+import 'package:janata_curfew/core/widgets/loading_progress_indicator.dart';
 import 'package:janata_curfew/features/authentication/bloc/authentication_bloc.dart';
 import 'package:janata_curfew/features/authentication/bloc/authentication_event.dart';
 import 'package:janata_curfew/features/authentication/bloc/authentication_state.dart';
 import 'package:janata_curfew/features/authentication/presentation/pages/profile_review_screen.dart';
 import 'package:janata_curfew/features/authentication/presentation/widgets/mobile_registration_view.dart';
 import 'package:janata_curfew/features/authentication/presentation/widgets/otp_registration_view.dart';
-import 'package:janata_curfew/features/home/presentation/home_screen.dart';
+import 'package:janata_curfew/features/authentication/presentation/widgets/registration_background.dart';
 import 'package:janata_curfew/injections.dart';
 
 class RegistrationScreen extends StatefulWidget {
@@ -28,94 +27,72 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   }
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    bloc.add(MobileRegistrationEvent());
-  }
-
-  @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        body: BlocBuilder<AuthenticationBloc, AuthenticationState>(
-            bloc: bloc,
-            builder: (BuildContext context, AuthenticationState state) {
-              if (state is ScreenLoaded) {
-                return BackgroundContainer(
-                  child: Padding(
-                    padding: const EdgeInsets.all(48.0),
-                    child: LayoutBuilder(
-                      builder: (context, constraint) {
-                        return SingleChildScrollView(
-                          child: ConstrainedBox(
-                            constraints:
-                                BoxConstraints(minHeight: constraint.maxHeight),
-                            child: IntrinsicHeight(
-                              child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: <Widget>[
-                                    Flexible(
-                                      flex: 5,
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: <Widget>[
-                                          Image.asset(
-                                            LOGO_APP,
-                                            width: 120,
-                                            height: 120,
-                                          ),
-                                          SizedBox(height: 8),
-                                          Text('Janata Pass',
-                                              style: AppTheme
-                                                  .authentication_header),
-                                        ],
-                                      ),
-                                    ),
-                                    Flexible(
-                                        flex: 5,
-                                        child: state.data ==
-                                                ScreenState.MOBILE_REGISTRATION
-                                            ? MobileRegistrationView(
-                                                onPressed: () {
-                                                bloc.add(
-                                                    OtpRegistrationEvent());
-                                              })
-                                            : OtpRegistrationView(
-                                                onPressed: () {
-                                                Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          ProfileReviewScreen()),
-                                                );
-                                              })),
-                                    FooterBrandText()
-                                  ]),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                );
-              } else if (state is Error) {
-                return null;
-              }
-              return null;
+      body: BlocProvider(
+        create: (context) {
+          return bloc;
+        },
+        child: BlocListener<AuthenticationBloc, AuthenticationState>(
+            listener: (context, state) {
+          if (state is GoToNextPage) {
+            goToNextPage(context, state.mobile);
+          } if (state is OtpState) {
+            Scaffold.of(context).showSnackBar(SnackBar(
+              content: Text(state.data.message),
+              duration: Duration(seconds: 3),
+            ));
+          } else if (state is Error) {
+            Scaffold.of(context).showSnackBar(SnackBar(
+              content: Text(state.message),
+              duration: Duration(seconds: 3),
+            ));
+          }
+        }, child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
+                builder: (BuildContext context, AuthenticationState state) {
+          if (state is RegistrationState) {
+            return RegistrationBackground(
+                child: MobileRegistrationView(onPressed: (mobile) {
+              _onMobileRegistrationButtonPressed(mobile);
             }));
+          } else if (state is OtpState) {
+            return RegistrationBackground(
+                child: OtpRegistrationView(
+                    mobile: state.mobile,
+                    onPressed: (mobile, otp) {
+                      _onOtpButtonPressed(mobile, otp);
+                    }));
+          } else if (state is Loading) {
+            return LoadingProgressIndicator();
+          }
+          return RegistrationBackground(
+              child: MobileRegistrationView(onPressed: (mobile) {
+            _onMobileRegistrationButtonPressed(mobile);
+          }));
+          ;
+        })),
+      ),
+    );
   }
 
-  PageController _controller = PageController(
-    initialPage: 1,
-  );
+  _onMobileRegistrationButtonPressed(mobile) {
+    bloc.add(MobileRegistrationEvent(mobile: mobile));
+  }
+
+  _onOtpButtonPressed(mobile, otp) {
+    bloc.add(OtpRegistrationEvent(mobile: mobile, otp: otp));
+  }
+
+  goToNextPage(context, mobile) async {
+    await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => ProfileReviewScreen(mobile: mobile)),
+    );
+  }
 
   @override
   void dispose() {
-    _controller.dispose();
     super.dispose();
+    bloc.close();
   }
 }
