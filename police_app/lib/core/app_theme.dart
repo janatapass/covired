@@ -38,7 +38,7 @@ class AppTheme {
     fontFamily: 'OpenSans',
     fontWeight: FontWeight.w600,
     fontSize: 18,
-    color: AppColors.primary_text,
+    color: AppColors.white,
   );
 
   static const TextStyle app_bar_text_white = TextStyle(
@@ -61,7 +61,7 @@ class AppTheme {
     fontWeight: FontWeight.w600,
     fontSize: 14,
     letterSpacing: 1,
-    color: AppColors.secondary_text,
+    color: AppColors.white_secondary,
   );
 
   static const TextStyle profile_review_header = TextStyle(

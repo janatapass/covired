@@ -27,17 +27,17 @@ class _HomeScreenState extends State<HomeScreen>
             centerTitle: true,
             iconTheme: new IconThemeData(color: Colors.black),
             elevation: 0,
-            backgroundColor: Colors.white,
+            backgroundColor: Colors.orange,
             title: Text(
               'Verify',
               style: AppTheme.app_bar_text,
             ),
             bottom: TabBar(
               controller: _tabController,
-              labelColor: AppColors.primary_text,
+              labelColor: AppColors.white,
               labelStyle: AppTheme.home_tab_selected,
               unselectedLabelStyle: AppTheme.home_tab_un_selected,
-              indicatorColor: Colors.orange,
+              indicatorColor: Colors.white,
               tabs: [
                 Tab(child: Text('Check Mobile')),
                 Tab(child: Text('Check QR'))
