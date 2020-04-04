@@ -12,6 +12,6 @@ class CardListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(margin: EdgeInsets.fromLTRB(8, 4, 8, 4), elevation:1, child: ListTile(title: Text(title, style: AppTheme.item_title,), subtitle: Text(subTitle, style: style ?? AppTheme.item_sub_title), trailing: trailing));
+    return ListTile(title: Text(title, style: AppTheme.item_title,), subtitle: Text(subTitle, style: style ?? AppTheme.item_sub_title), trailing: trailing);
   }
 }

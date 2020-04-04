@@ -23,43 +23,52 @@ class HomeUserDetailsView extends StatelessWidget {
       child: ListView(
         children: <Widget>[
           CardListTile(title: 'Name', subTitle: data.name, trailing: Icon(Icons.check_circle, color: HexColor.fromHex(data.colorCode))),
+          Divider(),
           CardListTile(
               title: 'Mobile Number', subTitle: data.mobile),
-          Card(
-            elevation: 1,
-            margin: EdgeInsets.fromLTRB(8, 4, 8, 4),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Container(child: Text(date, style: AppTheme.item_sub_title,), padding: EdgeInsets.fromLTRB(16, 16, 16, 0)),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Flexible(
-                        child: TripDetailsTile(
-                            title: 'from',
-                            subTitle: fromTime)),
-                    Flexible(
-                        child: TripDetailsTile(
-                            title: 'to',
-                            subTitle: toTime))
-                  ],
-                )
-              ],
-            ),
+          Divider(),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Container(child: Text(date, style: AppTheme.item_sub_title,), padding: EdgeInsets.fromLTRB(16, 16, 16, 0)),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Flexible(
+                      child: TripDetailsTile(
+                          title: 'from',
+                          subTitle: fromTime)),
+                  Flexible(
+                      child: TripDetailsTile(
+                          title: 'to',
+                          subTitle: toTime))
+                ],
+              )
+            ],
           ),
+          Divider(),
           CardListTile(
               title: 'Reason Provided', subTitle: '-'),
+          Divider(),
           CardListTile(title: 'From Locality', subTitle: data.address),
+          Divider(),
           CardListTile(title: 'To Locality', subTitle: data.address),
+          Divider(),
           CardListTile(title: 'City', subTitle: data.city),
+          Divider(),
           CardListTile(title: 'Vehicle Number', subTitle: '-'),
+          Divider(),
           CardListTile(title: 'Previous Warnings', subTitle: '-'),
-          AuthenticationButton(text: 'Issue Warning', onPressed: () {
-            
-          })
+          Divider(),
+          Container(
+            padding: EdgeInsets.all(24),
+            width: 100,
+            child: AuthenticationButton(text: 'Issue Warning', onPressed: () {
+
+            }),
+          )
         ],
       ),
     );
