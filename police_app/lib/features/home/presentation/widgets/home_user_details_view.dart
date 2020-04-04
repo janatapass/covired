@@ -39,14 +39,10 @@ class HomeUserDetailsView extends StatelessWidget {
                   children: <Widget>[
                     Flexible(
                         child: TripDetailsTile(
-                            subTitleStyle:
-                            AppTheme.item_sub_title_orange,
                             title: 'from',
                             subTitle: fromTime)),
                     Flexible(
                         child: TripDetailsTile(
-                            subTitleStyle:
-                            AppTheme.item_sub_title_orange,
                             title: 'to',
                             subTitle: toTime))
                   ],
